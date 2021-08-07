@@ -8,11 +8,11 @@ export const setAuthUserData = (userId, email, isAuth) => {
 export const isAuth = () => {
   return async dispatch => {
     try {
-      const response = await authAPI.isAuth();
-      console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
-      const {userId, email} = response.data;
-      dispatch(setAuthUserData(userId, email, true));
+      const data = await authAPI.isAuth();
+      console.log(data);
+      localStorage.setItem('token', data.accessToken);
+
+      dispatch(setAuthUserData(data.user.id, data.user.email, true));
     } catch(e) {
       console.log(e.response?.data?.message);
     }
@@ -22,12 +22,10 @@ export const isAuth = () => {
 export const login = (email, password) => {
   return async dispatch => {
     try {
-    const response = await authAPI.login(email, password);
-    console.log(response);
-    localStorage.setItem('token', response.data.accessToken);
+    const data = await authAPI.login(email, password);
+    localStorage.setItem('token', data.accessToken);
 
-    const {userId, email} = response.data;
-    dispatch(setAuthUserData(userId, email, true));
+    dispatch(setAuthUserData(data.user.id, data.user.email, true));
     } catch(e) {
       console.log(e.response?.data?.message);
     }
@@ -37,12 +35,10 @@ export const login = (email, password) => {
 export const registration = (firstName, lastName, email, password) => {
   return async dispatch => {
     try {
-      const response = await authAPI.registration(firstName, lastName, email, password);
-      console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
+      const data = await authAPI.registration(firstName, lastName, email, password);
+      localStorage.setItem('token', data.accessToken);
 
-      const {userId, email} = response.data;
-      dispatch(setAuthUserData(userId, email, true));
+      dispatch(setAuthUserData(data.user.id, data.user.email, true));
     } catch(e) {
       console.log(e.response?.data?.message);
     }
@@ -52,7 +48,7 @@ export const registration = (firstName, lastName, email, password) => {
 export const logout = () => {
   return async dispatch => {
     try {
-      const response = await authAPI.logout();
+      const data = await authAPI.logout();
       localStorage.removeItem('token');
 
       dispatch(setAuthUserData(null, null, false));

@@ -3,11 +3,11 @@ import {useForm} from 'react-hook-form';
 import {NavLink, Redirect} from "react-router-dom";
 import authStyles from './Auth.module.scss';
 
-const Auth = () => {
+const Auth = ({login}) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = ({email, password}) => {
+    login(email, password);
   }
 
   return (

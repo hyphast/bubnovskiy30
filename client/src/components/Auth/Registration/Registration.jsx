@@ -2,11 +2,11 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import registrationStyles from './Registration.module.scss';
 
-const Registration = () => {
+const Registration = ({registration}) => {
   const { register, handleSubmit, formState: { errors }} = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = ({firstName, lastName, email, password}) => {
+    registration(firstName, lastName, email, password);
   }
 
   return (
@@ -19,10 +19,10 @@ const Registration = () => {
         />
         {errors.firstName && <span>This field is required</span>}
         <input type='text'
-               placeholder='secondName'
-               {...register('secondName', { required: true })}
+               placeholder='lastName'
+               {...register('lastName', { required: true })}
         />
-        {errors.secondName && <span>This field is required</span>}
+        {errors.lastName && <span>This field is required</span>}
         <input type='text'
                placeholder='email'
                {...register('email', { required: true })}
