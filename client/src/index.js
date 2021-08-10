@@ -4,6 +4,7 @@ import {createStore, compose, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals'
+import 'antd/dist/antd.css';
 import {rootReducer} from "./redux/reducers/rootReducer";
 import App from './App'
 

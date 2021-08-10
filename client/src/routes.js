@@ -10,7 +10,7 @@ export const useRoutes = isAuth => {
   if (isAuth) {
     return (
       <>
-        <Navbar/>
+        {/*<Navbar/>*/}
         <Switch>
           <Route path='/' exact>
             <Profile/>
@@ -25,13 +25,13 @@ export const useRoutes = isAuth => {
 
   return (
     <Switch>
-      <Route path='/auth' exact>
+      <Route path='/login' exact>
         <AuthContainer/>
       </Route>
       <Route path='/registration' exact>
         <RegistrationContainer/>
       </Route>
-      <Redirect to='/auth'/>
+      <Redirect to='/login'/>
     </Switch>
 
   )

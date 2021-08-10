@@ -1,9 +1,33 @@
+login-form {
+  max-width: 300px;
+}
+
+login-form-forgot {
+  float: right;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
 .form {
-  input {
-    display: block;
-    margin-top: 1rem;
+  padding-top: 8rem;
+  h2 {
+    display: flex;
+    justify-content: center;
   }
-  button {
+  .btn {
     margin-top: 1rem;
+    width: 100%;
+  }
+  .forgot {
+    float: right;
+  }
+  .error {
+    color: red;
   }
 }
