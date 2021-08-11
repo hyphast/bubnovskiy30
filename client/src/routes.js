@@ -3,8 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import Records from "./components/Records/Records";
 import Profile from "./components/Profile/Profile";
 import RegistrationContainer from "./components/Auth/Registration/RegistrationContainer";
-import AuthContainer from "./components/Auth/AuthContainer";
-import Navbar from "./components/Navbar/Navbar";
+import LoginContainer from "./components/Auth/Login/LoginContainer";
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -25,13 +24,12 @@ export const useRoutes = isAuth => {
   return (
     <Switch>
       <Route path='/login' exact>
-        <AuthContainer/>
+        <LoginContainer/>
       </Route>
       <Route path='/registration' exact>
         <RegistrationContainer/>
       </Route>
       <Redirect to='/login'/>
     </Switch>
-
   )
 }

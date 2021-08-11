@@ -2,16 +2,16 @@ import React, {useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {NavLink} from "react-router-dom";
 import classnames from 'classnames'
-import {Form, Input, Button, Checkbox, Row, Col, Divider} from 'antd';
+import {Form, Row, Col, Divider} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import InputController from "./Common/InputController/InputController";
-import CheckboxController from "./Common/CheckboxController/CheckboxController";
-import ButtonController from "./Common/ButtonController/ButtonController";
-import authStyles from './Auth.module.scss';
+import InputController from "../Common/InputController/InputController";
+import CheckboxController from "../Common/CheckboxController/CheckboxController";
+import ButtonController from "../Common/ButtonController/ButtonController";
+import authStyles from './Login.module.scss';
 
-const Auth = ({login}) => {
+const Login = ({login}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
@@ -57,17 +57,15 @@ const Auth = ({login}) => {
               Забыли пароль?
             </a>
 
-            <Form.Item>
-              <ButtonController field='submitBtn'
-                                control={control}
-                                htmlType='submit'
-                                type='primary'
-                                className={classnames('login-form-button', authStyles.btn)}
-              >
-                Войти
-              </ButtonController>
-              Или <NavLink to='/registration'>зарегистрироваться</NavLink>
-            </Form.Item>
+            <ButtonController field='submitBtn'
+                              control={control}
+                              htmlType='submit'
+                              type='primary'
+                              className={classnames('login-form-button', authStyles.btn)}
+            >
+              Войти
+            </ButtonController>
+            Или <NavLink to='/registration'>зарегистрироваться</NavLink>
           </form>
         </Col>
       </Row>
@@ -75,4 +73,4 @@ const Auth = ({login}) => {
   );
 };
 
-export default Auth;
+export default Login;

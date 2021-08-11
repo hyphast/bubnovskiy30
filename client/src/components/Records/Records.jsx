@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
 import {profileAPI} from '../../API/api';
 
 const Records = () => {

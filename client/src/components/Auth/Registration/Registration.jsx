@@ -95,9 +95,9 @@ const Registration = ({registration}) => {
                >
                  Я прочитал и принимаю <a href="">Условия соглашения</a>
                </CheckboxController>
-
                <ButtonController field='submitBtn'
                                  control={control}
+                                 className={RegistrationStyles.btn}
                >
                  Зарегистрироваться
                </ButtonController>

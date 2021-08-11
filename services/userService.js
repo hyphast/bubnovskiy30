@@ -42,12 +42,13 @@ class UserService {
     const user = await User.findOne({ email })
 
     if (!user) {
-      return ApiError.BadRequest('Пользовтель с таким email не найден');
+      console.log('true');
+      throw ApiError.BadRequest('Пользователь с таким email не найден');
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return ApiError.BadRequest('Неверный пароль');
+      throw ApiError.BadRequest('Неверный пароль');
     }
 
     const userDto = new UserDto(user);
@@ -64,7 +65,7 @@ class UserService {
 
   async refresh(refreshToken) {
     if (!refreshToken) {
-      return ApiError.UnauthorizedError();
+      throw ApiError.UnauthorizedError();
     }
 
     const userData = tokenService.validateRefreshToken(refreshToken);

@@ -8,10 +8,12 @@ import 'antd/dist/antd.css';
 import {rootReducer} from "./redux/reducers/rootReducer";
 import App from './App'
 
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__();
+
 const store = createStore(rootReducer,
   compose(
     applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    devTools,
   ),
 );
 

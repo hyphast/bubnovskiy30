@@ -35,6 +35,7 @@ class TokenService {
       return tokenData.save();
     }
 
+    console.log(userId, refreshToken);
     const token = await Token.create({user: userId, refreshToken})
     return token;
   }

@@ -38,6 +38,7 @@ class UserController {
 
       return res.json(userData);
     } catch (e) {
+      console.log('catch: ',e)
       next(e);
     }
   }

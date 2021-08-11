@@ -1,9 +1,13 @@
 .form {
+  padding-top: 1rem;
   h2 {
     display: flex;
     justify-content: center;
   }
   .phoneNumber {
     width: 100%;
+  }
+  .btn {
+    margin-top: 1.5rem;
   }
 }
