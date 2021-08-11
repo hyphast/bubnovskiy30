@@ -10,7 +10,6 @@ export const useRoutes = isAuth => {
   if (isAuth) {
     return (
       <>
-        {/*<Navbar/>*/}
         <Switch>
           <Route path='/' exact>
             <Profile/>

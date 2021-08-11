@@ -36,7 +36,7 @@ function App() {
     setCollapsed((prev) => !prev);
   }
 
-  const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
+  const routes = useRoutes(false); //TODO Захардкодил isAuthorized в true
   return (
     <Router>
       <Layout style={{height:"100vh"}} >

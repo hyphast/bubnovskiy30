@@ -1,38 +1,31 @@
-import React from 'react';
-import {useController, useForm} from 'react-hook-form';
-import {Button, Checkbox, Col, Divider, Form, Input, Row, Select} from "antd";
+import React, {useMemo} from 'react';
+import {useForm} from 'react-hook-form';
+import {Col, Divider, Form, Row} from "antd";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import FormError from "../Common/FormError";
+import InputController from "../Common/InputController/InputController";
+import SelectController from "../Common/SelectController/SelectController";
+import CheckboxController from "../Common/CheckboxController/CheckboxController";
+import ButtonController from "../Common/ButtonController/ButtonController";
 import RegistrationStyles from './Registration.module.scss';
 
-const { Option } = Select;
-
-const schema = yup.object().shape({
-  firstName: yup.string().required('Как вас зовут?'),
-  lastName: yup.string().required('Как вас зовут?'),
-  gender: yup.string().required('Выберите ваш пол'),
-  email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
-  password: yup.string().required('Это поле обязательное').min(6, 'Пароль должен быть больше 6 символов').max(32, 'Максимальная длина пароля 32 символа'),
-  confirmPassword: yup.string().required('Это поле обязательное').oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
-  phoneNumber: yup.number().min(10),
-  agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
-});
-
 const Registration = ({registration}) => {
-  const {handleSubmit, formState: {errors}, control} = useForm({resolver: yupResolver(schema)});
-  const { field: inputFirstName } = useController({ name: 'firstName', control});
-  const { field: inputLastName } = useController({ name: 'lastName', control});
-  const { field: selectGender} = useController({ name: 'gender', control});
-  const { field: inputEmail } = useController({ name: 'email', control});
-  const { field: inputPassword } = useController({ name: 'password', control});
-  const { field: inputConfirmPassword } = useController({ name: 'confirmPassword', control});
-  const { field: inputPhoneNumber } = useController({ name: 'phoneNumber', control});
-  const { field: {value: valueAgreement, ...checkbox} } = useController({ name: 'agreement', control});
-  const { field: btn } = useController({ name: 'submitBtn', control});
+  const schema = useMemo(() =>
+    yup.object().shape({
+      firstName: yup.string().required('Как вас зовут?'),
+      lastName: yup.string().required('Как вас зовут?'),
+      gender: yup.string().required('Выберите ваш пол'),
+      email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
+      password: yup.string().required('Это поле обязательное').min(6, 'Пароль должен быть больше 6 символов').max(32, 'Максимальная длина пароля 32 символа'),
+      confirmPassword: yup.string().required('Это поле обязательное').oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
+      phoneNumber: yup.number().min(10),
+      agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
+    }), []);
 
-   const onSubmit = ({firstName, lastName, email, password}) => {
-    console.log('form:', firstName, lastName, email, password);
+  const {handleSubmit, formState: {errors}, control} = useForm({resolver: yupResolver(schema)});
+
+  const onSubmit = ({firstName, lastName, email, password}) => {
+    //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
     registration(firstName, lastName, email, password);
   }
 
@@ -43,66 +36,71 @@ const Registration = ({registration}) => {
           <h2>Регистрация</h2>
           <Divider orientation="left"></Divider>
           <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-            <Form.Item validateStatus={errors.firstName ? "error" : null} hasFeedback>
-              <Input  {...inputFirstName} placeholder='Имя'/>
-              <FormError errors={errors} field='firstName' />
-            </Form.Item>
+            <InputController errors={errors}
+                             field='firstName'
+                             control={control}
+                             placeholder='Имя'
+            />
 
-            <Form.Item validateStatus={errors.lastName ? "error" : null} hasFeedback>
-              <Input {...inputLastName} placeholder='Фамилия'/>
-              <FormError errors={errors} field='lastName' />
-            </Form.Item>
+            <InputController errors={errors}
+                             field='lastName'
+                             control={control}
+                             placeholder='Фамилия'
+            />
 
-            <Form.Item validateStatus={errors.gender ? "error" : null} hasFeedback>
-              <Select placeholder='Пол' {...selectGender}>
-                <Option value="male">Мужчина</Option>
-                <Option value="female">Женщина</Option>
-              </Select>
-              <FormError errors={errors} field='gender' />
-            </Form.Item>
+            <SelectController errors={errors}
+                              field='gender'
+                              options={{male: 'Мужчина', female: 'Женщина'}}
+                              control={control}
+                              placeholder='Пол'
+            />
 
-            <Form.Item validateStatus={errors.email ? "error" : null} hasFeedback>
-              <Input {...inputEmail} placeholder='Email'/>
-              <FormError errors={errors} field='email' />
-             </Form.Item>
+            <InputController errors={errors}
+                             field='email'
+                             control={control}
+                             placeholder='Email'
+            />
 
-             <Form.Item validateStatus={errors.password ? "error" : null} hasFeedback>
-               <Input.Password {...inputPassword} placeholder='Пароль'/>
-               <FormError errors={errors} field='password' />
-             </Form.Item>
+            <InputController errors={errors}
+                             field='password'
+                             control={control}
+                             placeholder='Пароль'
+                             inputpassword
+            />
 
-             <Form.Item validateStatus={errors.confirmPassword ? "error" : null} hasFeedback>
-                <Input.Password {...inputConfirmPassword} placeholder='Подтвердите пароль'/>
-                <FormError errors={errors} field='confirmPassword' />
-             </Form.Item>
+            <InputController errors={errors}
+                             field='confirmPassword'
+                             control={control}
+                             placeholder='Подтвердите пароль'
+                             inputpassword
+            />
+
+             <InputController className={RegistrationStyles.phoneNumber}
+                              errors={errors}
+                              field='phoneNumber'
+                              control={control}
+                              placeholder='Номер телефона'
+                              addonBefore='+7'
+             />
+
+            {/*<Form.Item label="Captcha" tooltip="Подтвердите, что вы не робот"  extra="Подтвердите, что вы не робот">*/}
+
+             {/*{errors.captcha && <span>This field is required</span>}*/}
+             {/*</Form.Item>*/}
 
              <Form.Item>
-               <Input addonBefore='+7'
-                      placeholder='Номер телефона'
-                      style={{width: '100%'}}
-                      {...inputPhoneNumber}
-               />
-             </Form.Item>
+               <CheckboxController errors={errors}
+                                   field='agreement'
+                                   control={control}
+               >
+                 Я прочитал и принимаю <a href="">Условия соглашения</a>
+               </CheckboxController>
 
-             <Form.Item label="Captcha" tooltip="Подтвердите, что вы не робот"  extra="Подтвердите, что вы не робот">
-
-             {errors.captcha && <span>This field is required</span>}
-             </Form.Item>
-
-             <Form.Item>
-              <Form.Item>
-                 <Checkbox {...checkbox}>
-                   Я прочитал и принимаю <a href="">Условия соглашения</a>
-                 </Checkbox>
-                 <FormError errors={errors} field='agreement' />
-              </Form.Item>
-                <Button {...btn}
-                        type='primary'
-                        htmlType='submit'
-                        //className={classnames('login-form-button', authStyles.btn)}
-                >
-                  Зарегистрироваться
-                </Button>
+               <ButtonController field='submitBtn'
+                                 control={control}
+               >
+                 Зарегистрироваться
+               </ButtonController>
               </Form.Item>
           </form>
         </Col>
