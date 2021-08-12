@@ -1,6 +1,6 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
-import {Col, Divider, Form, Row} from "antd";
+import {Col, Divider, Form, Row} from 'antd';
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import InputController from "../Common/InputController/InputController";
@@ -8,8 +8,9 @@ import SelectController from "../Common/SelectController/SelectController";
 import CheckboxController from "../Common/CheckboxController/CheckboxController";
 import ButtonController from "../Common/ButtonController/ButtonController";
 import RegistrationStyles from './Registration.module.scss';
+import authStyles from '../Login/Login.module.scss';
 
-const Registration = ({registration}) => {
+const Registration = ({registration, _error}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       firstName: yup.string().required('Как вас зовут?'),
@@ -22,12 +23,17 @@ const Registration = ({registration}) => {
       agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
     }), []);
 
-  const {handleSubmit, formState: {errors}, control} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors, isSubmitting}, control} = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = ({firstName, lastName, email, password}) => {
     //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
     registration(firstName, lastName, email, password);
   }
+
+  useEffect(() => {
+    _error && _error.forEach((er) => {
+      Object.keys(er).map((key) => setError(key, {type: 'Server', message: er[key]}))})
+  }, [_error, setError])
 
   return (
     <div className={RegistrationStyles.form}>
@@ -97,7 +103,10 @@ const Registration = ({registration}) => {
                </CheckboxController>
                <ButtonController field='submitBtn'
                                  control={control}
+                                 disabled={isSubmitting}
                                  className={RegistrationStyles.btn}
+                                 htmlType='submit'
+                                 type='primary'
                >
                  Зарегистрироваться
                </ButtonController>

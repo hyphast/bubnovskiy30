@@ -1,8 +1,12 @@
-import {SET_AUTH_USER_DATA} from "../types";
+import {AUTH_ERROR, SET_AUTH_USER_DATA} from '../types';
 import {authAPI} from "../../API/api";
 
 export const setAuthUserData = (userId, email, isAuth) => {
   return {type: SET_AUTH_USER_DATA, payload: {userId, email, isAuth}}
+}
+
+export const setAuthError = (errors) => {
+  return {type: AUTH_ERROR, errors}
 }
 
 export const isAuth = () => {
@@ -28,6 +32,7 @@ export const login = (email, password) => {
     dispatch(setAuthUserData(data.user.id, data.user.email, true));
     } catch(e) {
       console.log(e.response?.data?.message);
+      e.response?.data?.errors && dispatch(setAuthError(e.response.data.errors));
     }
   }
 }
@@ -41,6 +46,7 @@ export const registration = (firstName, lastName, email, password) => {
       dispatch(setAuthUserData(data.user.id, data.user.email, true));
     } catch(e) {
       console.log(e.response?.data?.message);
+      e.response?.data?.errors && dispatch(setAuthError(e.response.data.errors));
     }
   }
 }

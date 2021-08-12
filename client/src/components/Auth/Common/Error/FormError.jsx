@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const FormError = ({errors, field}) => {
   return (
     <>
-        {errors && <span className='error'>{errors[field]?.message}</span>}
+        {errors[field] && <span className='error'>{errors[field].message}</span>}
     </>
   );
 };

@@ -10,15 +10,18 @@ const User = require('../models/User');
 
 class UserService {
   async registration(firstName, lastName, email, password) {
-    const candidate = await User.findOne( {email} )
+    const candidate = await User.findOne( {email} );
 
     if (candidate) {
-      throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
+      throw ApiError.BadRequest(
+        `Пользователь с таким Email0 уже существует`,
+        [{email: 'Пользователь с таким Email уже существует'}]
+      );
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const activationLink = uuid.v4();
-    const user = await User.create({firstName, lastName, email, password: hashedPassword, activationLink})
+    const user = await User.create({firstName, lastName, email, password: hashedPassword, activationLink});
 
     await mailService.sendActivationMail(email, `${config.get('apiUrl')}/api/auth/activate/${activationLink}`);
     const userDto = new UserDto(user); // id, email. isActivated
@@ -39,16 +42,18 @@ class UserService {
   }
 
   async login(email, password) {
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
 
     if (!user) {
-      console.log('true');
-      throw ApiError.BadRequest('Пользователь с таким email не найден');
+      throw ApiError.BadRequest(
+        'Пользователь с таким email не найден',
+        [{email: 'Пользователь с таким email не найден'}]
+      );
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw ApiError.BadRequest('Неверный пароль');
+      throw ApiError.BadRequest('Неверный пароль', [{password: 'Неверный пароль'}]);
     }
 
     const userDto = new UserDto(user);
@@ -73,7 +78,7 @@ class UserService {
 
     if (!userData || !tokenFromDb) {
       console.log('Refresh Token DB');
-      throw ApiError.UnauthorizedError()
+      throw ApiError.UnauthorizedError();
     }
 
     const user = await User.findById(userData.id);

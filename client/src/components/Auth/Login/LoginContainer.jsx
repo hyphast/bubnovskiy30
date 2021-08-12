@@ -11,7 +11,7 @@ const LoginContainer = (props) => {
 
 const mapStateToProps = state => {
   return {
-
+    _error: state.auth.errors,
   }
 }
 

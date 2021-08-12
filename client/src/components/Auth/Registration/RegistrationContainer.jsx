@@ -5,13 +5,13 @@ import Registration from "./Registration";
 
 const RegistrationContainer = (props) => {
   return (
-    <Registration registration={props.registration}/>
+    <Registration {...props}/>
   );
 };
 
 const mapStateToProps = state => {
   return {
-
+    _error: state.auth.errors,
   }
 }
 

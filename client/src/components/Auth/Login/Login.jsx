@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {NavLink} from "react-router-dom";
 import classnames from 'classnames'
-import {Form, Row, Col, Divider} from 'antd';
+import {Form, Row, Col, Divider, Alert} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,19 +11,29 @@ import CheckboxController from "../Common/CheckboxController/CheckboxController"
 import ButtonController from "../Common/ButtonController/ButtonController";
 import authStyles from './Login.module.scss';
 
-const Login = ({login}) => {
+const Login = ({login, _error}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
       password: yup.string().required('Введите пароль'),
     }), []);
 
-  const {handleSubmit, formState: {errors}, control} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors, isSubmitting}, control} = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = ({email, password, rememberMe}) => {
     // console.log('form: ',email, password, rememberMe);
-    login(email, password);
+    login(email, password).catch(response => console.log(response));
   }
+
+  useEffect(() => {
+    _error && _error.forEach((er) => {
+      Object.keys(er).map((key) => setError(key, {type: 'Server'}))
+    })
+    return () => {
+      // remove errors
+    }
+  }, [_error, setError])
+
 
   return (
     <div className={authStyles.form}>
@@ -47,6 +57,8 @@ const Login = ({login}) => {
                              prefix={<LockOutlined className="site-form-item-icon" />}
             />
 
+            {_error[0] && <Alert className={authStyles.alertError} message={Object.values(_error[0])[0]} type="error" showIcon />}
+
             <CheckboxController errors={errors}
                                 field='rememberMe'
                                 control={control}
@@ -59,6 +71,7 @@ const Login = ({login}) => {
 
             <ButtonController field='submitBtn'
                               control={control}
+                              // disabled={isSubmitting}
                               htmlType='submit'
                               type='primary'
                               className={classnames('login-form-button', authStyles.btn)}

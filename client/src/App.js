@@ -7,6 +7,7 @@ import {initializeApp} from './redux/reducers/appAction';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import './App.css';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 
 const {Content} = Layout;
 
@@ -18,7 +19,7 @@ function App() {
     if (localStorage.getItem('token')) {
       dispatch(initializeApp());
     }
-  }, [dispatch]) // TODO добавил в зависимости dispatch
+  }, [dispatch])
 
   const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
   if (!isAuthorized) return <Router><Layout style={{height:"100vh"}}>{routes}</Layout></Router>
@@ -36,10 +37,11 @@ function App() {
               minHeight: 280,
             }}
           >
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
+            {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
+            {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}
+            {/*  <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
+            {/*</Breadcrumb>*/}
+            <Breadcrumbs/>
             {routes}
           </Content>
         </Layout>
