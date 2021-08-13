@@ -1,8 +1,8 @@
 import React, {useEffect, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
-import {NavLink} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import classnames from 'classnames'
-import {Form, Row, Col, Divider, Alert} from 'antd';
+import {Row, Col, Divider, Alert} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,14 +11,14 @@ import CheckboxController from "../Common/CheckboxController/CheckboxController"
 import ButtonController from "../Common/ButtonController/ButtonController";
 import authStyles from './Login.module.scss';
 
-const Login = ({login, _error}) => {
+const Login = ({login, _error, clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
       password: yup.string().required('Введите пароль'),
     }), []);
 
-  const {handleSubmit, setError, formState: {errors, isSubmitting}, control} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = ({email, password, rememberMe}) => {
     // console.log('form: ',email, password, rememberMe);
@@ -26,13 +26,17 @@ const Login = ({login, _error}) => {
   }
 
   useEffect(() => {
-    _error && _error.forEach((er) => {
+    _error.length && _error.forEach((er) => {
       Object.keys(er).map((key) => setError(key, {type: 'Server'}))
     })
-    return () => {
-      // remove errors
-    }
   }, [_error, setError])
+
+  useEffect(() => {
+    clearErrors();
+    return () => {
+      clearError();
+    }
+  }, [clearError, clearErrors]);
 
 
   return (
@@ -71,14 +75,15 @@ const Login = ({login, _error}) => {
 
             <ButtonController field='submitBtn'
                               control={control}
-                              // disabled={isSubmitting}
+                              disabled={isLoading}
                               htmlType='submit'
                               type='primary'
                               className={classnames('login-form-button', authStyles.btn)}
             >
               Войти
             </ButtonController>
-            Или <NavLink to='/registration'>зарегистрироваться</NavLink>
+            {/*<button>log in</button>*/}
+            Или <Link to='/registration'>зарегистрироваться</Link>
           </form>
         </Col>
       </Row>

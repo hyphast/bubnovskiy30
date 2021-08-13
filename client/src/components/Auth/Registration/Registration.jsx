@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {useForm} from 'react-hook-form';
 import {Col, Divider, Form, Row} from 'antd';
 import * as yup from "yup";
@@ -10,7 +10,7 @@ import ButtonController from "../Common/ButtonController/ButtonController";
 import RegistrationStyles from './Registration.module.scss';
 import authStyles from '../Login/Login.module.scss';
 
-const Registration = ({registration, _error}) => {
+const Registration = ({registration, _error, clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       firstName: yup.string().required('Как вас зовут?'),
@@ -23,7 +23,7 @@ const Registration = ({registration, _error}) => {
       agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
     }), []);
 
-  const {handleSubmit, setError, formState: {errors, isSubmitting}, control} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors, isSubmitting}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = ({firstName, lastName, email, password}) => {
     //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
@@ -31,9 +31,18 @@ const Registration = ({registration, _error}) => {
   }
 
   useEffect(() => {
-    _error && _error.forEach((er) => {
-      Object.keys(er).map((key) => setError(key, {type: 'Server', message: er[key]}))})
+    if(_error.length) {
+      _error.forEach((er) => {
+        Object.keys(er).map((key) => setError(key, {type: 'Server', message: er[key]}))})
+    }
   }, [_error, setError])
+
+  useEffect(() => {
+    clearErrors();
+    return () => {
+      clearError();
+    }
+  }, [clearError, clearErrors]);
 
   return (
     <div className={RegistrationStyles.form}>
@@ -103,7 +112,7 @@ const Registration = ({registration, _error}) => {
                </CheckboxController>
                <ButtonController field='submitBtn'
                                  control={control}
-                                 disabled={isSubmitting}
+                                 disabled={isLoading}
                                  className={RegistrationStyles.btn}
                                  htmlType='submit'
                                  type='primary'

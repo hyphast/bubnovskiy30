@@ -17,6 +17,8 @@ const store = createStore(rootReducer,
   ),
 );
 
+window.__store__ = store;
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

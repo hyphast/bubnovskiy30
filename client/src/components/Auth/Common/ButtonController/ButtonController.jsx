@@ -7,7 +7,6 @@ import CheckboxController from "../CheckboxController/CheckboxController";
 
 const ButtonController = ({field, control, disabled, children, ...restProps}) => {
   const {field: btn} = useController({name: field, control});
-  debugger
   return (
     <Form.Item>
       <Button {...btn}
