@@ -10,7 +10,7 @@ import ButtonController from "../Common/ButtonController/ButtonController";
 import RegistrationStyles from './Registration.module.scss';
 import authStyles from '../Login/Login.module.scss';
 
-const Registration = ({registration, _error, clearError, isLoading}) => {
+const Registration = ({registration, _error, _clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       firstName: yup.string().required('Как вас зовут?'),
@@ -23,7 +23,7 @@ const Registration = ({registration, _error, clearError, isLoading}) => {
       agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
     }), []);
 
-  const {handleSubmit, setError, formState: {errors, isSubmitting}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
 
   const onSubmit = ({firstName, lastName, email, password}) => {
     //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
@@ -31,18 +31,16 @@ const Registration = ({registration, _error, clearError, isLoading}) => {
   }
 
   useEffect(() => {
-    if(_error.length) {
-      _error.forEach((er) => {
+      _error.length && _error.forEach((er) => {
         Object.keys(er).map((key) => setError(key, {type: 'Server', message: er[key]}))})
-    }
   }, [_error, setError])
 
   useEffect(() => {
     clearErrors();
     return () => {
-      clearError();
+      _clearError();
     }
-  }, [clearError, clearErrors]);
+  }, [_clearError, clearErrors]);
 
   return (
     <div className={RegistrationStyles.form}>

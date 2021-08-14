@@ -4,6 +4,7 @@ import Records from "./components/Records/Records";
 import Profile from "./components/Profile/Profile";
 import RegistrationContainer from "./components/Auth/Registration/RegistrationContainer";
 import LoginContainer from "./components/Auth/Login/LoginContainer";
+import NewAppointment from './components/NewAppointment/NewAppointment';
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -12,6 +13,9 @@ export const useRoutes = isAuth => {
         <Switch>
           <Route path='/' exact>
             <Profile/>
+          </Route>
+          <Route path='/new-appointment' exact>
+            <NewAppointment/>
           </Route>
           <Route path='/records' exact>
             <Records/>

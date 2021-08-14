@@ -13,6 +13,7 @@ const HeaderContainer = ({collapsed, setCollapsed, logout}) => {
 const mapStateToProps = state => {
   return {
     collapsed: state.app.isNavbarClosed,
+    isLoading: state.auth.isLoading,
   }
 }
 

@@ -1,13 +1,10 @@
-import { Route, Switch, Link, withRouter } from 'react-router-dom';
-import { Breadcrumb, Alert } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import { Breadcrumb } from 'antd';
 import './Breadcrumbs.css';
 
 const breadcrumbNameMap = {
   '/': 'Profile',
   '/records': 'Records',
-  // '/apps/2': 'Application2',
-  // '/apps/1/detail': 'Detail',
-  // '/apps/2/detail': 'Detail',
 };
 const Breadcrumbs = withRouter(props => {
   const { location } = props;
@@ -26,7 +23,7 @@ const Breadcrumbs = withRouter(props => {
     </Breadcrumb.Item>,
   ].concat(extraBreadcrumbItems);
   return (
-    <div className="demo">
+    <div>
       <Breadcrumb>{breadcrumbItems}</Breadcrumb>
     </div>
   );

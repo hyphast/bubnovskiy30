@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Breadcrumb, Layout} from "antd";
+import {Layout} from "antd";
 import {BrowserRouter as Router} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRoutes} from './routes';
@@ -25,7 +25,7 @@ function App() {
   if (!isAuthorized) return <Router><Layout style={{height:"100vh"}}>{routes}</Layout></Router>
   else return (
     <Router>
-      <Layout style={{height:"100vh"}} >
+      <Layout style={{height: '100vh'}}>
         <NavbarContainer/>
         <Layout className="site-layout">
           <HeaderContainer/>
@@ -41,7 +41,7 @@ function App() {
             {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}
             {/*  <Breadcrumb.Item>Bill</Breadcrumb.Item>*/}
             {/*</Breadcrumb>*/}
-            <Breadcrumbs/>
+            {/*<Breadcrumbs/>*/}
             {routes}
           </Content>
         </Layout>

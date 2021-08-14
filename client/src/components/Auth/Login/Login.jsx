@@ -11,7 +11,7 @@ import CheckboxController from "../Common/CheckboxController/CheckboxController"
 import ButtonController from "../Common/ButtonController/ButtonController";
 import authStyles from './Login.module.scss';
 
-const Login = ({login, _error, clearError, isLoading}) => {
+const Login = ({login, _error, _clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
@@ -34,9 +34,9 @@ const Login = ({login, _error, clearError, isLoading}) => {
   useEffect(() => {
     clearErrors();
     return () => {
-      clearError();
+      _clearError();
     }
-  }, [clearError, clearErrors]);
+  }, [_clearError, clearErrors]);
 
 
   return (

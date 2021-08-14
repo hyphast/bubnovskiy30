@@ -68,14 +68,14 @@ export const registration = (firstName, lastName, email, password) => {
 export const logout = () => {
   return async dispatch => {
     try {
-      //dispatch(setIsLoading(true));
+      dispatch(setIsLoading(true));
       const data = await authAPI.logout();
       localStorage.removeItem('token');
 
       dispatch(setAuthUserData(null, null, false));
-      //dispatch(setIsLoading(false));
+      dispatch(setIsLoading(false));
     } catch(e) {
-      //dispatch(setIsLoading(false));
+      dispatch(setIsLoading(false));
       console.log(e.response?.data?.message);
     }
   }

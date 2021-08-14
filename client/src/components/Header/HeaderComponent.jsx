@@ -5,7 +5,7 @@ import HeaderStyles from './Header.module.scss';
 
 const { Header } = Layout;
 
-const HeaderComponent = ({collapsed, setCollapsed, logout}) => {
+const HeaderComponent = ({collapsed, setCollapsed, logout, isLoading}) => {
   const toggle = () => {
     setCollapsed(!collapsed);
   }
@@ -15,7 +15,7 @@ const HeaderComponent = ({collapsed, setCollapsed, logout}) => {
         className: 'trigger',
         onClick: toggle,
       })}
-      <Button className={HeaderStyles.btn} onClick={() => {logout()}}>Выйти</Button>
+      <Button className={HeaderStyles.btn} disabled={isLoading} onClick={() => {logout()}}>Выйти</Button>
     </Header>
   );
 };

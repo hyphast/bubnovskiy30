@@ -16,4 +16,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {registration, clearError: clearAuthError})(RegistrationContainer);
+export default connect(mapStateToProps, {registration, _clearError: clearAuthError})(RegistrationContainer);
