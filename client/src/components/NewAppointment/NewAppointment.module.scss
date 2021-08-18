@@ -1,6 +1,6 @@
 .cards {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 3rem;
 }
 
@@ -8,8 +8,15 @@
   width: 330px;
 }
 
-.btns {
-  button {
-    margin-top: 3rem;
+//.btns {
+//  button {
+//    margin-top: 3rem;
+//  }
+//}
+
+.type {
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
   }
 }

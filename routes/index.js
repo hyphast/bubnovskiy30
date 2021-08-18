@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const {check} = require('express-validator');
 const userController = require('../controllers/userController');
-const profileController = require('../controllers/profileController');
+const appointmentController = require('../controllers/appointmentController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
@@ -23,6 +23,13 @@ router.post('/auth/login',
 router.post('/auth/logout', userController.logout);
 router.get('/auth/activate/:link', userController.activate);
 router.get('/auth/refresh', userController.refresh);
-router.get('/profile/records', authMiddleware, profileController.getRecords);
+
+router.post('/appointment', authMiddleware, appointmentController.createAppointment); //todo AuthMiddleware
+// router.get('/appointment', authMiddleware, profileController.getRecords);
+//router.put('/appointment', authMiddleware, profileController.getRecords);
+
+router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
+
+// router.get('/profile/records', authMiddleware, profileController.getRecords);
 
 module.exports = router;

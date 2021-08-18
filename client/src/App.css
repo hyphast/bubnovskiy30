@@ -13,3 +13,13 @@
 .ant-layout-sider-trigger {
     //background-color: white;
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.contentContainer {
+    margin: 24px 16px;
+    padding: 20px;
+    min-height: 280px;
+}

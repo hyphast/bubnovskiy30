@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: start;
+  padding-top: 1.5rem;
+
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .datePick {
+    width: 300px;
+  }
+  .instructors {
+    margin-left: 1rem;
+    div {
+      background-color: white;
+      padding: 1rem
+    }
+  }
+}
+
+.backBtn {
+  padding: 0;
+  span {
+    font-size: 0.9rem;
+    opacity: 60%;
+    font-weight: bold!important;
+  }
+}

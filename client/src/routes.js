@@ -5,6 +5,7 @@ import Profile from "./components/Profile/Profile";
 import RegistrationContainer from "./components/Auth/Registration/RegistrationContainer";
 import LoginContainer from "./components/Auth/Login/LoginContainer";
 import NewAppointment from './components/NewAppointment/NewAppointment';
+import Treatment from './components/NewAppointment/Treatment/Treatment';
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -16,6 +17,9 @@ export const useRoutes = isAuth => {
           </Route>
           <Route path='/new-appointment' exact>
             <NewAppointment/>
+          </Route>
+          <Route path='/new-appointment/treatment' exact>
+            <Treatment/>
           </Route>
           <Route path='/records' exact>
             <Records/>

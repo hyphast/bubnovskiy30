@@ -14,7 +14,7 @@ class UserService {
 
     if (candidate) {
       throw ApiError.BadRequest(
-        `Пользователь с таким Email0 уже существует`,
+        'Пользователь с таким Email0 уже существует',
         [{email: 'Пользователь с таким Email уже существует'}]
       );
     }
@@ -65,7 +65,7 @@ class UserService {
 
   async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken);
-    return token;
+    return token; //todo убрать
   }
 
   async refresh(refreshToken) {

@@ -8,6 +8,7 @@ import NavbarContainer from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import './App.css';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import classnames from 'classnames';
 
 const {Content} = Layout;
 
@@ -30,12 +31,7 @@ function App() {
         <Layout className="site-layout">
           <HeaderContainer/>
           <Content
-            className="site-layout-background"
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-            }}
+            className={classnames('site-layout-background', 'contentContainer')}
           >
             {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
             {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}
