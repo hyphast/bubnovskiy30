@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Layout} from "antd";
+import {Layout} from 'antd';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRoutes} from './routes';
@@ -7,7 +7,6 @@ import {initializeApp} from './redux/reducers/appAction';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import './App.css';
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import classnames from 'classnames';
 
 const {Content} = Layout;
@@ -23,15 +22,15 @@ function App() {
   }, [dispatch])
 
   const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
-  if (!isAuthorized) return <Router><Layout style={{height:"100vh"}}>{routes}</Layout></Router>
+  if (!isAuthorized) return <Router><Layout>{routes}</Layout></Router>
   else return (
     <Router>
-      <Layout style={{height: '100vh'}}>
+      <Layout>
         <NavbarContainer/>
         <Layout className="site-layout">
           <HeaderContainer/>
           <Content
-            className={classnames('site-layout-background', 'contentContainer')}
+            className={classnames('site-layout-background', 'contentContainer', 'AppContainer')}
           >
             {/*<Breadcrumb style={{ margin: '16px 0' }}>*/}
             {/*  <Breadcrumb.Item>User</Breadcrumb.Item>*/}

@@ -1,33 +1,50 @@
 .container {
-  display: flex;
-  justify-content: start;
-  padding-top: 1.5rem;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "subtitle subtitle"
+    "calendar content";
+  grid-gap: 5px;
+  grid-template-columns: 230px 1fr;
+  grid-template-rows: 30px 50px 1fr;
+}
 
-  h2 {
-    font-size: 1.875rem;
-    font-weight: 700;
-  }
+.header {
+  grid-area: header;
+  border: 1px solid black;
+}
+
+.calendar {
+  grid-area: calendar;
+  border: 1px solid black;
+  align-self: start;
   h3 {
     font-size: 1.3rem;
     font-weight: 700;
   }
-  .datePick {
-    width: 300px;
-  }
-  .instructors {
-    margin-left: 1rem;
-    div {
-      background-color: white;
-      padding: 1rem
-    }
+}
+
+.content {
+  grid-area: content;
+  border: 1px solid black;
+}
+
+.subtitle {
+  border: 1px solid black;
+  grid-area: subtitle;
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
   }
 }
 
-.backBtn {
-  padding: 0;
-  span {
-    font-size: 0.9rem;
-    opacity: 60%;
-    font-weight: bold!important;
+.instructor {
+  button {
+    margin-right: 0.2rem;
+    width: 75px;
+  }
+  .times {
+    margin: 0 0 0.2rem 0.8rem;
+    //border: 1px solid green;
   }
 }

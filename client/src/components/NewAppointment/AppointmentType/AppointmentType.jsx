@@ -23,14 +23,14 @@ const AppointmentType = () => {
               className={NewAppointmentStyles.card}
               cover={<img alt="image" src={TreatmentImg}/>}
         >
-          <Meta title='Лечебные занятия' description="12 лечебный занятий"/>
+          <Meta title='Лечебные занятия' description="12 лечебных занятий"/>
         </Card>
       </Link>
       <Card hoverable
             className={NewAppointmentStyles.card}
             cover={<img alt="image" src={PhysicalTrainingImg}/>}
       >
-        <Meta title='Физкультурно-оздоровительные занятия' description="Физкультура"/>
+        <Meta title='Физкультурно-оздоровительные занятия' description="Физкультурно-оздоровительные занятия"/>
       </Card>
     </div>
   );

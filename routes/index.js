@@ -24,7 +24,10 @@ router.post('/auth/logout', userController.logout);
 router.get('/auth/activate/:link', userController.activate);
 router.get('/auth/refresh', userController.refresh);
 
-router.post('/appointment', authMiddleware, appointmentController.createAppointment); //todo AuthMiddleware
+router.get('/appointments', authMiddleware, appointmentController.getAppointments);
+
+router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
+router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
 // router.get('/appointment', authMiddleware, profileController.getRecords);
 //router.put('/appointment', authMiddleware, profileController.getRecords);
 
