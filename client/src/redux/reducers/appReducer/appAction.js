@@ -1,5 +1,5 @@
-import {isAuth} from './authActions';
-import {SET_INITIALIZED, SET_IS_NAVBAR_CLOSED} from '../types';
+import {isAuth} from '../authReducer/authActions';
+import {SET_INITIALIZED, SET_IS_NAVBAR_CLOSED} from '../../types';
 
 export const setInitialized = () => {
   return {type: SET_INITIALIZED}

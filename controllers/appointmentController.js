@@ -5,7 +5,7 @@ class AppointmentController {
     try {
       const {date, appointments} = req.body; // appointment is array of objects [{fullname: ref: 'Insctrucotrs', time:{...}, ...}]
       // const {user} = req.user; //todo user or admin?
-      console.log(date, new Date(appointments[0].times[0].time))
+      console.log('new: ', new Date(date), new Date(appointments[0].times[0].time))
 
       const data = await AppointmentService.createAppointment(date, appointments);
 
@@ -37,9 +37,14 @@ class AppointmentController {
 
   async getAppointments(req, res, next) {
     try {
-      const {date} = req.body;
-      const appointments = await AppointmentService.getAppointments(date);
+      const {date} = req.query;
+      const parseDate = parseInt(date, 10);
 
+      console.log(parseDate, new Date(parseDate));
+
+      const appointments = await AppointmentService.getAppointments(parseDate);
+
+      console.log(appointments);
       return res.json(appointments);
     } catch (e) {
       next(e);

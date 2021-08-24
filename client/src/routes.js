@@ -1,11 +1,11 @@
 import React from 'react'
-import {Switch, Route, Redirect} from 'react-router-dom'
-import Records from "./components/Records/Records";
-import Profile from "./components/Profile/Profile";
-import RegistrationContainer from "./components/Auth/Registration/RegistrationContainer";
-import LoginContainer from "./components/Auth/Login/LoginContainer";
+import {Redirect, Route, Switch} from 'react-router-dom'
+import Records from './components/Records/Records';
+import Profile from './components/Profile/Profile';
+import RegistrationContainer from './components/Auth/Registration/RegistrationContainer';
+import LoginContainer from './components/Auth/Login/LoginContainer';
 import NewAppointment from './components/NewAppointment/NewAppointment';
-import Treatment from './components/NewAppointment/Treatment/Treatment';
+import TreatmentContainer from './components/NewAppointment/Treatment/TreatmentContainer';
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -19,7 +19,7 @@ export const useRoutes = isAuth => {
             <NewAppointment/>
           </Route>
           <Route path='/new-appointment/treatment' exact>
-            <Treatment/>
+            <TreatmentContainer/>
           </Route>
           <Route path='/records' exact>
             <Records/>

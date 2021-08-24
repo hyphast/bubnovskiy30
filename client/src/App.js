@@ -3,7 +3,7 @@ import {Layout} from 'antd';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRoutes} from './routes';
-import {initializeApp} from './redux/reducers/appAction';
+import {initializeApp} from './redux/reducers/appReducer/appAction';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import './App.css';

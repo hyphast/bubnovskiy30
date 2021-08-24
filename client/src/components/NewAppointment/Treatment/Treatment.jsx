@@ -1,10 +1,11 @@
-import React from 'react';
-import {Badge, Button, DatePicker, Image, List, PageHeader} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Button, ConfigProvider, DatePicker, List, PageHeader} from 'antd';
 import TreatmentStyles from './Treatment.module.scss';
 import Avatar from 'antd/es/avatar/avatar';
-import locale from '../locale.json';
+import 'moment/locale/ru';
+import ruRU from 'antd/lib/locale/ru_RU';
 import './Treatment.scss';
-import {UserOutlined} from '@ant-design/icons';
+import classnames from 'classnames';
 
 const data = [
   {
@@ -16,24 +17,15 @@ const data = [
   {
     title: 'Сергеев Никита Никитович',
   },
-  {
-    title: 'Минин Владилен Пожарский',
-  },
-  {
-    title: 'Егоров Егор Егорьевич',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
 ];
 
-const Treatment = () => {
+const Treatment = ({appointments, isLoading, getAppointments}) => {
+
+  const onChange = (date) => {
+    console.log(new Date(date._d));
+    getAppointments(+new Date(date._d));
+  };
+
   return (
     <>
       <div className={TreatmentStyles.container}>
@@ -48,8 +40,9 @@ const Treatment = () => {
         </div>
         <div className={TreatmentStyles.calendar}>
           <h3>Календарь</h3>
-
-          <DatePicker locale={locale} size="large"/>
+          <ConfigProvider locale={ruRU}>
+              <DatePicker onChange={onChange} className={'date_picker'} size="large"/>
+          </ConfigProvider>;
         </div>
         <div className={TreatmentStyles.content}>
           <List
@@ -66,12 +59,6 @@ const Treatment = () => {
                 <div className={TreatmentStyles.times}>
                 <Button type="primary" shape="round" size={20} >
                   9:00
-                </Button>
-                <Button type="primary" shape="round" size={20} >
-                  11:00
-                </Button>
-                <Button type="primary" shape="round" size={20} >
-                  12:00
                 </Button>
                 </div>
               </List.Item>

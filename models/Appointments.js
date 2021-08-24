@@ -16,4 +16,4 @@ const schema = new Schema({
   appointmentsTime: [cellSchema]
 })
 
-module.exports = model('Appointments', schema);
+module.exports = model('Appointments', schema, 'appointments');

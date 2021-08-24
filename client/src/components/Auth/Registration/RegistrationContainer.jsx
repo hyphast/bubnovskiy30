@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {clearAuthError, registration} from '../../../redux/reducers/authActions';
+import {clearAuthError, registration} from '../../../redux/reducers/authReducer/authActions';
 import Registration from "./Registration";
 
 const RegistrationContainer = (props) => {

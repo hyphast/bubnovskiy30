@@ -1,4 +1,4 @@
-import {SET_INITIALIZED, SET_IS_NAVBAR_CLOSED} from '../types';
+import {SET_INITIALIZED, SET_IS_NAVBAR_CLOSED} from '../../types';
 
 const initialState = {
   initialized: false,

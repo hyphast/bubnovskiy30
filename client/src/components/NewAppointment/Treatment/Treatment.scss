@@ -11,6 +11,15 @@
   opacity: 90%;
   font-weight: 700;
 }
+
 .ant-picker-input {
   width: 200px;
+}
+
+.ant-picker-header-super-next-btn {
+    display: none !important;
+}
+
+.ant-picker-header-super-prev-btn {
+  display: none !important;
 }

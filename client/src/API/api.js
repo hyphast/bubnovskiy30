@@ -44,6 +44,12 @@ export const authAPI = {
   },
 }
 
+export const newAppointmentAPI = {
+  getAppointments(date) {
+    return api.get(`/appointments?date=${date}`).then(response => response.data);
+  },
+}
+
 export const profileAPI = {
   getRecordsA() {
     return api.get('/profile/records').then(response => response.data);

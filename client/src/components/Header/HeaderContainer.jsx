@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setIsNavbarClosed} from '../../redux/reducers/appAction';
-import {logout} from '../../redux/reducers/authActions';
+import {setIsNavbarClosed} from '../../redux/reducers/appReducer/appAction';
+import {logout} from '../../redux/reducers/authReducer/authActions';
 import HeaderComponent from './HeaderComponent';
 
 const HeaderContainer = ({collapsed, setCollapsed, logout}) => {

@@ -1,5 +1,5 @@
-import {AUTH_ERROR, AUTH_LOADING, CLEAR_AUTH_ERROR, SET_AUTH_USER_DATA} from '../types';
-import {authAPI} from "../../API/api";
+import {AUTH_ERROR, AUTH_LOADING, CLEAR_AUTH_ERROR, SET_AUTH_USER_DATA} from '../../types';
+import {authAPI} from "../../../API/api";
 
 export const setAuthUserData = (userId, email, isAuth) => {
   return {type: SET_AUTH_USER_DATA, payload: {userId, email, isAuth}}

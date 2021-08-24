@@ -5,6 +5,7 @@ const ApiError = require('../exceptions/apiError');
 
 class AppointmentService {
   async createAppointment(date, appointments) {
+
     const isExist = await Appointments.findOne({date});
 
     if(isExist) {
@@ -29,8 +30,22 @@ class AppointmentService {
   }
 
   async getAppointments(date) {
-    const appointments = await TimeTemplate.find({date});
-    console.log(appointments);
+    const UTC4OffsetMs = 14400000;
+    const UTC4OffsetHours = 4;
+
+    const dateUTC4 = new Date(date);
+    dateUTC4.setHours(dateUTC4.getHours() + UTC4OffsetHours);
+    console.log(dateUTC4);
+
+    const start = +new Date(dateUTC4.getFullYear(), dateUTC4.getMonth(), dateUTC4.getDate()) + UTC4OffsetMs;
+    console.log('start: ', start, new Date(start));
+    const end = +new Date(dateUTC4.getFullYear(), dateUTC4.getMonth(), dateUTC4.getDate() + 1) + UTC4OffsetMs;
+    console.log('end', end, new Date(end));
+
+    const appointments = await Appointments.find({date: {$gte: start, $lt: end}});
+    console.log('app', appointments);
+
+    // aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
 
     return appointments;
   }
