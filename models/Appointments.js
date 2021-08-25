@@ -6,14 +6,15 @@ const timeSchema = new Schema({
 });
 
 const cellSchema = new Schema({
-  instructor: {type: Types.ObjectId, ref: 'Instructors'},
+  instructorId: {type: Types.ObjectId, ref: 'Instructors'},
+  instructorName: {type: String},
   times: [timeSchema],
 });
 
 const schema = new Schema({
   date: { type : Date},
   // createdBy: {type: Types.ObjectId, required: true},
-  appointmentsTime: [cellSchema]
+  appointments: [cellSchema]
 })
 
 module.exports = model('Appointments', schema, 'appointments');

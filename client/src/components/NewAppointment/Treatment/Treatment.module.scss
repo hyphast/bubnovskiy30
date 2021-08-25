@@ -11,12 +11,10 @@
 
 .header {
   grid-area: header;
-  border: 1px solid black;
 }
 
 .calendar {
   grid-area: calendar;
-  border: 1px solid black;
   align-self: start;
   h3 {
     font-size: 1.3rem;
@@ -26,14 +24,12 @@
 
 .content {
   grid-area: content;
-  border: 1px solid black;
 }
 
 .subtitle {
-  border: 1px solid black;
   grid-area: subtitle;
   h2 {
-    font-size: 1.875rem;
+    font-size: 1.7rem;
     font-weight: 700;
   }
 }
@@ -44,7 +40,9 @@
     width: 75px;
   }
   .times {
-    margin: 0 0 0.2rem 0.8rem;
-    //border: 1px solid green;
+    margin-left: 0.8rem;
+  }
+  .time {
+    margin: 0 0.2rem 0.4rem 0;
   }
 }

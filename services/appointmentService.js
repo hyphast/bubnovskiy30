@@ -1,18 +1,20 @@
 const Appointments = require('../models/Appointments');
 const Instructor = require('../models/Instructors');
 const TimeTemplate = require('../models/TimeTemplate');
+const dateService = require('./dateService');
 const ApiError = require('../exceptions/apiError');
 
 class AppointmentService {
   async createAppointment(date, appointments) {
+    const range = dateService.timestampOffsetUTC4(date);
 
-    const isExist = await Appointments.findOne({date});
+    const isExist = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
 
-    if(isExist) {
+    if(!!isExist.length) {
       throw ApiError.BadRequest('В этот день уже есть запись');
     }
 
-    const appointment = await Appointments.create({date: date, appointmentsTime: appointments});
+    const appointment = await Appointments.create({date: range.dateUTC4, appointments: appointments});
 
     return appointment;
   }
@@ -30,20 +32,14 @@ class AppointmentService {
   }
 
   async getAppointments(date) {
-    const UTC4OffsetMs = 14400000;
-    const UTC4OffsetHours = 4;
+    const range = dateService.timestampOffsetUTC4(date);
 
-    const dateUTC4 = new Date(date);
-    dateUTC4.setHours(dateUTC4.getHours() + UTC4OffsetHours);
-    console.log(dateUTC4);
-
-    const start = +new Date(dateUTC4.getFullYear(), dateUTC4.getMonth(), dateUTC4.getDate()) + UTC4OffsetMs;
-    console.log('start: ', start, new Date(start));
-    const end = +new Date(dateUTC4.getFullYear(), dateUTC4.getMonth(), dateUTC4.getDate() + 1) + UTC4OffsetMs;
-    console.log('end', end, new Date(end));
-
-    const appointments = await Appointments.find({date: {$gte: start, $lt: end}});
+    const appointments = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
     console.log('app', appointments);
+
+    appointments.map(item => console.log(item.date));
+    // const UTC4OffsetMs = 14400000;
+    // appointments.map(item => +new Date(item.date) - UTC4OffsetMs);
 
     // aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
 
