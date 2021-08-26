@@ -13,7 +13,6 @@ export const getAppointments = (date) => {
   return async dispatch => {
     try {
       console.log(typeof date)
-      debugger
       dispatch(setIsLoading(true));
       const appointments = await newAppointmentAPI.getAppointments(date);
       console.log(appointments);
