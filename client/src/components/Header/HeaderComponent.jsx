@@ -1,23 +1,21 @@
 import React from 'react';
-import {Button, Layout} from 'antd';
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons';
-import HeaderStyles from './Header.module.scss';
+import {Layout, Avatar} from 'antd';
+import classnames from 'classnames';
+import HeaderLogo from './HeaderLogo/HeaderLogo';
+import HeaderComponentStyles from './HeaderComponent.module.scss';
+import HeaderInfo from './HeaderInfo/HeaderInfo';
+import HeaderStyles from './Header.scss';
 
-const { Header } = Layout;
+const {Header} = Layout;
 
-const HeaderComponent = ({collapsed, setCollapsed, logout, isLoading}) => {
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  }
-  return (
-    <Header className="site-layout-background" style={{ padding: 0 }}>
-      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-        className: 'trigger',
-        onClick: toggle,
-      })}
-      <Button className={HeaderStyles.btn} disabled={isLoading} onClick={() => {logout()}}>Выйти</Button>
-    </Header>
-  );
+const HeaderComponent = ({logout, isLoading}) => {
+
+    return (
+        <Header className={classnames('site-layout-background', HeaderComponentStyles.header)}>
+            <HeaderLogo/>
+            <HeaderInfo logout={logout} isLoading={isLoading}/>
+        </Header>
+    );
 };
 
 export default HeaderComponent;

@@ -6,7 +6,7 @@ const ApiError = require('../exceptions/apiError');
 
 class AppointmentService {
   async createAppointment(date, appointments) {
-    const range = dateService.timestampOffsetUTC4(date);
+    const range = dateService.dateSearchRange(date);
 
     const isExist = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
 
@@ -14,7 +14,7 @@ class AppointmentService {
       throw ApiError.BadRequest('В этот день уже есть запись');
     }
 
-    const appointment = await Appointments.create({date: range.dateUTC4, appointments: appointments});
+    const appointment = await Appointments.create({date: date, appointments: appointments});
 
     return appointment;
   }
@@ -32,12 +32,12 @@ class AppointmentService {
   }
 
   async getAppointments(date) {
-    const range = dateService.timestampOffsetUTC4(date);
+    const range = dateService.dateSearchRange(date);
 
     const appointments = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
     console.log('app', appointments);
 
-    appointments.map(item => console.log(item.date));
+    appointments.map(item => console.log(item.date))
     // const UTC4OffsetMs = 14400000;
     // appointments.map(item => +new Date(item.date) - UTC4OffsetMs);
 

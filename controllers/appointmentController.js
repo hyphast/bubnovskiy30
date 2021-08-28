@@ -40,7 +40,7 @@ class AppointmentController {
       const {date} = req.query;
       const parseDate = parseInt(date, 10);
 
-      console.log(parseDate, new Date(parseDate));
+      console.log('hus', parseDate, new Date(parseDate))
 
       const appointments = await AppointmentService.getAppointments(parseDate);
 

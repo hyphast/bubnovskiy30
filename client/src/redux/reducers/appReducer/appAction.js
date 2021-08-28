@@ -1,12 +1,8 @@
 import {isAuth} from '../authReducer/authActions';
-import {SET_INITIALIZED, SET_IS_NAVBAR_CLOSED} from '../../types';
+import {SET_INITIALIZED} from '../../types';
 
 export const setInitialized = () => {
   return {type: SET_INITIALIZED}
-}
-
-export const setIsNavbarClosed = (isNavbarClosed) => {
-  return {type: SET_IS_NAVBAR_CLOSED, payload: {isNavbarClosed}}
 }
 
 export const initializeApp = () => {

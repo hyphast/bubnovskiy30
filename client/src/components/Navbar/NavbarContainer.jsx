@@ -2,15 +2,14 @@ import React from 'react';
 import Navbar from './Navbar';
 import {connect} from 'react-redux';
 
-const NavbarContainer = ({collapsed}) => {
+const NavbarContainer = () => {
   return (
-   <Navbar collapsed={collapsed}/>
+   <Navbar/>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    collapsed: state.app.isNavbarClosed,
   }
 }
 

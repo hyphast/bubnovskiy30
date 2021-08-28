@@ -7,7 +7,8 @@ import moment from 'moment';
 const TreatmentList = ({appointments, isLoading}) => {
   let data;
   if (!!appointments.length) {
-    data = appointments[0].appointments.map(item => ({title: item.instructorName}));
+    data = appointments[0].appointments
+        .map(item => ({name: item.instructorName, times: item.times}));
   }
 
   return (
@@ -22,17 +23,17 @@ const TreatmentList = ({appointments, isLoading}) => {
               <List.Item className={TreatmentStyles.instructor}>
                 <List.Item.Meta
                   avatar={<Avatar size={64} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                  title={<a href="https://ant.design">{item.title}</a>}
+                  title={<a href="https://ant.design">{item.name}</a>}
                   description="Инструктор"
                 />
                 <div className={TreatmentStyles.times}>
-                  {appointments[0].appointments.map(app => app.times.map(t => {
+                  {item.times.map(t => {
                     return (
-                      <Button className={TreatmentStyles.time} type="primary" shape="round" size={20}>
-                        {moment(t.time).utc().format('H:mm')}
+                      <Button key={t.time} className={TreatmentStyles.time} type="primary" shape="round" size={20}>
+                        {moment(t.time).utc().utcOffset(240).format('H:mm')}
                       </Button>
                     )
-                  }))}
+                  })}
                 </div>
               </List.Item>
             </Card>

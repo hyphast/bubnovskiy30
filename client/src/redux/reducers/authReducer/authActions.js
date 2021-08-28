@@ -21,7 +21,6 @@ export const isAuth = () => {
   return async dispatch => {
     try {
       const data = await authAPI.isAuth();
-      console.log(data);
       localStorage.setItem('token', data.accessToken);
 
       dispatch(setAuthUserData(data.user.id, data.user.email, true));
