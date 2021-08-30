@@ -5,12 +5,15 @@ import HeaderComponent from './HeaderComponent';
 
 const HeaderContainer = (props) => {
   return (
-   <HeaderComponent {...props} logout={logout}/>
+   <HeaderComponent {...props}/>
   );
 };
 
 const mapStateToProps = state => {
   return {
+    firstName: state.profile.firstName,
+    lastName: state.profile.lastName,
+    phoneNumber: state.profile.phoneNumber,
     isLoading: state.auth.isLoading,
   }
 }

@@ -9,7 +9,7 @@ const User = require('../models/User');
 
 
 class UserService {
-  async registration(firstName, lastName, email, password) {
+  async registration(firstName, lastName, email, password, gender, phoneNumber) {
     const candidate = await User.findOne( {email} );
 
     if (candidate) {
@@ -21,10 +21,12 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const activationLink = uuid.v4();
-    const user = await User.create({firstName, lastName, email, password: hashedPassword, activationLink});
+    const user = await User.create({firstName, lastName, email,
+                                    password: hashedPassword, gender,
+                                    phoneNumber, activationLink});
 
     await mailService.sendActivationMail(email, `${config.get('apiUrl')}/api/auth/activate/${activationLink}`);
-    const userDto = new UserDto(user); // id, email. isActivated
+    const userDto = new UserDto(user); // id, email, phoneNumber, isActivated
     const tokens = tokenService.generateToken({...userDto});
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 

@@ -1,27 +1,33 @@
 import React, {useEffect} from 'react';
-import {Layout} from 'antd';
+import {Layout, Spin} from 'antd';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import classnames from 'classnames';
 import {useRoutes} from './routes';
-import {initializeApp} from './redux/reducers/appReducer/appAction';
+import {initializeApp, setIsReady} from './redux/reducers/appReducer/appAction';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import './App.css';
+import Preloader from './components/common/Preloader/Preloader';
 
 const {Content} = Layout;
 
 function App() {
   const dispatch = useDispatch();
   const isAuthorized = useSelector(state => state.auth.isAuth);
+  const ready = useSelector(state => state.app.isReady);
+  const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
       dispatch(initializeApp());
+    } else {
+      dispatch(setIsReady(true));
     }
   }, [dispatch])
 
-  const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
+  if(!ready) return <Preloader/>
+
   if (!isAuthorized) return <Router><Layout>{routes}</Layout></Router>
   else return (
     <Router>

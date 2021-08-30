@@ -19,15 +19,15 @@ const Registration = ({registration, _error, _clearError, isLoading}) => {
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
       password: yup.string().required('Это поле обязательное').min(6, 'Пароль должен быть больше 6 символов').max(32, 'Максимальная длина пароля 32 символа'),
       confirmPassword: yup.string().required('Это поле обязательное').oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
-      phoneNumber: yup.number().min(10),
+      phoneNumber: yup.string().min(10),
       agreement: yup.boolean().required('Условия соглашения необходимо принять').oneOf([true], 'Условия соглашения необходимо принять'),
     }), []);
 
   const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
 
-  const onSubmit = ({firstName, lastName, email, password}) => {
+  const onSubmit = ({firstName, lastName, email, password, gender, phoneNumber}) => {
     //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
-    registration(firstName, lastName, email, password);
+    registration(firstName, lastName, email, password, gender, phoneNumber);
   }
 
   useEffect(() => {

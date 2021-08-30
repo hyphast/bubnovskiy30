@@ -12,10 +12,10 @@ const Navbar = (props) => {
     return (
         <Sider trigger={null}>
             <div className={classnames('logo', NavbarStyles.navbar)}/>
-                <NavbarProfileInfo/>
-            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+                <NavbarProfileInfo {...props}/>
+            <Menu theme="light" defaultSelectedKeys={'1'} mode="inline">
                 <Menu.Item key="1" icon={<UserOutlined/>}>
-                    <Link to='/'>Профиль</Link>
+                    <Link to='/profile'>Профиль</Link>
                 </Menu.Item>
                 <Menu.Item key="2" icon={<FileOutlined/>}>
                     <Link to='/new-appointment'>Запись</Link>

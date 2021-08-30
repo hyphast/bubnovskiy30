@@ -6,24 +6,29 @@ import RegistrationContainer from './components/Auth/Registration/RegistrationCo
 import LoginContainer from './components/Auth/Login/LoginContainer';
 import NewAppointment from './components/NewAppointment/NewAppointment';
 import TreatmentContainer from './components/NewAppointment/Treatment/TreatmentContainer';
+import AppointmentFinish from './components/NewAppointment/AppointmentFinish/AppointmentFinish';
 
 export const useRoutes = isAuth => {
   if (isAuth) {
     return (
       <>
         <Switch>
-          <Route path='/' exact>
+          <Route path="/profile" exact>
             <Profile/>
           </Route>
-          <Route path='/new-appointment' exact>
+          <Route path="/new-appointment" exact>
             <NewAppointment/>
           </Route>
-          <Route path='/new-appointment/treatment' exact>
+          <Route path="/new-appointment/treatment" exact>
             <TreatmentContainer/>
           </Route>
-          <Route path='/records' exact>
+          <Route path="/new-appointment/finish" exact>
+            <AppointmentFinish/>
+          </Route>
+          <Route path="/records" exact>
             <Records/>
           </Route>
+          <Redirect to="/profile"/>
         </Switch>
       </>
     )
@@ -31,13 +36,13 @@ export const useRoutes = isAuth => {
 
   return (
     <Switch>
-      <Route path='/login' exact>
+      <Route path="/login" exact>
         <LoginContainer/>
       </Route>
-      <Route path='/registration' exact>
+      <Route path="/registration" exact>
         <RegistrationContainer/>
       </Route>
-      <Redirect to='/login'/>
+      <Redirect to="/login"/>
     </Switch>
   )
 }

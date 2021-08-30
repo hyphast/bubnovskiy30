@@ -1,9 +1,14 @@
 const Users = require('../models/User');
+const ProfileDto = require('../dtos/profileDto');
+const UserDto = require('../dtos/userDto');
 
 class ProfileService {
-  async getRecords() {
-    const records = await Users.find(); //!!!!
-    return records;
+  async getUserProfile(id) {
+    const profile = await Users.findOne({_id: id});
+
+    const profileDto = new ProfileDto(profile); // id, firstName, lastName, gender, phoneNumber
+
+    return {profile: profileDto};
   }
 }
 

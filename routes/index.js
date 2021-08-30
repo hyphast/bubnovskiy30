@@ -1,11 +1,13 @@
 const {Router} = require('express');
 const {check} = require('express-validator');
 const userController = require('../controllers/userController');
+const profileController = require('../controllers/profileController');
 const appointmentController = require('../controllers/appointmentController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
 
+//client
 router.post('/auth/registration',
   [
     check('firstName', 'Invalid first name').exists().trim(),
@@ -26,13 +28,14 @@ router.get('/auth/refresh', userController.refresh);
 
 router.get('/appointments', authMiddleware, appointmentController.getAppointments);
 
+router.get('/profile', authMiddleware, profileController.getUserProfile)
+
+
+//server
 router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
 router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
-// router.get('/appointment', authMiddleware, profileController.getRecords);
-//router.put('/appointment', authMiddleware, profileController.getRecords);
 
 router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
 
-// router.get('/profile/records', authMiddleware, profileController.getRecords);
 
 module.exports = router;

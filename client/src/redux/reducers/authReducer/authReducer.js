@@ -3,6 +3,7 @@ import {AUTH_ERROR, AUTH_LOADING, CLEAR_AUTH_ERROR, SET_AUTH_USER_DATA} from '..
 const initialState = {
   userId: null,
   email: null,
+  // phoneNumber: null,
   isAuth: false,
   errors: [],
   isLoading: false,

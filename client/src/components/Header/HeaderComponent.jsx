@@ -8,12 +8,12 @@ import HeaderStyles from './Header.scss';
 
 const {Header} = Layout;
 
-const HeaderComponent = ({logout, isLoading}) => {
+const HeaderComponent = (props) => {
 
     return (
         <Header className={classnames('site-layout-background', HeaderComponentStyles.header)}>
             <HeaderLogo/>
-            <HeaderInfo logout={logout} isLoading={isLoading}/>
+            <HeaderInfo {...props}/>
         </Header>
     );
 };

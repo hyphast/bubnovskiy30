@@ -2,6 +2,8 @@ const config = require('config');
 const {validationResult} = require('express-validator');
 const userService = require('../services/userService');
 const ApiError = require('../exceptions/apiError');
+const AppointmentService = require('../services/appointmentService');
+const ProfileService = require('../services/ProfileService');
 
 class UserController {
   async registration(req, res, next) {
@@ -12,8 +14,8 @@ class UserController {
         return next(ApiError.BadRequest('Ошибка при валидации', errors.array()));
       }
 
-    const {firstName, lastName, email, password} = req.body;
-    const userData = await userService.registration(firstName, lastName, email, password);
+    const {firstName, lastName, email, password, gender, phoneNumber} = req.body;
+    const userData = await userService.registration(firstName, lastName, email, password, gender, phoneNumber);
 
     res.cookie('refreshToken', userData.refreshToken, {maxAge: 2592000000, httpOnly: true}); // maxAge: 30 days
 

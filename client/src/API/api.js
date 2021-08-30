@@ -36,8 +36,9 @@ export const authAPI = {
   login(email, password) {
     return api.post('/auth/login', {email, password}).then(response => response.data);
   },
-  registration(firstName, lastName, email, password) {
-    return api.post('/auth/registration', {firstName, lastName, email, password}).then(response => response.data);
+  registration(firstName, lastName, email, password, gender, phoneNumber) {
+    return api.post('/auth/registration', {firstName, lastName, email, password, gender, phoneNumber})
+        .then(response => response.data);
   },
   logout() {
     return api.post('/auth/logout');
@@ -51,7 +52,7 @@ export const newAppointmentAPI = {
 }
 
 export const profileAPI = {
-  getRecordsA() {
-    return api.get('/profile/records').then(response => response.data);
+  getUserProfile() {
+    return api.get('/profile').then(response => response.data);
   },
 }
