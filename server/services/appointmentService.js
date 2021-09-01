@@ -38,11 +38,6 @@ class AppointmentService {
     console.log('app', appointments);
 
     appointments.map(item => console.log(item.date))
-    // const UTC4OffsetMs = 14400000;
-    // appointments.map(item => +new Date(item.date) - UTC4OffsetMs);
-
-    // aggregate.lookup({ from: 'users', localField: 'userId', foreignField: '_id', as: 'users' });
-
     return appointments;
   }
 }

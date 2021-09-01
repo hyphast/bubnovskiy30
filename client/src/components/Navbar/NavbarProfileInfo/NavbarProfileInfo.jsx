@@ -1,11 +1,12 @@
 import React from 'react';
 import {Avatar} from 'antd';
-import {SettingFilled, UserOutlined} from '@ant-design/icons';
+import {EditOutlined, UserOutlined} from '@ant-design/icons';
 import NavbarProfileInfoStyles from './NavbarProfileInfo.module.scss';
 import {Link} from 'react-router-dom';
 
 const NavbarProfileInfo = ({firstName, lastName, gender, phoneNumber}) => {
 
+  debugger
   let formatPhoneNumber;
   if (!!phoneNumber) {
     formatPhoneNumber =
@@ -24,8 +25,8 @@ const NavbarProfileInfo = ({firstName, lastName, gender, phoneNumber}) => {
         <span className={NavbarProfileInfoStyles.gender}>Пол: {gender === 'male' ? 'Мужской' : 'Женский'}</span>
         <span className={NavbarProfileInfoStyles.phone}>Телефон: {formatPhoneNumber}</span>
         <div className={NavbarProfileInfoStyles.settings}>
-          <Link to="/edit-profile">Настройки</Link>
-          <SettingFilled className={NavbarProfileInfoStyles.SettingsIcon}/>
+          <Link to="/edit-profile">Редактировать</Link>
+          <EditOutlined className={NavbarProfileInfoStyles.SettingsIcon}/>
         </div>
       </div>
     </>);

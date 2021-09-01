@@ -9,9 +9,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+const whitelist = ['http://localhost:3000', 'http://localhost:3001'];
 app.use(cors({
   credentials: true,
-  origin: config.get('clientUrl'),
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }))
 
 app.use('/api', require('./routes/index'));

@@ -10,6 +10,7 @@ export const getUserProfile = () => {
   return async dispatch => {
     try {
       const data = await profileAPI.getUserProfile();
+      debugger
 
       dispatch(setUserProfile(data.profile));
     } catch(e) {

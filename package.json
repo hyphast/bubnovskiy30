@@ -2,10 +2,10 @@
   "name": "bubnovskiy30",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server/app.js",
   "scripts": {
-    "start": "node app.js",
-    "server": "nodemon app.js",
+    "start": "node app.js --prefix server",
+    "server": "( cd ./server && nodemon app.js)",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
