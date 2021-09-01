@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout, Menu} from 'antd';
 import classnames from 'classnames';
-import {DesktopOutlined, FileOutlined, UserOutlined} from '@ant-design/icons';
+import {InboxOutlined, PlusCircleOutlined, UserOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import NavbarProfileInfo from './NavbarProfileInfo/NavbarProfileInfo';
 import NavbarStyles from './Navbar.module.scss';
@@ -9,6 +9,7 @@ import NavbarStyles from './Navbar.module.scss';
 const {Sider} = Layout;
 
 const Navbar = (props) => {
+
     return (
         <Sider trigger={null}>
             <div className={classnames('logo', NavbarStyles.navbar)}/>
@@ -17,10 +18,10 @@ const Navbar = (props) => {
                 <Menu.Item key="1" icon={<UserOutlined/>}>
                     <Link to='/profile'>Профиль</Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<FileOutlined/>}>
+                <Menu.Item key="2" icon={<PlusCircleOutlined/>}>
                     <Link to='/new-appointment'>Запись</Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<DesktopOutlined/>}>
+                <Menu.Item key="3" icon={<InboxOutlined />}>
                     <Link to='/records'>Мои записи</Link>
                 </Menu.Item>
             </Menu>

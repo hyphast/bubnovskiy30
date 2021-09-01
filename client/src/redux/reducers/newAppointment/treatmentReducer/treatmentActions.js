@@ -12,10 +12,8 @@ export const setIsLoading = (isLoading) => {
 export const getAppointments = (date) => {
   return async dispatch => {
     try {
-      console.log(typeof date)
       dispatch(setIsLoading(true));
       const appointments = await newAppointmentAPI.getAppointments(date);
-      console.log(appointments);
 
       dispatch(setTreatmentAppointmentsData(appointments));
       dispatch(setIsLoading(false));

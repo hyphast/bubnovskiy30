@@ -5,13 +5,9 @@ import NavbarProfileInfoStyles from './NavbarProfileInfo.module.scss';
 import {Link} from 'react-router-dom';
 
 const NavbarProfileInfo = ({firstName, lastName, gender, phoneNumber}) => {
+    const formatPhoneNumber =
+      `+7-${phoneNumber?.slice(0, 3)}-${phoneNumber?.slice(3, 6)}-${phoneNumber?.slice(6, 8)}-${phoneNumber?.slice(8, 10)}`
 
-  debugger
-  let formatPhoneNumber;
-  if (!!phoneNumber) {
-    formatPhoneNumber =
-      `+7-${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 8)}-${phoneNumber.slice(8, 10)}`
-  }
   return (
     <>
       <div className={NavbarProfileInfoStyles.avatar}>

@@ -19,7 +19,6 @@ function App() {
   const routes = useRoutes(isAuthorized); //TODO Захардкодил isAuthorized в true
 
   useEffect(() => {
-    debugger
     if (localStorage.getItem('token')) {
       dispatch(initializeApp());
     } else {
