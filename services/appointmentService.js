@@ -40,6 +40,20 @@ class AppointmentService {
     appointments.map(item => console.log(item.date))
     return appointments;
   }
+
+  async addPatient(date, time, userId, firstName, lastName) {
+    const range = dateService.dateSearchRange(date);
+
+    const app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    console.log('app', app);
+
+    const appointment = app.appointments.find(item => item.time === time);
+
+    const userName = `${firstName} ${lastName}`;
+    appointment.patients = [...appointment.patients, {patientId: userId, patientName: userName}];
+
+    return appointment.save();
+  }
 }
 
 module.exports = new AppointmentService();

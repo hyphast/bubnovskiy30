@@ -34,15 +34,16 @@
   }
 }
 
-.instructor {
-  button {
-    margin-right: 0.2rem;
-    width: 75px;
-  }
-  .times {
-    margin-left: 0.8rem;
-  }
-  .time {
-    margin: 0 0.2rem 0.4rem 0;
-  }
+.list {
+  margin-left: 1rem;
+}
+
+.times {
+  background-color: #5dc232;
+  width: 135px;
+  height: 40px;
+}
+
+.times:hover {
+  background-color: #a5e38a;
 }

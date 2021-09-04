@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout, Menu} from 'antd';
 import classnames from 'classnames';
-import {InboxOutlined, PlusCircleOutlined, UserOutlined} from '@ant-design/icons';
+import {InboxOutlined, PlusCircleOutlined, UserOutlined, SettingFilled} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import NavbarProfileInfo from './NavbarProfileInfo/NavbarProfileInfo';
 import NavbarStyles from './Navbar.module.scss';
@@ -21,8 +21,11 @@ const Navbar = (props) => {
                 <Menu.Item key="2" icon={<PlusCircleOutlined/>}>
                     <Link to='/new-appointment'>Запись</Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<InboxOutlined />}>
+                <Menu.Item key="3" icon={<InboxOutlined/>}>
                     <Link to='/records'>Мои записи</Link>
+                </Menu.Item>
+                <Menu.Item key="4" icon={<SettingFilled/>}>
+                    <Link to='/settings'>Настройки</Link>
                 </Menu.Item>
             </Menu>
         </Sider>

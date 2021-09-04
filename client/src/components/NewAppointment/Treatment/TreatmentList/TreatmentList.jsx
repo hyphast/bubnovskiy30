@@ -1,15 +1,23 @@
 import React from 'react';
-import {Button, Card, List, Skeleton} from 'antd';
+import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {Button, List, Skeleton, Space} from 'antd';
 import TreatmentStyles from '../Treatment.module.scss';
-import Avatar from 'antd/es/avatar/avatar';
 import moment from 'moment';
+import {setAppointmentFinishData} from '../../../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions';
 
 const TreatmentList = ({appointments, isLoading}) => {
+    const dispatch = useDispatch();
+
     const data = appointments[0]?.appointments
-      .map(item => ({name: item.instructorName, times: item.times}));
+      .map(item => ({time: item.time}));
 
     const minutesOfDay = function (d) {
       return d.getMinutes() + d.getHours() * 60;
+    }
+
+    const onSubmit = (time) => {
+      dispatch(setAppointmentFinishData(appointments[0].date, time));
     }
 
     const date = new Date().getDate();
@@ -17,40 +25,42 @@ const TreatmentList = ({appointments, isLoading}) => {
     const isToday = date === appDate;
 
     return (
-      <>
-        {isLoading ? <><Skeleton avatar paragraph={{rows: 3}}/><Skeleton avatar paragraph={{rows: 2}}/></>
+      <div className={TreatmentStyles.list}>
+        <h2>Выберите время для записи</h2>
+        {isLoading ?
+          <>
+              <Space size='middle' direction="vertical">
+                  <Skeleton.Input style={{ width: 850 }} active />
+                  <Skeleton.Input style={{ width: 850 }} active />
+              </Space>
+          </>
           :
           <List
-            itemLayout="vertical"
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 2,
+              md: 4,
+              lg: 4,
+              xl: 6,
+              xxl: 3,
+            }}
             dataSource={data}
             renderItem={item => (
-              <Card>
-                <List.Item className={TreatmentStyles.instructor}>
-                  <List.Item.Meta
-                    avatar={<Avatar size={64} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                    title={<a href="https://ant.design">{item.name}</a>}
-                    description="Инструктор"
-                  />
-                  <div className={TreatmentStyles.times}>
-                    {item.times.map(t => {
-                      return (
-                        <Button disabled={isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(t.time))}
-                                key={t.time} className={TreatmentStyles.time}
-                                type="primary"
-                                shape="round"
-                                size={20}
-                        >
-                          {moment(t.time).utc().utcOffset(240).format('H:mm')}
-                        </Button>
-                      )
-                    })}
-                  </div>
+                <List.Item>
+                  <Button disabled={isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
+                          className={TreatmentStyles.times}
+                          onClick={() => onSubmit(item.time)}
+                          type="primary"
+                          key={item.time.toString()}
+                  >
+                      <Link to='/new-appointment/finish'>{moment(item.time).utc().utcOffset(240).format('H:mm')}</Link>
+                  </Button>
                 </List.Item>
-              </Card>
             )}
           />
         }
-      </>
+      </div>
     );
   }
 ;

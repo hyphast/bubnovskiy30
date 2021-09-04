@@ -1,7 +1,12 @@
 import React from 'react';
-import {PageHeader, Tag, Button, Statistic, Descriptions, Row} from 'antd';
+import {PageHeader, Tag, Button, Statistic, Row} from 'antd';
+import moment from 'moment';
 
-const AppointmentFinish = () => {
+const AppointmentFinish = ({date, time, addPatient}) => {
+  const onSubmit = () => {
+    addPatient(date, time);
+  }
+
   return (
     <>
       <PageHeader
@@ -15,21 +20,20 @@ const AppointmentFinish = () => {
           </Button>
         }
         footer={
-          <Button style={{color: 'green'}} key="1">
+          <Button onClick={onSubmit} style={{color: 'green'}} key="1">
             Записаться
           </Button>
         }
       >
         <Row>
-          <Statistic title="Дата записи" value="30.09.2021"/>
+          <Statistic title="Дата записи" value={moment(date).utc().utcOffset(240).format('DD.MM.YYYY dddd')}/>
           <Statistic
             title="Время"
-            value="9:30"
+            value={moment(time).utc().utcOffset(240).format('H:mm')}
             style={{
               margin: '0 32px',
             }}
           />
-          <Statistic title="Инструктор" value="Иванов Иван Иванович"/>
         </Row>
       </PageHeader>
     </>

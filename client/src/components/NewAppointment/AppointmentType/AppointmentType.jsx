@@ -4,34 +4,53 @@ import {Card} from 'antd';
 import NewAppointmentStyles from '../NewAppointment.module.scss';
 import ConsultationImg from '../../../assets/images/Consultation.jpg';
 import TreatmentImg from '../../../assets/images/Treatment.jpg';
-import PhysicalTrainingImg from '../../../assets/images/Physical training.jpg';
+import PhysicalTrainingImg from '../../../assets/images/PhysicalTraining.jpg';
+import FloatingImg from '../../../assets/images/floating.jpg';
+import MassageImg from '../../../assets/images/massage.jpg';
 import {Link} from 'react-router-dom';
 
-const { Meta } = Card;
+const {Meta} = Card;
 
 const AppointmentType = () => {
   return (
     <div className={classnames('steps-content', NewAppointmentStyles.cards)}>
-      <Card hoverable
-            className={NewAppointmentStyles.card}
-            cover={<img alt="image" src={ConsultationImg}/>}
-      >
-        <Meta title='Консультация' description="Медицинская консультация врача"/>
-      </Card>
-      <Link to='/new-appointment/treatment'>
+      <div className={NewAppointmentStyles.card}>
         <Card hoverable
-              className={NewAppointmentStyles.card}
-              cover={<img alt="image" src={TreatmentImg}/>}
+              cover={<img alt="image" src={ConsultationImg}/>}
         >
-          <Meta title='Лечебные занятия' description="12 лечебных занятий"/>
+          <Meta title="Консультация" description="Медицинская консультация врача"/>
         </Card>
-      </Link>
-      <Card hoverable
-            className={NewAppointmentStyles.card}
-            cover={<img alt="image" src={PhysicalTrainingImg}/>}
-      >
-        <Meta title='Физкультурно-оздоровительные занятия' description="Физкультурно-оздоровительные занятия"/>
-      </Card>
+      </div>
+      <div className={NewAppointmentStyles.card}>
+        <Link to="/new-appointment/treatment">
+          <Card hoverable
+                cover={<img alt="image" src={TreatmentImg}/>}
+          >
+            <Meta title="Лечебные занятия" description="1-й и 2-й циклы"/>
+          </Card>
+        </Link>
+      </div>
+      <div className={NewAppointmentStyles.card}>
+        <Card hoverable
+              cover={<img alt="image" src={PhysicalTrainingImg}/>}
+        >
+          <Meta title="Физкультурно-оздоровительные занятия" description="3-й цикл и больше"/>
+        </Card>
+      </div>
+      <div className={NewAppointmentStyles.card}>
+        <Card hoverable
+              cover={<img alt="image" src={MassageImg}/>}
+        >
+          <Meta title="Массаж" description="Запись на массаж"/>
+        </Card>
+      </div>
+      <div className={classnames(NewAppointmentStyles.card,NewAppointmentStyles.lastCard)}>
+        <Card hoverable
+              cover={<img alt="image" src={FloatingImg}/>}
+        >
+          <Meta title="Флоатинг" description="Запись на флоатинг"/>
+        </Card>
+      </div>
     </div>
   );
 };

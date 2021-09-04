@@ -9,10 +9,20 @@
 }
 
 .headerLogoTitle {
-  white-space: pre-wrap;
-  margin: 1rem 0 0 1rem;
+  margin: 0.3rem 0 0 1rem;
   font-family: Rubik, sans-serif;
   color: #644394;
   font-weight: 800;
   font-size: 1.35rem;
+}
+
+.headerLogoSubtitle {
+  position: relative;
+  top: 2.1rem;
+  left: -20rem;
+  font-family: Rubik, sans-serif;
+  color: #644394;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.2rem;
 }

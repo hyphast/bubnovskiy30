@@ -8,6 +8,7 @@ import TreatmentContainer from './components/NewAppointment/Treatment/TreatmentC
 import AppointmentFinish from './components/NewAppointment/AppointmentFinish/AppointmentFinish';
 import EditProfile from './components/Profile/EditProfile/EditProfile';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import AppointmentFinishContainer from './components/NewAppointment/AppointmentFinish/AppointmentFinishContainer'
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -27,7 +28,7 @@ export const useRoutes = isAuth => {
             <TreatmentContainer/>
           </Route>
           <Route path="/new-appointment/finish" exact>
-            <AppointmentFinish/>
+            <AppointmentFinishContainer/>
           </Route>
           <Route path="/records" exact>
             <Records/>

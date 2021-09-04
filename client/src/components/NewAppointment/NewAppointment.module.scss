@@ -1,18 +1,23 @@
 .cards {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin-top: 3rem;
+  &:after {
+    content: "";
+    flex: auto;
+  }
 }
 
 .card {
   width: 330px;
+  margin-bottom: 1rem;
 }
 
-//.btns {
-//  button {
-//    margin-top: 3rem;
-//  }
-//}
+.lastCard {
+  margin-left: 2.9rem;
+}
 
 .type {
   h2 {

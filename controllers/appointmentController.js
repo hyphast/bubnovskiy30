@@ -3,9 +3,9 @@ const AppointmentService = require('../services/appointmentService');
 class AppointmentController {
   async createAppointment(req, res, next) {
     try {
-      const {date, appointments} = req.body; // appointment is array of objects [{fullname: ref: 'Insctrucotrs', time:{...}, ...}]
+      const {date, appointments} = req.body;
       // const {user} = req.user; //todo user or admin?
-      console.log('new: ', new Date(date), new Date(appointments[0].times[0].time))
+      console.log('new: ', new Date(date), new Date(appointments[0].time))
 
       const data = await AppointmentService.createAppointment(date, appointments);
 
@@ -46,6 +46,19 @@ class AppointmentController {
 
       console.log(appointments);
       return res.json(appointments);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async addPatient(req, res, next) {
+    try {
+      const {date, time, userId, firstName, lastName} = req.body;
+
+      const appointments = await AppointmentService.addPatient(date, time, userId, firstName, lastName);
+
+      console.log(appointments);
+      return res.status(201).json({message: 'Запись была выполнена'});
     } catch (e) {
       next(e);
     }

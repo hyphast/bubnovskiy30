@@ -13,12 +13,11 @@ const Profile = ({firstName, lastName, gender, phoneNumber, email}) => {
           <Row style={{marginBottom: '1rem', fontWeight: '700'}}>
             <Statistic style={{marginRight: '1rem'}} title="" value={lastName}/>
             <Statistic style={{marginRight: '1rem'}} title="" value={firstName}/>
-            <Statistic title="" value="Иванович"/>
+            {/* <Statistic title="" value="Иванович"/> */}
           </Row>
           <Statistic style={{marginBottom: '1rem'}} title="Пол" value={gender === 'male' ? 'Мужской' : 'Женский'}/>
           <Statistic style={{marginBottom: '1rem'}} title="Телефон" value={formatPhoneNumber}/>
           <Statistic style={{marginBottom: '1rem'}} title="Почта" value={email}/>
-          <Statistic title="Инструктор" value="Иванов Иван Иванович"/>
         </div>
       </div>
     </div>

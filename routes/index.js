@@ -27,11 +27,11 @@ router.get('/auth/activate/:link', userController.activate);
 router.get('/auth/refresh', userController.refresh);
 
 router.get('/appointments', authMiddleware, appointmentController.getAppointments);
+router.put('/appointments', authMiddleware, appointmentController.addPatient);
 
-router.get('/profile', authMiddleware, profileController.getUserProfile)
+router.get('/profile', authMiddleware, profileController.getUserProfile);
 
-
-//server
+//admin-panel
 router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
 router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
 
