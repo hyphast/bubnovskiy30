@@ -34,6 +34,7 @@ router.get('/profile', authMiddleware, profileController.getUserProfile);
 //admin-panel
 router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
 router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
+router.get('/created-appointments', appointmentController.getCreatedAppointments); //todo AuthMiddleware
 
 router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
 

@@ -63,6 +63,16 @@ class AppointmentController {
       next(e);
     }
   }
+
+  async getCreatedAppointments(req, res, next) {
+    try {
+      const appointments = await AppointmentService.getCreatedAppointments();
+
+      return res.json(appointments);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 module.exports = new AppointmentController();

@@ -57,6 +57,12 @@ class AppointmentService {
 
     return app.save();
   }
+
+  async getCreatedAppointments() {
+    const appointments = await Appointments.find();
+
+    return appointments;
+  }
 }
 
 module.exports = new AppointmentService();

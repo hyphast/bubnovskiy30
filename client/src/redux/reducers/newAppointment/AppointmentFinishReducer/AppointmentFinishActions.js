@@ -15,7 +15,6 @@ export const addPatient = (date, time, free) => {
       debugger
       const data = await newAppointmentAPI.addPatient(date, time, userId, firstName, lastName, free);
 
-      debugger
     } catch(e) {
       console.log(e.response?.data?.message);
     }
