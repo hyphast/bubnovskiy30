@@ -1,6 +1,7 @@
 import {SET_APPOINTMENT_FINISH_DATA} from '../../../types';
 
 const initialState = {
+  appointmentType: '',
   date: null,
   time: null,
 }

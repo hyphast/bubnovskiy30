@@ -41,18 +41,21 @@ class AppointmentService {
     return appointments;
   }
 
-  async addPatient(date, time, userId, firstName, lastName) {
+  async addPatient(date, time, userId, firstName, lastName, free) {
     const range = dateService.dateSearchRange(date);
 
+    console.log('free', free);
     const app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
-    console.log('app', app);
 
-    const appointment = app.appointments.find(item => item.time === time);
+    const appointment = app.appointments.find(item => +new Date(item.time) === +new Date(time));
 
     const userName = `${firstName} ${lastName}`;
     appointment.patients = [...appointment.patients, {patientId: userId, patientName: userName}];
 
-    return appointment.save();
+    appointment.numberPatients = appointment.patients.length;
+    appointment.free = appointment.free - free;
+
+    return app.save();
   }
 }
 

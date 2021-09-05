@@ -4,6 +4,7 @@ import PageHeaderBack from '../../common/PageHeader/PageHeader';
 import TreatmentDatePicker from './TreatmentDatePicker/TreatmentDatePicker';
 import './Treatment.scss';
 import TreatmentList from './TreatmentList/TreatmentList';
+import {Badge} from 'antd';
 
 
 const Treatment = ({appointments, isLoading, getAppointments}) => {
@@ -19,6 +20,11 @@ const Treatment = ({appointments, isLoading, getAppointments}) => {
         <div className={TreatmentStyles.calendar}>
           <h3>Календарь</h3>
           <TreatmentDatePicker getAppointments={getAppointments}/>
+          <div className={TreatmentStyles.badges}>
+            <Badge color='#96E561' text='Малая загруженность зала' size='default'/>
+            <Badge color='#FFB85C' text='Средняя загруженность зала' size='default'/>
+            <Badge color='#F8A38B' text='Высокая загруженность зала' size='default'/>
+          </div>
         </div>
         <div className={TreatmentStyles.content}>
           <TreatmentList appointments={appointments} isLoading={isLoading}/>

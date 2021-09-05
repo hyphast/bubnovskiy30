@@ -11,6 +11,7 @@ const AppointmentFinishContainer = (props) => {
 
 const mapStateToProps = state => {
   return {
+    appointmentType: state.newAppointmentFinish.appointmentType,
     date: state.newAppointmentFinish.date,
     time: state.newAppointmentFinish.time,
   }

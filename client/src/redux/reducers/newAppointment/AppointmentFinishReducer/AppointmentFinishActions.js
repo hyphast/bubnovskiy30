@@ -1,11 +1,11 @@
 import {SET_APPOINTMENT_FINISH_DATA} from '../../../types';
 import {newAppointmentAPI} from '../../../../API/api';
 
-export const setAppointmentFinishData = (date, time) => {
-  return {type: SET_APPOINTMENT_FINISH_DATA, payload: {date, time}}
+export const setAppointmentFinishData = (date, time, appointmentType) => {
+  return {type: SET_APPOINTMENT_FINISH_DATA, payload: {date, time, appointmentType}}
 }
 
-export const addPatient = (date, time) => {
+export const addPatient = (date, time, free) => {
   return async (dispatch,  getState) => {
     try {
       const userId = getState().auth.userId;
@@ -13,7 +13,7 @@ export const addPatient = (date, time) => {
       const lastName = getState().profile.lastName;
 
       debugger
-      const data = await newAppointmentAPI.addPatient(date, time, userId, firstName, lastName);
+      const data = await newAppointmentAPI.addPatient(date, time, userId, firstName, lastName, free);
 
       debugger
     } catch(e) {

@@ -5,19 +5,20 @@ import {Button, List, Skeleton, Space} from 'antd';
 import TreatmentStyles from '../Treatment.module.scss';
 import moment from 'moment';
 import {setAppointmentFinishData} from '../../../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions';
+import classnames from 'classnames';
 
 const TreatmentList = ({appointments, isLoading}) => {
     const dispatch = useDispatch();
 
     const data = appointments[0]?.appointments
-      .map(item => ({time: item.time}));
+      .map(item => ({time: item.time, numberPatients: item.numberPatients, free: item.free}));
 
     const minutesOfDay = function (d) {
       return d.getMinutes() + d.getHours() * 60;
     }
 
     const onSubmit = (time) => {
-      dispatch(setAppointmentFinishData(appointments[0].date, time));
+      dispatch(setAppointmentFinishData(appointments[0].date, time, 'Лечебные занятия'));
     }
 
     const date = new Date().getDate();
@@ -35,6 +36,7 @@ const TreatmentList = ({appointments, isLoading}) => {
               </Space>
           </>
           :
+          <>
           <List
             grid={{
               gutter: 16,
@@ -48,8 +50,14 @@ const TreatmentList = ({appointments, isLoading}) => {
             dataSource={data}
             renderItem={item => (
                 <List.Item>
-                  <Button disabled={isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
-                          className={TreatmentStyles.times}
+                  <Button disabled={item.free < 2 || isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
+                          className={classnames(TreatmentStyles.times,
+                            {
+                              [TreatmentStyles.orange]: item.numberPatients >= 8,
+                              [TreatmentStyles.yellow]: item.numberPatients >= 4 && item.numberPatients < 8,
+                              [TreatmentStyles.green]: item.numberPatients < 4,
+                            })
+                          }
                           onClick={() => onSubmit(item.time)}
                           type="primary"
                           key={item.time.toString()}
@@ -57,8 +65,9 @@ const TreatmentList = ({appointments, isLoading}) => {
                       <Link to='/new-appointment/finish'>{moment(item.time).utc().utcOffset(240).format('H:mm')}</Link>
                   </Button>
                 </List.Item>
-            )}
-          />
+            )}>
+          </List>
+          </>
         }
       </div>
     );

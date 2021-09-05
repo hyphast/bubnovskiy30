@@ -39,11 +39,38 @@
 }
 
 .times {
-  background-color: #5dc232;
+  font-size: 1rem;
+  font-weight: 700;
   width: 135px;
   height: 40px;
 }
 
-.times:hover {
-  background-color: #a5e38a;
+.green {
+  background-color: #96E561;
+}
+
+.green:hover {
+  background-color: #B7EE95;
+}
+
+.yellow {
+  background-color: #FFB85C;
+}
+
+.yellow:hover {
+  background-color: #FFD399;
+}
+
+.orange {
+  background-color: #F8A38B;
+}
+
+.orange:hover {
+  background-color: #FBC1B1;
+}
+
+.badges {
+  padding-top: 2.3rem;
+  display: flex;
+  flex-direction: column;
 }
