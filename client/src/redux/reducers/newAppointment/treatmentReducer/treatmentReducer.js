@@ -1,7 +1,7 @@
 import {NEW_APPOINTMENT_LOADING, SET_TREATMENT_APPOINTMENTS_DATA} from '../../../types';
 
 const initialState = {
-  appointments: [],
+  appointments: null,
   isLoading: false,
 }
 
@@ -11,7 +11,7 @@ export const treatmentReducer = (state = initialState, action) => {
     case NEW_APPOINTMENT_LOADING: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
     }
     default: return state;

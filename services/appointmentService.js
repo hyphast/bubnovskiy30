@@ -34,10 +34,16 @@ class AppointmentService {
   async getAppointments(date) {
     const range = dateService.dateSearchRange(date);
 
-    const appointments = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
-    console.log('app', appointments);
+    const appointments = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
 
-    appointments.map(item => console.log(item.date))
+    if (!appointments) {
+      const time = await TimeTemplate.find();
+      const app = time.map(t => ({time: t.time, patients: [], numberPatients: 0}));
+      const sortedApp = app.sort((a, b) => a.time - b.time);
+
+      return {date, appointments: sortedApp}
+    }
+
     return appointments;
   }
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Button, List, Skeleton, Space} from 'antd';
+import {Button, List, Popover, Skeleton, Space, Tooltip} from 'antd';
 import TreatmentStyles from '../Treatment.module.scss';
 import moment from 'moment';
 import {setAppointmentFinishData} from '../../../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions';
@@ -10,20 +10,25 @@ import classnames from 'classnames';
 const TreatmentList = ({appointments, isLoading}) => {
     const dispatch = useDispatch();
 
-    const data = appointments[0]?.appointments
-      .map(item => ({time: item.time, numberPatients: item.numberPatients, free: item.free}));
+    const data = appointments?.appointments
+      .map(item => ({time: item.time, numberPatients: item.numberPatients}));
 
     const minutesOfDay = function (d) {
       return d.getMinutes() + d.getHours() * 60;
     }
 
     const onSubmit = (time) => {
-      dispatch(setAppointmentFinishData(appointments[0].date, time, 'Лечебные занятия'));
+      dispatch(setAppointmentFinishData(appointments?.date, time, 'Лечебные занятия'));
     }
 
-    const date = new Date().getDate();
-    const appDate = new Date(appointments[0]?.date).getDate();
-    const isToday = date === appDate;
+    const isToday = useMemo(()=> {
+      const date = new Date();
+      const appDate = new Date(appointments?.date);
+      console.log(moment(date).isSame(appDate, 'day'))
+      debugger
+
+      return moment(date).isSame(appDate, 'day');
+    }, [appointments])
 
     return (
       <div className={TreatmentStyles.list}>
@@ -50,7 +55,7 @@ const TreatmentList = ({appointments, isLoading}) => {
             dataSource={data}
             renderItem={item => (
                 <List.Item>
-                  <Button disabled={item.free < 2 || isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
+                  <Button disabled={item.numberPatients > 11 || isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
                           className={classnames(TreatmentStyles.times,
                             {
                               [TreatmentStyles.orange]: item.numberPatients >= 8,
@@ -62,7 +67,9 @@ const TreatmentList = ({appointments, isLoading}) => {
                           type="primary"
                           key={item.time.toString()}
                   >
+                    <Popover  content={`Свободных мест: ${12 - item.numberPatients}`}>
                       <Link to='/new-appointment/finish'>{moment(item.time).utc().utcOffset(240).format('H:mm')}</Link>
+                    </Popover>
                   </Button>
                 </List.Item>
             )}>

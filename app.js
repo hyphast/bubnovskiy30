@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const whitelist = ['http://localhost:3000', 'https://bubnovskiy-admin-panel.netlify.app'];
+const whitelist = ['http://localhost:3000', 'https://bubnovskiy-admin-panel.netlify.app', 'http://localhost:3001'];
 app.use(cors({
   credentials: true,
   origin: function (origin, callback) {
