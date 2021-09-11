@@ -23,7 +23,13 @@ app.use(cors({
   }
 }))
 
+app.use((req, res, next) => {
+  res.append('Access-Control-Expose-Headers', 'Content-Range');
+  next();
+});
+
 app.use('/api', require('./routes/index'));
+app.use('/api/admin', require('./routes/admin'));
 
 app.use(errorMiddleware);
 

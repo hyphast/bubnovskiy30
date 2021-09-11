@@ -1,6 +1,5 @@
-const Users = require('../models/User');
-const ProfileDto = require('../dtos/profileDto');
-const UserDto = require('../dtos/userDto');
+const Users = require('../../models/User');
+const ProfileDto = require('../../dtos/profileDto');
 
 class ProfileService {
   async getUserProfile(id) {

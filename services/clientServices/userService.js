@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const mailService = require('./mailService');
 const tokenService = require('./tokenService');
-const UserDto = require('../dtos/userDto');
-const ApiError = require('../exceptions/apiError');
-const User = require('../models/User');
+const UserDto = require('../../dtos/userDto');
+const ApiError = require('../../exceptions/apiError');
+const User = require('../../models/User');
 
 
 class UserService {

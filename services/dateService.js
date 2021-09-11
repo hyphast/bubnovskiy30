@@ -1,4 +1,4 @@
-class dateService {
+class DateService {
   dateSearchRange(date) {
     const d = new Date(date);
     const start = +new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -12,4 +12,4 @@ class dateService {
 
 }
 
-module.exports = new dateService();
+module.exports = new DateService();

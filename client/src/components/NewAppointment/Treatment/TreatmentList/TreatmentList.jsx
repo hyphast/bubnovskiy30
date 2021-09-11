@@ -24,8 +24,7 @@ const TreatmentList = ({appointments, isLoading}) => {
     const isToday = useMemo(()=> {
       const date = new Date();
       const appDate = new Date(appointments?.date);
-      console.log(moment(date).isSame(appDate, 'day'))
-      debugger
+      console.log(moment(date).isSame(appDate, 'day'));
 
       return moment(date).isSame(appDate, 'day');
     }, [appointments])

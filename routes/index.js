@@ -1,13 +1,12 @@
 const {Router} = require('express');
 const {check} = require('express-validator');
 const userController = require('../controllers/userController');
-const profileController = require('../controllers/profileController');
-const appointmentController = require('../controllers/appointmentController');
+const profileController = require('../controllers/clientControllers/profileController');
+const appointmentController = require('../controllers/clientControllers/appointmentController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
 
-//client
 router.post('/auth/registration',
   [
     check('firstName', 'Invalid first name').exists().trim(),
@@ -30,13 +29,5 @@ router.get('/appointments', authMiddleware, appointmentController.getAppointment
 router.put('/appointments', authMiddleware, appointmentController.addPatient);
 
 router.get('/profile', authMiddleware, profileController.getUserProfile);
-
-//admin-panel
-router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
-router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
-router.get('/created-appointments', appointmentController.getCreatedAppointments); //todo AuthMiddleware
-
-router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
-
 
 module.exports = router;

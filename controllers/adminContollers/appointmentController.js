@@ -1,4 +1,4 @@
-const AppointmentService = require('../services/appointmentService');
+const AppointmentService = require('../../services/adminServices/appointmentService');
 
 class AppointmentController {
   async createAppointment(req, res, next) {
@@ -37,35 +37,13 @@ class AppointmentController {
 
   async getAppointments(req, res, next) {
     try {
-      const {date} = req.query;
-      const parseDate = parseInt(date, 10);
+      let {range} = req.query;
+      range = JSON.parse(range);
+      console.log('range', range);
 
-      const appointments = await AppointmentService.getAppointments(parseDate);
+      const appointments = await AppointmentService.getAppointments(range);
 
-      return res.json(appointments);
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  async addPatient(req, res, next) {
-    try {
-      const {date, time, userId, firstName, lastName, free} = req.body;
-
-      const appointments = await AppointmentService.addPatient(date, time, userId, firstName, lastName, free);
-
-      console.log(appointments);
-      return res.status(201).json({message: 'Запись была выполнена'});
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  async getCreatedAppointments(req, res, next) {
-    try {
-      const appointments = await AppointmentService.getCreatedAppointments();
-
-      return res.json(appointments);
+      return res.set('Content-Range', appointments.countDocuments.toString()).json(appointments.appointmentsList);
     } catch (e) {
       next(e);
     }
