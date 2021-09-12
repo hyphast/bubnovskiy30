@@ -16,7 +16,7 @@ class AppointmentService {
       throw ApiError.BadRequest('В этот день уже есть запись');
     }
 
-    const appointment = await Appointments.create({date: date, appointments: appointments});
+    const appointment = await Appointments.create({date, appointments});
 
     return appointment;
   }

@@ -39,7 +39,6 @@ class AppointmentController {
     try {
       let {range} = req.query;
       range = JSON.parse(range);
-      console.log('range', range);
 
       const appointments = await AppointmentService.getAppointments(range);
 

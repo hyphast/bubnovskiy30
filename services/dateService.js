@@ -10,6 +10,15 @@ class DateService {
     return {start, end};
   }
 
+  // dateToUtc(date) {
+  //   const d = new Date(date);
+  //   console.log('d', d)
+  //   const utc =  new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), 0));
+  //   console.log('utc', utc);
+  //   console.log('utc.toUTCString()', utc.toUTCString());
+  //
+  //   return utc;
+  // }
 }
 
 module.exports = new DateService();

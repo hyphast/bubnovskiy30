@@ -1,6 +1,7 @@
 const Appointments = require('../../models/Appointments');
 const TimeTemplate = require('../../models/TimeTemplate');
 const DateService = require('../DateService');
+const CommonService = require('../adminServices/common/commonService');
 
 class AppointmentService {
   async getAppointments(date) {
@@ -19,19 +20,25 @@ class AppointmentService {
     return appointments;
   }
 
-  async addPatient(date, time, userId, firstName, lastName, free) {
+  async addPatient(date, time, userId, firstName, lastName) {
     const range = DateService.dateSearchRange(date);
+    // console.log('date', new Date(date))
+    // const utcDate = DateService.dateToUtc(date);
 
-    console.log('free', free);
-    const app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    let app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    // let app = await Appointments.findOne({date: utcDate});
 
-    const appointment = app.appointments.find(item => +new Date(item.time) === +new Date(time));
+    console.log('app', app)
+    if (!app) {
+      app = await CommonService.createAppointment(date);
+    }
+
+    const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
 
     const userName = `${firstName} ${lastName}`;
     appointment.patients = [...appointment.patients, {patientId: userId, patientName: userName}];
 
     appointment.numberPatients = appointment.patients.length;
-    appointment.free = appointment.free - free;
 
     return app.save();
   }
