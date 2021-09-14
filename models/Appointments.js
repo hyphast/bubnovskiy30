@@ -15,7 +15,8 @@ const cellSchema = new Schema({
 
 const schema = new Schema({
   date: { type : Date},
-  appointments: [cellSchema]
+  appointments: [cellSchema],
+  numberAllPatients: {type: Number},
 })
 
-module.exports = model('Appointments', schema, 'appointments');
+module.exports = model('appointments', schema, 'appointments');

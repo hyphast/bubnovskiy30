@@ -26,7 +26,7 @@ class AppointmentService {
     // const utcDate = DateService.dateToUtc(date);
 
     let app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
-    // let app = await Appointments.findOne({date: utcDate});
+    // let app = await appointments.findOne({date: utcDate});
 
     console.log('app', app)
     if (!app) {

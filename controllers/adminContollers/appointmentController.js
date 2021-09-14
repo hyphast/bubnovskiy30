@@ -1,4 +1,4 @@
-const AppointmentService = require('../../services/adminServices/appointmentService');
+const AppointmentService = require('../../services/adminServices/appointments/appointmentService');
 
 class AppointmentController {
   async createAppointment(req, res, next) {
@@ -42,7 +42,7 @@ class AppointmentController {
 
       const appointments = await AppointmentService.getAppointments(range);
 
-      return res.set('Content-Range', appointments.countDocuments.toString()).json(appointments.appointmentsList);
+      return res.set('Content-Range', appointments.countDocuments.toString()).json(appointments.appointments);
     } catch (e) {
       next(e);
     }

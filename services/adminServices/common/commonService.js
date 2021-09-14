@@ -18,10 +18,10 @@ class CommonService {
       ...i._doc,
     }))
 
-    return {itemsList, countDocuments, amountOnePortion: lim};
+    return {itemsList, countDocuments, lim};
   }
 
-  async getAppointmentTimes() {
+  async initAppointments() {
     const time = await TimeTemplate.find();
 
     const appointments = time.map(i => ({
@@ -34,24 +34,11 @@ class CommonService {
   }
 
   async createAppointment(date) {
-    const appointments = await this.getAppointmentTimes();
+    const appointments = await this.initAppointments();
 
     const appointment = await Appointments.create({date, appointments});
 
     return appointment;
-  }
-
-  async newAppointment(date) {
-    const appointments = await this.getAppointmentTimes();
-
-    const app = {
-      id: nanoid(10),
-      date,
-      appointments,
-      numberAllPatients: 0,
-    }
-
-    return app;
   }
 }
 
