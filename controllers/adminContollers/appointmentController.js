@@ -37,12 +37,25 @@ class AppointmentController {
 
   async getAppointments(req, res, next) {
     try {
-      let {range} = req.query;
-      range = JSON.parse(range);
+      const filter = req.query.filter ? JSON.parse(req.query.filter) : null;
+      const range = req.query.range ? JSON.parse(req.query.range) : null;
+      const sort = req.query.sort ? JSON.parse(req.query.sort) : null;
 
-      const appointments = await AppointmentService.getAppointments(range);
+      const appointments = await AppointmentService.getAppointments(filter, range, sort);
 
       return res.set('Content-Range', appointments.countDocuments.toString()).json(appointments.appointments);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getOneAppointment(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      const appointment = await AppointmentService.getOneAppointment(id);
+
+      return res.json(appointment);
     } catch (e) {
       next(e);
     }

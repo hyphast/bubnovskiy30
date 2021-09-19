@@ -2,11 +2,15 @@ import React from 'react';
 import {PageHeader, Tag, Button, Statistic, Row} from 'antd';
 import moment from 'moment';
 import AppointmentStyles from './AppointmentFinish.module.scss';
+import { useHistory } from "react-router-dom";
 
 const AppointmentFinish = ({appointmentType, date, time, addPatient}) => {
+  const history = useHistory();
+
   const onSubmit = () => {
     const free = appointmentType === 'Лечебные занятия' ? 2 : 1;
     addPatient(date, time, free);
+    history.push("/appointments");
   }
 
   return (

@@ -8,7 +8,7 @@ const router = Router();
 router.get('/users', userController.getUsers);
 router.get('/users/:id', userController.getOneUser);
 router.get('/appointments', appointmentController.getAppointments);
-router.get('/appointments/:id', appointmentController.getAppointments);
+router.get('/appointments/:id', appointmentController.getOneAppointment);
 
 
 router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware

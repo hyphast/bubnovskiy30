@@ -5,6 +5,7 @@ const DateService = require('../../dateService');
 const ApiError = require('../../../exceptions/apiError');
 const User = require('../../../models/User');
 const AppoinmentHelpers = require('./appointmentHelpers');
+const CommonService = require('../common/commonService');
 
 class AppointmentService {
   // async createAppointment(date, appointments) {
@@ -33,42 +34,28 @@ class AppointmentService {
     return time;
   }
 
-  async getAppointments(range) {
+  async getAppointments(filter, range, sort) {
     console.time('test');
-    const date = DateService.dateToUtc(new Date());
-    const dateOffset = range[0];
-    const amountOnePortion = range[1] - range[0] + 1;
-    const startDate = date.setDate(date.getDate() + dateOffset);
+    const {start, end} = await AppoinmentHelpers.handlePagination(range);
 
-    const {start, end} = DateService.dateSearchRange(startDate, amountOnePortion);
+    const sortBy = CommonService.handleSort(sort);
 
-    const itemsList = await Appointments.find({date: {$gte: start, $lt: end}});
+    const appointments = await Appointments.find({date: {$gte: start, $lt: end}}).sort(sortBy);
 
-    let appointmentsList = [];
-    const curDate = new Date(startDate);
-    for (let i = 0; i < amountOnePortion; i++) {
-      const range = DateService.dateSearchRange(curDate.getTime());
-      const app = itemsList.find(item => {
-        const itemDate = new Date(item.date).getTime();
-        return itemDate >= range.start && itemDate <= range.end
-      })
-
-      if (!app) {
-        const newApp = await AppoinmentHelpers.newAppointment(curDate.toISOString());
-        appointmentsList.push(newApp);
-      }
-
-      curDate.setDate(curDate.getDate() + 1);
-    }
-    await Appointments.insertMany(appointmentsList);
-
-    let appointments = await Appointments.find({date: {$gte: start, $lt: end}});
-    appointments = appointments.map(item => ({id: item._id, ...item._doc}))
+    const apps = CommonService.withIdField(appointments);
 
     const countDocuments = 180; // 6 month
 
     console.timeEnd('test');
-    return {appointments, countDocuments}
+    return {appointments: apps, countDocuments}
+  }
+
+  async getOneAppointment(id) {
+    const appointment = await Appointments.findOne({_id: id});
+
+    const appointmentWithId = {id: appointment._id, ...appointment._doc}
+
+    return appointmentWithId;
   }
 }
 

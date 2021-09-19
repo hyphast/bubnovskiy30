@@ -1,24 +1,53 @@
 const TimeTemplate = require('../../../models/TimeTemplate');
-const { nanoid } = require('nanoid');
 const Appointments = require('../../../models/Appointments');
 
 class CommonService {
-  async getPortion(range, model) {
-    const skip = range[0];
-    const lim = range[1] - range[0] + 1;
+   withIdField(items) {
+     console.log('items', typeof items);
+    if (Array.isArray(items)) {
+      const itemsList = items.map(i => ({
+        id: i._id,
+        ...i._doc,
+      }))
 
-    const items = await model.find()
-      .limit(lim)
-      .skip(skip);
+      return itemsList
+    }
+    else {
+      const itemsList = {id: items._id, ...items._doc}
 
-    const countDocuments = await model.countDocuments({});
+      return itemsList;
+    }
+  }
 
-    const itemsList = items.map(i => ({
-      id: i._id,
-      ...i._doc,
-    }))
+  handleFilter(filter) {
+    let match = {};
+    if (filter) {
+      Object.keys(filter).forEach(item => {
+        if (item === 'id') return match['_id'] = filter[item]
+        return match[item] = filter[item]
+      })
+    }
 
-    return {itemsList, countDocuments, lim};
+    return match;
+  }
+
+  handleSort(sort) {
+    let sortBy = {};
+    if(sort){
+      sortBy[sort[0]] = sort[1] === 'DESC' ? -1 : 1;
+    }
+    console.log('sortBy', sortBy)
+    return sortBy;
+  }
+
+  handlePagination(range) {
+    let skip, lim;
+    if (range) {
+      skip = range[0];
+      lim = range[1] - range[0] + 1;
+    }
+
+    return {skip, lim}
   }
 
   async initAppointments() {
@@ -36,7 +65,7 @@ class CommonService {
   async createAppointment(date) {
     const appointments = await this.initAppointments();
 
-    const appointment = await Appointments.create({date, appointments});
+    const appointment = await Appointments.create({date, appointments, numberAllPatients: 0});
 
     return appointment;
   }

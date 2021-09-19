@@ -40,6 +40,8 @@ class AppointmentService {
 
     appointment.numberPatients = appointment.patients.length;
 
+    app.numberAllPatients = app.numberAllPatients + 1;
+
     return app.save();
   }
 }

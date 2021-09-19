@@ -1,14 +1,14 @@
-const usersService = require('../../services/adminServices/usersService');
+const usersService = require('../../services/adminServices/users/usersService');
 
 class UsersController {
   async getUsers(req, res, next) {
     try {
-      let {range} = req.query;
-      range = JSON.parse(range);
+      const filter = req.query.filter ? JSON.parse(req.query.filter) : null;
+      const range = req.query.range ? JSON.parse(req.query.range) : null;
+      const sort = req.query.sort ? JSON.parse(req.query.sort) : null;
 
-      const users = await usersService.getUsers(range);
+      const users = await usersService.getUsers(filter, range, sort);
 
-      console.log()
       return res.set('Content-Range', users.countDocuments.toString()).json(users.usersList);
     } catch (e) {
       next(e);
@@ -17,7 +17,7 @@ class UsersController {
 
   async getOneUser(req, res, next) {
     try {
-      let id = req.params.id;
+      const id = req.params.id;
 
       const user = await usersService.getOneUser(id);
 
