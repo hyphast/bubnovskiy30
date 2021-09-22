@@ -49,8 +49,8 @@ export const newAppointmentAPI = {
   getAppointments(date) {
     return api.get(`/appointments?date=${date}`).then(response => response.data);
   },
-  addPatient(date, time, userId, firstName, lastName, free) {
-    return api.put('/appointments', {date, time, userId, firstName, lastName, free})
+  addPatient(date, time, userId) {
+    return api.put('/appointments', {date, time, userId})
       .then(response => response.data);
   },
 }

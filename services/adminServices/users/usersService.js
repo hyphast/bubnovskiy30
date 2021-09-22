@@ -11,13 +11,15 @@ class UsersService {
   }
 
   async getUsers(filter, range, sort) {
-    const {match} = CommonService.handleFilter(filter);
-    const {sortBy} = CommonService.handleSort(sort);
+    const match = CommonService.handleFilter(filter);
+    const sortBy = CommonService.handleSort(sort);
     const {skip, lim} = CommonService.handlePagination(range);
+    console.log('filter', filter)
+    console.log('match', match);
 
     const users = await User.find(match).sort(sortBy).limit(lim).skip(skip);
 
-    console.log('users', typeof users);
+    //console.log('users', users);
 
     const countDocuments = await User.countDocuments({});
 

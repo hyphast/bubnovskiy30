@@ -16,9 +16,9 @@ class AppointmentController {
 
   async addPatient(req, res, next) {
     try {
-      const {date, time, userId, firstName, lastName} = req.body;
+      const {date, time, userId} = req.body;
 
-      const appointments = await AppointmentService.addPatient(date, time, userId, firstName, lastName);
+      const appointments = await AppointmentService.addPatient(date, time, userId);
 
       console.log(appointments);
       return res.status(201).json({message: 'Запись была выполнена'});

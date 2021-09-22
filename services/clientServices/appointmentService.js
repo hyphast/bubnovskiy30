@@ -10,8 +10,7 @@ class AppointmentService {
     const appointments = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
 
     if (!appointments) {
-      const time = await TimeTemplate.find();
-      const app = time.map(t => ({time: t.time, patients: [], numberPatients: 0}));
+      const app = await CommonService.initAppointments();
       const sortedApp = app.sort((a, b) => a.time - b.time);
 
       return {date, appointments: sortedApp}
@@ -20,7 +19,7 @@ class AppointmentService {
     return appointments;
   }
 
-  async addPatient(date, time, userId, firstName, lastName) {
+  async addPatient(date, time, userId) {
     const range = DateService.dateSearchRange(date);
     // console.log('date', new Date(date))
     // const utcDate = DateService.dateToUtc(date);
@@ -35,8 +34,7 @@ class AppointmentService {
 
     const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
 
-    const userName = `${firstName} ${lastName}`;
-    appointment.patients = [...appointment.patients, {patientId: userId, patientName: userName}];
+    appointment.patients = [...appointment.patients, {id: userId}];
 
     appointment.numberPatients = appointment.patients.length;
 

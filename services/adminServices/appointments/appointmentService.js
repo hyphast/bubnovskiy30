@@ -53,9 +53,26 @@ class AppointmentService {
   async getOneAppointment(id) {
     const appointment = await Appointments.findOne({_id: id});
 
-    const appointmentWithId = {id: appointment._id, ...appointment._doc}
+    let appointmentWithId = {id: appointment._id, ...appointment._doc}
+
+    // for (let obj of appointmentWithId) {
+    //   for(let key in obj.appointments) {
+    //     id: appointment._id,
+    //   }
+    // }
+
+    appointmentWithId.appointments = appointmentWithId.appointments.map(app => ({id: app._id, ...app._doc})); //todo refactor
+    //console.log('appointmentWithId', appointmentWithId);
 
     return appointmentWithId;
+  }
+
+  async updateOneAppointment(id, appointments) {
+    // appointments = appointments.map(item => item.patients.map(i => i.numberPatients + 1))
+
+    const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments});
+
+    return appointment;
   }
 }
 

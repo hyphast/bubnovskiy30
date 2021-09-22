@@ -20,10 +20,10 @@ class AppointmentHelpers {
 
     const appointment = {
       date,
-      app,
+      appointments: app,
       numberAllPatients: 0,
     }
-
+    // console.log('appointment', appointment.app);
 
     return appointment;
   }

@@ -60,6 +60,21 @@ class AppointmentController {
       next(e);
     }
   }
+
+  async updateOneAppointment(req, res, next) {
+    try {
+      const id = req.params.id;
+      const {appointments} = req.body;
+      console.log('appointments', appointments)
+
+
+      const appointment = await AppointmentService.updateOneAppointment(id, appointments);
+
+      res.json(appointment);
+    } catch (e) {
+      next(e)
+    }
+  }
 }
 
 module.exports = new AppointmentController();
