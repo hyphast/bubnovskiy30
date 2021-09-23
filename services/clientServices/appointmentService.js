@@ -11,6 +11,7 @@ class AppointmentService {
 
     if (!appointments) {
       const app = await CommonService.initAppointments();
+      console.log('app', app);
       const sortedApp = app.sort((a, b) => a.time - b.time);
 
       return {date, appointments: sortedApp}

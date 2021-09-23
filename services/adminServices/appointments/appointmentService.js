@@ -67,10 +67,15 @@ class AppointmentService {
     return appointmentWithId;
   }
 
-  async updateOneAppointment(id, appointments) {
+  async updateOneAppointment(id, appointments, date) {
     // appointments = appointments.map(item => item.patients.map(i => i.numberPatients + 1))
 
-    const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments});
+    const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments, numberAllpatients});
+
+    console.log('appointment', appointment)
+
+    appointment['date'] = date; //todo refactor
+    appointment['id'] = id; //todo refactor
 
     return appointment;
   }

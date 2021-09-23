@@ -64,11 +64,11 @@ class AppointmentController {
   async updateOneAppointment(req, res, next) {
     try {
       const id = req.params.id;
-      const {appointments} = req.body;
+      const {appointments, date} = req.body;
       console.log('appointments', appointments)
 
 
-      const appointment = await AppointmentService.updateOneAppointment(id, appointments);
+      const appointment = await AppointmentService.updateOneAppointment(id, appointments, date);
 
       res.json(appointment);
     } catch (e) {
