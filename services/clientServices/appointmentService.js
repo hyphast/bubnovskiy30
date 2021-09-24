@@ -1,6 +1,6 @@
 const Appointments = require('../../models/Appointments');
 const TimeTemplate = require('../../models/TimeTemplate');
-const DateService = require('../DateService');
+const DateService = require('../dateService');
 const CommonService = require('../adminServices/common/commonService');
 
 class AppointmentService {
