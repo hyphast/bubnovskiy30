@@ -6,7 +6,7 @@
   "smtpHost": "smtp.gmail.com",
   "smtpPort": 587,
   "smtpUser": "bubnovskiy30@gmail.com",
-  "smtpPassword": "123bub456novskiy30",
+  "smtpPassword": "****",
   "apiUrl": "http://localhost:5000",
   "clientUrl": "http://localhost:3000"
 }

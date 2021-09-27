@@ -11,7 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const whitelist = ['http://localhost:3000', 'https://bubnovskiy-admin-panel.netlify.app', 'http://localhost:3001'];
+const whitelist = ['http://localhost:3000', 'https://bubnovskiy30admin.netlify.app',
+'http://localhost:3001', 'http://bubnovskiy30.hopto.org'];
 app.use(cors({
   credentials: true,
   origin: function (origin, callback) {
@@ -33,13 +34,13 @@ app.use('/api/admin', require('./routes/admin'));
 
 app.use(errorMiddleware);
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use('/', express.static(path.join(__dirname, '..', 'client', 'build')));
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
 
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
-//   })
-// }
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 const PORT = config.get('port') || 5000;
 
