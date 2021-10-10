@@ -9,8 +9,7 @@ const patientsSchema = new Schema({
 const cellSchema = new Schema({
   time: { type : Date},
   patients: [patientsSchema],
-  numberPatients: {type: Number},
-  //free: {type: Number},
+  maxNumberPatients: {type: Number},
 });
 
 const schema = new Schema({

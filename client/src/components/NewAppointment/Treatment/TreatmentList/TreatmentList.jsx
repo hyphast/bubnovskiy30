@@ -11,7 +11,7 @@ const TreatmentList = ({appointments, isLoading}) => {
     const dispatch = useDispatch();
 
     const data = appointments?.appointments
-      .map(item => ({time: item.time, numberPatients: item.patients.length}));
+      .map(item => ({time: item.time, numberPatients: item.maxNumberPatients - item.patients.length}));
 
     const minutesOfDay = function (d) {
       return d.getMinutes() + d.getHours() * 60;
@@ -53,19 +53,19 @@ const TreatmentList = ({appointments, isLoading}) => {
             dataSource={data}
             renderItem={item => (
                 <List.Item>
-                  <Button disabled={item.numberPatients > 11 || isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
+                  <Button disabled={item.numberPatients < 1 || isToday && minutesOfDay(new Date()) > minutesOfDay(new Date(item.time))}
                           className={classnames(TreatmentStyles.times,
                             {
-                              [TreatmentStyles.orange]: item.numberPatients >= 8,
+                              [TreatmentStyles.green]: item.numberPatients >= 8,
                               [TreatmentStyles.yellow]: item.numberPatients >= 4 && item.numberPatients < 8,
-                              [TreatmentStyles.green]: item.numberPatients < 4,
+                              [TreatmentStyles.orange]: item.numberPatients < 4,
                             })
                           }
                           onClick={() => onSubmit(item.time)}
                           type="primary"
                           key={item.time.toString()}
                   >
-                    <Popover  content={`Свободных мест: ${12 - item.numberPatients}`}>
+                    <Popover  content={`Свободных мест: ${item.numberPatients}`}>
                       <Link to='/new-appointment/finish'>{moment(item.time).utc().utcOffset(240).format('H:mm')}</Link>
                     </Popover>
                   </Button>

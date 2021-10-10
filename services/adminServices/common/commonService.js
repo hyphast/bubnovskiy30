@@ -2,24 +2,6 @@ const TimeTemplate = require('../../../models/TimeTemplate');
 const Appointments = require('../../../models/Appointments');
 
 class CommonService {
-  // deepClone(obj) {
-  //   if (obj === null) return null;
-  //
-  //   let clone = Object.assign({}, obj);
-  //
-  //   Object.keys(clone).forEach(
-  //     key =>
-  //       (clone[key] =
-  //         typeof obj[key] === "object" ? this.deepClone(obj[key]) : obj[key])
-  //   );
-  //
-  //   return Array.isArray(obj) && obj.length
-  //     ? (clone.length = obj.length) && Array.from(clone)
-  //     : Array.isArray(obj)
-  //       ? Array.from(obj)
-  //       : clone;
-  // };
-
    withIdField(items) {
      console.log('items', typeof items);
     if (Array.isArray(items)) {
@@ -97,12 +79,14 @@ class CommonService {
   }
 
   async initAppointments() {
-    const time = await TimeTemplate.find();
+    const time = await TimeTemplate.find().sort({time: 1});
+
+    console.log('time', time);
 
     const appointments = time.map(i => ({
         time: i.time,
         patients: [],
-        numberPatients: 0,
+        maxNumberPatients: 12,
       }
     ))
     return appointments;

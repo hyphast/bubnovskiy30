@@ -4,12 +4,14 @@ const DateService = require('../../dateService');
 
 class AppointmentHelpers {
   async initAppointmentsTime() {
-    const time = await TimeTemplate.find();
+    const time = await TimeTemplate.find().sort({time: 1});
+
+    console.log('time', time);
 
     const appointment = time.map(i => ({
         time: i.time,
         patients: [],
-        numberPatients: 0,
+        maxNumberPatients: 12,
       }
     ))
     return appointment;
@@ -23,7 +25,6 @@ class AppointmentHelpers {
       appointments: app,
       numberAllPatients: 0,
     }
-    // console.log('appointment', appointment.app);
 
     return appointment;
   }

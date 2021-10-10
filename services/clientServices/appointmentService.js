@@ -37,7 +37,7 @@ class AppointmentService {
 
     appointment.patients = [...appointment.patients, {id: userId}];
 
-    appointment.numberPatients = appointment.patients.length;
+    //appointment.numberPatients = appointment.numberPatients - 1;
 
     app.numberAllPatients = app.numberAllPatients + 1;
 
