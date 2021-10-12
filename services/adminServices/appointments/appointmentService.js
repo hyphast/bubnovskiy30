@@ -70,7 +70,8 @@ class AppointmentService {
   async updateOneAppointment(id, appointments, date) {
     // appointments = appointments.map(item => item.patients.map(i => i.numberPatients + 1))
 
-    const numberAllPatients = appointments ? appointments.reduce((acc, cur) => acc + cur.patients.length, 0) : null;
+    const numberAllPatients = appointments ?
+      appointments.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
     console.log('numberAllPatients', numberAllPatients);
     const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
 

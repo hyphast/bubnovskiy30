@@ -11,7 +11,7 @@ const TreatmentList = ({appointments, isLoading}) => {
     const dispatch = useDispatch();
 
     const data = appointments?.appointments
-      .map(item => ({time: item.time, numberPatients: item.maxNumberPatients - item.patients.length}));
+      .map(item => ({time: item.time, numberPatients: item.maxNumberPatients - (item.patients ? item.patients.length : 0)}));
 
     const minutesOfDay = function (d) {
       return d.getMinutes() + d.getHours() * 60;
