@@ -3,10 +3,11 @@ import {APP_IS_READY, APP_SET_INITIALIZED} from '../../types';
 const initialState = {
   initialized: false,
   isReady: false,
-  globalError: null,
+  globalError: null as string | null,
 }
+export type initialStateType = typeof initialState;
 
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (state = initialState, action: any): initialStateType => {
   switch(action.type) {
     case APP_SET_INITIALIZED: {
       return {

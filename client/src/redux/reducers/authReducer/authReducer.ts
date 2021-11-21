@@ -1,27 +1,27 @@
 import {AUTH_ERROR, AUTH_LOADING, CLEAR_AUTH_ERROR, SET_AUTH_USER_DATA} from '../../types';
 
 const initialState = {
-  userId: null,
-  email: null,
-  // phoneNumber: null,
+  userId: null as string | null,
+  email: null as string | null,
   isAuth: false,
-  errors: [],
+  errors: [] as Array<string>,
   isLoading: false,
 }
+export type initialStateType = typeof initialState;
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: any): initialStateType => {
   switch(action.type) {
     case SET_AUTH_USER_DATA:
     case AUTH_LOADING: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
     }
     case AUTH_ERROR: {
       return {
         ...state,
-        errors: [...action.errors]
+        errors: [...action.errors],
       }
     }
     case CLEAR_AUTH_ERROR: {

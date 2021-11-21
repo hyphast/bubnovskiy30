@@ -2,16 +2,23 @@ import {isAuth} from '../authReducer/authActions';
 import {getUserProfile} from '../profileReducer/profileActions';
 import {APP_IS_READY, APP_SET_INITIALIZED} from '../../types';
 
-export const setInitialized = () => {
+type setInitializedType = {
+  type: typeof APP_SET_INITIALIZED,
+}
+export const setInitialized = (): setInitializedType => {
   return {type: APP_SET_INITIALIZED}
 }
 
-export const setIsReady = (isReady) => {
+type setIsReadyType = {
+  type: typeof APP_IS_READY,
+  payload: {isReady: boolean},
+}
+export const setIsReady = (isReady: boolean): setIsReadyType => {
   return {type: APP_IS_READY, payload: {isReady}}
 }
 
 export const initializeApp = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     const isAuthPromise = dispatch(isAuth());
     const getUserProfilePromise = dispatch(getUserProfile())
 

@@ -1,19 +1,23 @@
 import {SET_UPCOMING_RECORDS} from '../../types';
 import {recordsAPI} from '../../../API/api';
+import {recordsType} from '../commonTypes';
 
-export const setUpcomingRecords = (records) => {
-  const recs = {...records};
+type setUpcomingRecordsType = {
+  type: typeof SET_UPCOMING_RECORDS,
+  payload: recordsType,
+}
+export const setUpcomingRecords = (records: recordsType): setUpcomingRecordsType => {
   return {type: SET_UPCOMING_RECORDS, payload: {...records}}
 }
 
 export const getUpcomingRecords = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch: any, getState: any) => {
     try {
       const userId = getState().auth.userId;
       const data = await recordsAPI.getUpcomingRecords(userId);
 
       dispatch(setUpcomingRecords(data.records));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.response?.data?.message);
     }
   }
