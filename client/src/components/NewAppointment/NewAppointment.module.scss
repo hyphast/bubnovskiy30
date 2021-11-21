@@ -1,6 +1,6 @@
 .cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 3rem;
@@ -12,11 +12,7 @@
 
 .card {
   width: 330px;
-  margin-bottom: 1rem;
-}
-
-.lastCard {
-  margin-left: 2.9rem;
+  margin: 0 0 1rem 4rem;
 }
 
 .type {

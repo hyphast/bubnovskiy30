@@ -3,6 +3,7 @@ const {check} = require('express-validator');
 const userController = require('../controllers/userController');
 const profileController = require('../controllers/clientControllers/profileController');
 const appointmentController = require('../controllers/clientControllers/appointmentController');
+const recordsController = require('../controllers/clientControllers/recordsController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
@@ -29,5 +30,9 @@ router.get('/appointments', authMiddleware, appointmentController.getAppointment
 router.put('/appointments', authMiddleware, appointmentController.addPatient);
 
 router.get('/profile', authMiddleware, profileController.getUserProfile);
+router.put('/profile/photo', authMiddleware, profileController.savePhoto);
+router.put('/profile', authMiddleware, profileController.editProfileInfo);
+
+router.get('/records', authMiddleware, recordsController.getUpcomingRecords);
 
 module.exports = router;

@@ -62,7 +62,13 @@ class AppointmentService {
     // }
 
     appointmentWithId.appointments = appointmentWithId.appointments.map(app => ({id: app._id, ...app._doc})); //todo refactor
-    //console.log('appointmentWithId', appointmentWithId);
+
+    appointmentWithId.appointments.forEach(app => {
+      app.treatment = app.patients.filter( item => item.appointmentType === 'Лечебные занятия');
+      app.physicalTraining = app.patients.filter( item => item.appointmentType === 'Физкультурно-оздоровительные занятия');
+    });
+
+    //console.log('appointmentWithId', appointmentWithId.treatment);
 
     return appointmentWithId;
   }

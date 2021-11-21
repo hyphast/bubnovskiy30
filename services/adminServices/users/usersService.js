@@ -19,8 +19,6 @@ class UsersService {
 
     const users = await User.find(match).sort(sortBy).limit(lim).skip(skip);
 
-    //console.log('users', users);
-
     const countDocuments = await User.countDocuments({});
 
     const usersList = CommonService.withIdField(users)

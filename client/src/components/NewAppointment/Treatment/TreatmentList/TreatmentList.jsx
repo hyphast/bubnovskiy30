@@ -18,7 +18,7 @@ const TreatmentList = ({appointments, isLoading}) => {
     }
 
     const onSubmit = (time) => {
-      dispatch(setAppointmentFinishData(appointments?.date, time, 'Лечебные занятия'));
+      dispatch(setAppointmentFinishData(appointments?.date, time, true));
     }
 
     const isToday = useMemo(()=> {

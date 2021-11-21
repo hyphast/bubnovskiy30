@@ -9,6 +9,24 @@ class ProfileService {
 
     return {profile: profileDto};
   }
+  async savePhoto(id, photoUrl) {
+    const profile = await Users.findOne({_id: id});
+
+    profile.photoUrl = photoUrl;
+
+    return profile.save();
+  }
+  async editProfileInfo(id, firstName, lastName, patronymic, gender, phoneNumber) {
+    const profile = await Users.findOne({_id: id});
+
+    profile.firstName = firstName;
+    profile.lastName = lastName;
+    profile.patronymic = patronymic;
+    profile.gender = gender;
+    profile.phoneNumber = phoneNumber;
+
+    return profile.save();
+  }
 }
 
 module.exports = new ProfileService();

@@ -13,8 +13,9 @@ import authStyles from '../Login/Login.module.scss';
 const Registration = ({registration, _error, _clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
-      firstName: yup.string().required('Как вас зовут?'),
-      lastName: yup.string().required('Как вас зовут?'),
+      firstName: yup.string().required('Введите ваше имя'),
+      lastName: yup.string().required('Введите вашу фамилию'),
+      patronymic: yup.string().required('Введите ваше отчество'),
       gender: yup.string().required('Выберите ваш пол'),
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
       password: yup.string().required('Это поле обязательное').min(6, 'Пароль должен быть больше 6 символов').max(32, 'Максимальная длина пароля 32 символа'),
@@ -25,9 +26,9 @@ const Registration = ({registration, _error, _clearError, isLoading}) => {
 
   const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
 
-  const onSubmit = ({firstName, lastName, email, password, gender, phoneNumber}) => {
+  const onSubmit = ({firstName, lastName, patronymic, email, password, gender, phoneNumber}) => {
     //console.log('form:', firstName, lastName, gender, email, password, confirmPassword, phoneNumber, agreement);
-    registration(firstName, lastName, email, password, gender, phoneNumber);
+    registration(firstName, lastName, patronymic, email, password, gender, phoneNumber);
   }
 
   useEffect(() => {
@@ -60,6 +61,12 @@ const Registration = ({registration, _error, _clearError, isLoading}) => {
                              control={control}
                              placeholder='Фамилия'
             />
+
+          <InputController errors={errors}
+                           field='patronymic'
+                           control={control}
+                           placeholder='Отчество'
+          />
 
             <SelectController errors={errors}
                               field='gender'

@@ -1,14 +1,15 @@
 import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
-import Records from './components/Records/Records';
 import RegistrationContainer from './components/Auth/Registration/RegistrationContainer';
 import LoginContainer from './components/Auth/Login/LoginContainer';
 import NewAppointment from './components/NewAppointment/NewAppointment';
 import TreatmentContainer from './components/NewAppointment/Treatment/TreatmentContainer';
-import AppointmentFinish from './components/NewAppointment/AppointmentFinish/AppointmentFinish';
-import EditProfile from './components/Profile/EditProfile/EditProfile';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import AppointmentFinishContainer from './components/NewAppointment/AppointmentFinish/AppointmentFinishContainer'
+import EditProfileContainer from "./components/Profile/EditProfile/EditProfileContainer";
+import Settings from "./components/Settings/Settings";
+import RecordsCalendar from "./components/Records/RecordsCalendar/RecordsCalendar";
+import RecordsContainer from "./components/Records/RecordsContainer";
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -19,7 +20,7 @@ export const useRoutes = isAuth => {
             <ProfileContainer/>
           </Route>
           <Route path="/edit-profile" exact>
-            <EditProfile/>
+            <EditProfileContainer/>
           </Route>
           <Route path="/new-appointment" exact>
             <NewAppointment/>
@@ -31,7 +32,13 @@ export const useRoutes = isAuth => {
             <AppointmentFinishContainer/>
           </Route>
           <Route path="/records" exact>
-            <Records/>
+            <RecordsContainer/>
+          </Route>
+          <Route path="/records-calendar" exact>
+            <RecordsCalendar/>
+          </Route>
+          <Route path="/settings" exact>
+            <Settings/>
           </Route>
           <Redirect to="/profile"/>
         </Switch>

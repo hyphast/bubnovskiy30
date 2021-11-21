@@ -20,13 +20,10 @@ class AppointmentService {
     return appointments;
   }
 
-  async addPatient(date, time, userId) {
+  async addPatient(date, time, appointmentType, userId) {
     const range = DateService.dateSearchRange(date);
-    // console.log('date', new Date(date))
-    // const utcDate = DateService.dateToUtc(date);
 
     let app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
-    // let app = await appointments.findOne({date: utcDate});
 
     console.log('app', app)
     if (!app) {
@@ -35,9 +32,7 @@ class AppointmentService {
 
     const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
 
-    appointment.patients = [...appointment.patients, {id: userId}];
-
-    //appointment.numberPatients = appointment.numberPatients - 1;
+    appointment.patients = [...appointment.patients, {id: userId, appointmentType: appointmentType}];
 
     app.numberAllPatients = app.numberAllPatients + 1;
 

@@ -55,6 +55,7 @@ const Login = ({login, _error, _clearError, isLoading}) => {
 
             <InputController errors={errors}
                              field='password'
+                             type='password'
                              control={control}
                              placeholder='Пароль'
                              className="site-form-item-icon"

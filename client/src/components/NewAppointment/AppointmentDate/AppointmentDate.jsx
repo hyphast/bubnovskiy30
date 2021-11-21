@@ -19,7 +19,7 @@ const AppointmentDate = () => {
       {/*<Alert*/}
       {/*  message={`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`}*/}
       {/*/>*/}
-      {/*<Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} />*/}
+      {/*<RecordsCalendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} />*/}
       <Calendar  />
     </>
   );

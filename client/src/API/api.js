@@ -36,8 +36,8 @@ export const authAPI = {
   login(email, password) {
     return api.post('/auth/login', {email, password}).then(response => response.data);
   },
-  registration(firstName, lastName, email, password, gender, phoneNumber) {
-    return api.post('/auth/registration', {firstName, lastName, email, password, gender, phoneNumber})
+  registration(firstName, lastName, patronymic, email, password, gender, phoneNumber) {
+    return api.post('/auth/registration', {firstName, lastName, patronymic, email, password, gender, phoneNumber})
         .then(response => response.data);
   },
   logout() {
@@ -49,8 +49,8 @@ export const newAppointmentAPI = {
   getAppointments(date) {
     return api.get(`/appointments?date=${date}`).then(response => response.data);
   },
-  addPatient(date, time, userId) {
-    return api.put('/appointments', {date, time, userId})
+  addPatient(date, time, appointmentType, userId) {
+    return api.put('/appointments', {date, time, appointmentType, userId})
       .then(response => response.data);
   },
 }
@@ -58,5 +58,17 @@ export const newAppointmentAPI = {
 export const profileAPI = {
   getUserProfile() {
     return api.get('/profile').then(response => response.data);
+  },
+  savePhoto(photoUrl) {
+    return api.put('/profile/photo', {photoUrl}).then(response => response.data);
+  },
+  editProfileInfo(firstName, lastName, patronymic, gender, phoneNumber) {
+    return api.put('/profile', {firstName, lastName, patronymic, gender, phoneNumber}).then(response => response.data);
+  }
+}
+
+export const recordsAPI = {
+  getUpcomingRecords(id) {
+    return api.get(`/records?id=${id}`).then(response => response.data);
   },
 }

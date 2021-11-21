@@ -9,7 +9,7 @@ const User = require('../../models/User');
 
 
 class UserService {
-  async registration(firstName, lastName, email, password, gender, phoneNumber) {
+  async registration(firstName, lastName, patronymic, email, password, gender, phoneNumber) {
     const candidate = await User.findOne( {email} );
 
     if (candidate) {
@@ -21,7 +21,7 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const activationLink = uuid.v4();
-    const user = await User.create({firstName, lastName, email,
+    const user = await User.create({firstName, lastName, patronymic, email,
                                     password: hashedPassword, gender,
                                     phoneNumber, activationLink});
 

@@ -2,8 +2,7 @@ const {Schema, model, Types} = require('mongoose');
 
 const patientsSchema = new Schema({
   id: {type: Types.ObjectId, ref: 'User'},
-  //patientType: ...,
-  // patientName: {type: String},
+  appointmentType: {type: String},
 });
 
 const cellSchema = new Schema({

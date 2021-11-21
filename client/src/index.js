@@ -8,16 +8,16 @@ import 'antd/dist/antd.css';
 import {rootReducer} from "./redux/reducers/rootReducer";
 import App from './App'
 
-const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__();
+//const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__();
 
 const store = createStore(rootReducer,
   compose(
     applyMiddleware(thunk),
-    devTools,
+    //devTools,
   ),
 );
 
-window.__store__ = store;
+//window.__store__ = store;
 
 ReactDOM.render(
   <React.StrictMode>

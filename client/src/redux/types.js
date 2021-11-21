@@ -7,8 +7,13 @@ export const APP_SET_INITIALIZED = 'app/APP_SET_INITIALIZED';
 export const APP_IS_READY = 'app/APP_IS_READY';
 
 export const SET_PROFILE = 'profile/SET_USER_PROFILE';
+export const SET_USER_PHOTO = 'profile/SET_USER_PHOTO';
+export const SET_USER_INFO = 'profile/SET_USER_INFO';
 
 export const SET_TREATMENT_APPOINTMENTS_DATA = 'newAppointment/SET_TREATMENT_APPOINTMENTS_DATA';
 export const NEW_APPOINTMENT_LOADING = 'newAppointment/NEW_APPOINTMENT_LOADING';
 
 export const SET_APPOINTMENT_FINISH_DATA = 'appointmentFinish/SET_APPOINTMENT_FINISH_DATA';
+export const SET_APPOINTMENT_TYPE = 'appointmentFinish/SET_APPOINTMENT_TYPE';
+
+export const SET_UPCOMING_RECORDS = 'records/SET_UPCOMING_RECORDS';

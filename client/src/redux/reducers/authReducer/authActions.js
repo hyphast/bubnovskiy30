@@ -49,11 +49,11 @@ export const login = (email, password) => {
   }
 }
 
-export const registration = (firstName, lastName, email, password, gender, phoneNumber) => {
+export const registration = (firstName, lastName, patronymic, email, password, gender, phoneNumber) => {
   return async dispatch => {
     try {
       dispatch(setIsLoading(true));
-      const data = await authAPI.registration(firstName, lastName, email, password, gender, phoneNumber);
+      const data = await authAPI.registration(firstName, lastName, patronymic, email, password, gender, phoneNumber);
       localStorage.setItem('token', data.accessToken);
 
       dispatch(setAuthUserData(data.user.id, data.user.email, data.user.phoneNumber, true));
