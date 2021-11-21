@@ -11,8 +11,6 @@ const app = express();
 app.use(express.json({limit: '5mb'}));
 app.use(cookieParser());
 
-//app.use(express.json({limit: '50mb'}));
-
 const whitelist = ['http://localhost:3000', 'https://bubnovskiy30admin.netlify.app',
 'http://localhost:3001', 'http://bubnovskiy30.hopto.org'];
 app.use(cors({
