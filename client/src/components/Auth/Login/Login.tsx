@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 import classnames from 'classnames'
@@ -11,23 +11,40 @@ import CheckboxController from "../Common/CheckboxController/CheckboxController"
 import ButtonController from "../Common/ButtonController/ButtonController";
 import authStyles from './Login.module.scss';
 
-const Login = ({login, _error, _clearError, isLoading}) => {
+type mapStateToPropsType = {
+  _error: Array<object>,
+  isLoading: boolean,
+}
+type mapDispatchToPropsType = {
+  login: (email: string, password: string) => void,
+  _clearError: () => void,
+}
+type propsType = mapStateToPropsType & mapDispatchToPropsType;
+
+type FormValues = {
+  email: string,
+  password: string,
+  rememberMe: boolean,
+};
+
+const Login: FC<propsType> = ({login, _error, _clearError, isLoading}) => {
   const schema = useMemo(() =>
     yup.object().shape({
       email: yup.string().required('Введите ваш Email').email('Некорректный Email'),
       password: yup.string().required('Введите пароль'),
     }), []);
 
-  const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm({resolver: yupResolver(schema)});
+  const {handleSubmit, setError, formState: {errors}, control, clearErrors} = useForm<FormValues>({resolver: yupResolver(schema)});
 
-  const onSubmit = ({email, password, rememberMe}) => {
+  const onSubmit: (obj: FormValues) => void = ({email, password, rememberMe}) => {
     // console.log('form: ',email, password, rememberMe);
-    login(email, password).catch(response => console.log(response));
+    //login(email, password).catch((response: any) => console.log(response));
+    login(email, password);
   }
 
   useEffect(() => {
     _error.length && _error.forEach((er) => {
-      Object.keys(er).map((key) => setError(key, {type: 'Server'}))
+      Object.keys(er).map((key: any) => setError(key, {type: 'Server'})) //TODO refactor any
     })
   }, [_error, setError])
 

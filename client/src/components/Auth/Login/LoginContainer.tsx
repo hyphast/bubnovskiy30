@@ -5,7 +5,7 @@ import Login from "./Login";
 import {stateType} from '../../../redux/reducers/rootReducer';
 
 type mapStateToPropsType = {
-  _error: Array<string>,
+  _error: Array<object>,
   isLoading: boolean,
 }
 type mapDispatchToPropsType = {

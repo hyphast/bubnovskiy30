@@ -4,7 +4,7 @@ const initialState = {
   userId: null as string | null,
   email: null as string | null,
   isAuth: false,
-  errors: [] as Array<string>,
+  errors: [] as Array<object>,
   isLoading: false,
 }
 export type initialStateType = typeof initialState;
