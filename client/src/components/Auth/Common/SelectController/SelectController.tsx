@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Form, Select} from "antd";
 import FormError from "../Error/FormError";
 import {useController} from "react-hook-form";
-import PropTypes from "prop-types";
 
 const { Option } = Select;
 
-const SelectController = ({errors, field, options, control, ...restProps}) => {
+type PropsType = {
+    errors: any,
+    field: string,
+    options: any,
+    control: any,
+}
+
+const SelectController: FC<PropsType> = ({errors, field, options, control, ...restProps}) => {
   const {field: select} = useController({name: field, control});
   return (
-    <Form.Item validateStatus={errors[field] ? "error" : null} hasFeedback>
+    <Form.Item validateStatus={errors[field] ? "error" : ""} hasFeedback>
       <Select {...select} {...restProps}>
         {Object.keys(options).map(opt =>
           <Option key={opt} value={opt}>{options[opt]}</Option>
@@ -19,13 +25,6 @@ const SelectController = ({errors, field, options, control, ...restProps}) => {
     </Form.Item>
   );
 };
-
-SelectController.propTypes = {
-  errors: PropTypes.object,
-  field: PropTypes.string,
-  options: PropTypes.object,
-  control:  PropTypes.object,
-}
 
 SelectController.defaultProps = {
   errors: {},
