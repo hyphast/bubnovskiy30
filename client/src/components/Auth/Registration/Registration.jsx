@@ -85,14 +85,14 @@ const Registration = ({registration, _error, _clearError, isLoading}) => {
                              field='password'
                              control={control}
                              placeholder='Пароль'
-                             inputpassword
+                             inputPassword
             />
 
             <InputController errors={errors}
                              field='confirmPassword'
                              control={control}
                              placeholder='Подтвердите пароль'
-                             inputpassword
+                             inputPassword
             />
 
              <InputController className={RegistrationStyles.phoneNumber}
