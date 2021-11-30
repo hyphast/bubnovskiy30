@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Checkbox, Form} from "antd";
 import FormError from "../Error/FormError";
 import {useController} from "react-hook-form";
-import PropTypes from "prop-types";
 
-const CheckboxController = ({errors, field, control, children, ...restProps}) => {
+type PropsType = {
+  errors: any,
+  field: string,
+  control: any,
+  children: React.ReactNode,
+}
+
+const CheckboxController: FC<PropsType> = ({errors, field, control, children, ...restProps}) => {
   const {field: {value, ...checkbox}} = useController({name: field, control});
   return (
     <Form.Item valuePropName="checked" noStyle>
@@ -14,13 +20,6 @@ const CheckboxController = ({errors, field, control, children, ...restProps}) =>
       <FormError errors={errors} field={field}/>
     </Form.Item>
   )
-}
-
-CheckboxController.propTypes = {
-  errors: PropTypes.object,
-  field: PropTypes.string,
-  control:  PropTypes.object,
-  children: PropTypes.node,
 }
 
 CheckboxController.defaultProps = {
