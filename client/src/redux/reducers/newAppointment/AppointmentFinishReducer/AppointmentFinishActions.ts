@@ -1,5 +1,6 @@
 import {SET_APPOINTMENT_FINISH_DATA, SET_APPOINTMENT_TYPE} from '../../../types';
 import {newAppointmentAPI} from '../../../../API/api';
+import {setMessage} from '../../appReducer/appAction';
 
 type setAppointmentFinishDataPayloadType = {
   date: Date,
@@ -14,11 +15,11 @@ export const setAppointmentFinishData = (date: Date, time: Date, isSelected: boo
   return {type: SET_APPOINTMENT_FINISH_DATA, payload: {date, time, isSelected}}
 }
 
-type setAppointmentTypeType = {
+type setAppointmentType = {
   type: typeof SET_APPOINTMENT_TYPE,
   payload: {appointmentType: string}
 }
-export const setAppointmentType = (appointmentType: string): setAppointmentTypeType => {
+export const setAppointmentType = (appointmentType: string): setAppointmentType => {
   return {type: SET_APPOINTMENT_TYPE, payload: {appointmentType}}
 }
 
@@ -29,8 +30,10 @@ export const addPatient = (date: Date, time: Date, appointmentType: string) => {
 
       const data = await newAppointmentAPI.addPatient(date, time, appointmentType, userId);
 
+      dispatch(setMessage(data));
     } catch(e: any) {
-      console.log(e.response?.data?.message);
+      console.log(e.response?.data);
+      dispatch(setMessage(e.response?.data));
     }
   }
 }

@@ -1,6 +1,7 @@
 import {SET_PROFILE, SET_USER_INFO, SET_USER_PHOTO} from '../../types';
 import {profileAPI} from '../../../API/api';
 import {profileType} from '../commonTypes';
+import {setMessage} from "../appReducer/appAction";
 
 type setUserProfileType = {
   type: typeof SET_PROFILE,
@@ -41,8 +42,11 @@ export const savePhoto = (photoUrl: string) => {
       dispatch(setUserPhoto(photoUrl));
 
       dispatch(getUserProfile());
+
+      dispatch(setMessage(data));
     } catch (e: any) {
       console.log(e.response?.data?.message);
+      dispatch(setMessage(e.response?.data));
     }
   }
 }
@@ -54,8 +58,11 @@ export const editProfileInfo = (firstName: string, lastName: string, patronymic:
       dispatch(setUserInfo(firstName, lastName, patronymic, gender, phoneNumber));
 
       dispatch(getUserProfile());
+
+      dispatch(setMessage(data));
     } catch (e: any) {
       console.log(e.response?.data?.message);
+      dispatch(setMessage(e.response?.data));
     }
   }
 }
