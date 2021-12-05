@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Layout, Menu} from 'antd';
 import classnames from 'classnames';
 import {InboxOutlined, PlusCircleOutlined, UserOutlined, SettingFilled} from '@ant-design/icons';
-import {Link, useHistory, useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import NavbarProfileInfo from './NavbarProfileInfo/NavbarProfileInfo';
 import NavbarStyles from './Navbar.module.scss';
 
@@ -19,7 +19,7 @@ const Navbar = (props) => {
                   <Link to='/profile'>Профиль</Link>
               </Menu.Item>
               <Menu.Item key='/new-appointment' icon={<PlusCircleOutlined/>}>
-                  <Link to='/new-appointment'>Запись</Link>
+                  <Link to='/new-appointment'>Услуги</Link>
               </Menu.Item>
               <Menu.Item key='/records' icon={<InboxOutlined/>}>
                   <Link to='/records'>Мои записи</Link>

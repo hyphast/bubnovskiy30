@@ -1,20 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore, compose, applyMiddleware} from "redux";
+import {createStore, applyMiddleware} from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals'
 import 'antd/dist/antd.css';
 import {rootReducer} from "./redux/reducers/rootReducer";
-import App from './App'
-
-//const devTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__();
+import AppContainer from './AppContainer';
 
 const store = createStore(rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    //devTools,
-  ),
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 //window.__store__ = store;
@@ -22,7 +18,7 @@ const store = createStore(rootReducer,
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AppContainer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

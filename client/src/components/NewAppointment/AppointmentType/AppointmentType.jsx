@@ -7,7 +7,6 @@ import PhysicalTrainingImg from '../../../assets/images/PhysicalTraining.jpg';
 import FloatingImg from '../../../assets/images/floating.jpg';
 import PriceImg from '../../../assets/images/Price.jpg';
 import TypeFooter from "./TypeFooter/TypeFooter";
-import {setAppointmentType} from "../../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions";
 
 const content = {
   consultant: 'Миофасциальная диагностика - то с чего начинается лечение в центрах доктора Бубновского. Это диагностика опорно двигательного аппарата пациента, состояния его мышц, суставов, позвоночника, костей. Миофасциальная диагностика определяет, насколько пациент подвижен, есть ли у него боли, скрытые проблемы и возможные риски возникновения каких-либо новых заболеваний.',

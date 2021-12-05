@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getAppointments} from '../../../redux/reducers/newAppointment/treatmentReducer/treatmentActions';
+import {clearAppointments} from '../../../redux/reducers/newAppointment/treatmentReducer/treatmentActions';
 import Treatment from './Treatment';
 
 const TreatmentContainer = (props) => {
@@ -16,4 +17,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getAppointments})(TreatmentContainer);
+export default connect(mapStateToProps, {getAppointments, clearAppointments})(TreatmentContainer);

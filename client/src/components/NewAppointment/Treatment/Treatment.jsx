@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import TreatmentStyles from './Treatment.module.scss';
 import PageHeaderBack from '../../common/PageHeader/PageHeader';
 import TreatmentDatePicker from './TreatmentDatePicker/TreatmentDatePicker';
@@ -6,7 +6,13 @@ import './Treatment.scss';
 import TreatmentList from './TreatmentList/TreatmentList';
 
 
-const Treatment = ({appointments, isLoading, getAppointments}) => {
+const Treatment = ({appointments, isLoading, getAppointments, clearAppointments}) => {
+  useEffect(() => {
+    return () => {
+      clearAppointments();
+    }
+  }, [clearAppointments])
+
   return (
     <>
       <div className={TreatmentStyles.container}>

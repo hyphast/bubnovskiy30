@@ -1,4 +1,4 @@
-import {NEW_APPOINTMENT_LOADING, SET_TREATMENT_APPOINTMENTS_DATA} from '../../../types';
+import {CLEAR_APPOINTMENTS, NEW_APPOINTMENT_LOADING, SET_TREATMENT_APPOINTMENTS_DATA} from '../../../types';
 import {appointmentsType} from "../../commonTypes";
 
 const initialState = {
@@ -14,6 +14,12 @@ export const treatmentReducer = (state = initialState, action: any): initialStat
       return {
         ...state,
         ...action.payload,
+      }
+    }
+    case CLEAR_APPOINTMENTS: {
+      return {
+        ...state,
+        appointments: null,
       }
     }
     default: return state;

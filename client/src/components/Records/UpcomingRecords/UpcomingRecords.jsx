@@ -6,7 +6,7 @@ const {Column} = Table;
 
 const UpcomingRecords = ({upcomingRecords}) => {
   const data = upcomingRecords?.map(item => ({
-      key: item.time,
+      key: item._id,
       date: item.date,
       time: item.time,
       appType: item.appointmentType,

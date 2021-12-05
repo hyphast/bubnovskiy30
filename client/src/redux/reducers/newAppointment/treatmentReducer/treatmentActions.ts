@@ -1,4 +1,4 @@
-import {SET_TREATMENT_APPOINTMENTS_DATA, NEW_APPOINTMENT_LOADING} from '../../../types';
+import {SET_TREATMENT_APPOINTMENTS_DATA, NEW_APPOINTMENT_LOADING, CLEAR_APPOINTMENTS} from '../../../types';
 import {newAppointmentAPI} from '../../../../API/api';
 import {appointmentsType} from '../../commonTypes'
 
@@ -16,6 +16,13 @@ type setIsLoadingType = {
 }
 export const setIsLoading = (isLoading: boolean): setIsLoadingType => {
   return {type: NEW_APPOINTMENT_LOADING, payload: {isLoading}}
+}
+
+type clearAppointmentsType = {
+  type: typeof CLEAR_APPOINTMENTS,
+}
+export const clearAppointments = (): clearAppointmentsType => {
+  return {type: CLEAR_APPOINTMENTS}
 }
 
 export const getAppointments = (date: Date) => {

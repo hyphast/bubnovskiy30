@@ -1,9 +1,4 @@
 const Appointments = require('../../../models/Appointments');
-const Instructor = require('../../../models/Instructors');
-const TimeTemplate = require('../../../models/TimeTemplate');
-const DateService = require('../../dateService');
-const ApiError = require('../../../exceptions/apiError');
-const User = require('../../../models/User');
 const AppoinmentHelpers = require('./appointmentHelpers');
 const CommonService = require('../common/commonService');
 
@@ -28,11 +23,11 @@ class AppointmentService {
   //   return instructors;
   // }
 
-  async getAppointmentsTime() {
-    const time = await TimeTemplate.find();
-
-    return time;
-  }
+  // async getAppointmentsTime() {
+  //   const time = await TimeTemplate.find();
+  //
+  //   return time;
+  // }
 
   async getAppointments(filter, range, sort) {
     console.time('test');

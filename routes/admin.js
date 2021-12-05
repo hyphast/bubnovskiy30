@@ -12,10 +12,10 @@ router.get('/appointments/:id', appointmentController.getOneAppointment);
 router.put('/appointments/:id', appointmentController.updateOneAppointment);
 
 
-router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
-router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
+//router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
+//router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
 // router.get('/created-appointments', appointmentController.getCreatedAppointments); //todo AuthMiddleware
 
-router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
+//router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
 
 module.exports = router;
