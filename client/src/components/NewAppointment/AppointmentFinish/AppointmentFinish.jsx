@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {PageHeader, Tag, Button, Statistic, Row} from 'antd';
+import React from 'react';
+import {PageHeader, Tag, Button, Statistic, Row, notification} from 'antd';
 import moment from 'moment';
 import AppointmentStyles from './AppointmentFinish.module.scss';
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,7 @@ const AppointmentFinish = ({appointmentType, date, time, addPatient, isSelected}
 
   const onSubmit = () => {
     addPatient(date, time, appointmentType);
-    history.push("/new-appointment");
+    history.push("/new-appointment/success");
   }
 
   return (

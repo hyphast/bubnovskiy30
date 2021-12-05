@@ -10,6 +10,7 @@ import EditProfileContainer from "./components/Profile/EditProfile/EditProfileCo
 import Settings from "./components/Settings/Settings";
 import RecordsCalendar from "./components/Records/RecordsCalendar/RecordsCalendar";
 import RecordsContainer from "./components/Records/RecordsContainer";
+import SuccessResult from './components/resultsComponents/SuccessResult/SuccessResult';
 
 export const useRoutes = isAuth => {
   if (isAuth) {
@@ -30,6 +31,9 @@ export const useRoutes = isAuth => {
           </Route>
           <Route path="/new-appointment/finish" exact>
             <AppointmentFinishContainer/>
+          </Route>
+          <Route path="/new-appointment/success" exact>
+            <SuccessResult/>
           </Route>
           <Route path="/records" exact>
             <RecordsContainer/>
