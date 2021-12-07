@@ -78,5 +78,3 @@ class AppointmentController {
 }
 
 module.exports = new AppointmentController();
-
-module.exports = new AppointmentController();

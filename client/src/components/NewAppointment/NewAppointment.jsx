@@ -2,7 +2,6 @@ import React from 'react';
 import AppointmentType from './AppointmentType/AppointmentType';
 import NewAppointmentStyles from './NewAppointment.module.scss';
 import {connect} from "react-redux";
-import {setAppointmentType} from '../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions';
 
 
 const NewAppointment = (props) => {
@@ -21,7 +20,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {setAppointmentType})(NewAppointment);
+export default connect(mapStateToProps, {})(NewAppointment);
 
 
 

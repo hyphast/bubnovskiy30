@@ -5,8 +5,14 @@ import {useHistory} from "react-router-dom";
 
 const {Meta} = Card;
 
-const TypeFooter = ({title, content, cardImg, cardTitle, cardDesc, link, priceImg, appType, setAppointmentType}) => {
+const TypeFooter = ({title, content, cardImg, cardTitle, cardDesc, link, priceImg, appType}) => {
   const history = useHistory();
+
+  const onCardClick = () => {
+    //setAppointmentType(appType);
+    localStorage.setItem('appointmentType', appType);
+    history.push(link);
+  }
 
   const info = (e) => {
     e.stopPropagation();
@@ -36,11 +42,6 @@ const TypeFooter = ({title, content, cardImg, cardTitle, cardDesc, link, priceIm
       },
     });
   };
-
-  const onCardClick = () => {
-    setAppointmentType(appType);
-    history.push(link);
-  }
 
   return (
       <Card hoverable

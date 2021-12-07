@@ -1,8 +1,9 @@
-import {SET_APPOINTMENT_FINISH_DATA, SET_APPOINTMENT_TYPE} from '../../../types';
+import {SET_APPOINTMENT_FINISH_DATA} from '../../../types';
 import {newAppointmentAPI} from '../../../../API/api';
 import {setMessage} from '../../appReducer/appAction';
 
 type setAppointmentFinishDataPayloadType = {
+  appointmentType: string | null
   date: Date,
   time: Date,
   isSelected: boolean,
@@ -12,16 +13,18 @@ type setAppointmentFinishDataType = {
   payload: setAppointmentFinishDataPayloadType,
 }
 export const setAppointmentFinishData = (date: Date, time: Date, isSelected: boolean): setAppointmentFinishDataType => {
-  return {type: SET_APPOINTMENT_FINISH_DATA, payload: {date, time, isSelected}}
+  const appointmentType = localStorage.getItem('appointmentType');
+  console.log('appointmentType', appointmentType);
+  return {type: SET_APPOINTMENT_FINISH_DATA, payload: {appointmentType, date, time, isSelected}}
 }
 
-type setAppointmentType = {
-  type: typeof SET_APPOINTMENT_TYPE,
-  payload: {appointmentType: string}
-}
-export const setAppointmentType = (appointmentType: string): setAppointmentType => {
-  return {type: SET_APPOINTMENT_TYPE, payload: {appointmentType}}
-}
+// type setAppointmentType = {
+//   type: typeof SET_APPOINTMENT_TYPE,
+//   payload: {appointmentType: string}
+// }
+// export const setAppointmentType = (appointmentType: string): setAppointmentType => {
+//   return {type: SET_APPOINTMENT_TYPE, payload: {appointmentType}}
+// }
 
 export const addPatient = (date: Date, time: Date, appointmentType: string) => {
   return async (dispatch: any, getState: any) => {
