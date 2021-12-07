@@ -13,7 +13,7 @@ const NavbarProfileInfo = ({photoUrl, firstName, lastName, patronymic, gender, p
       <div className={NavbarProfileInfoStyles.avatar}>
         <Avatar
           size={{xs: 110, sm: 120, md: 130, lg: 140, xl: 150, xxl: 160}}
-          icon={photoUrl === null ? <UserOutlined/> : null} src={photoUrl}
+          icon={photoUrl.length === 0 ? <UserOutlined/> : null} src={photoUrl}
         />
       </div>
       <div className={NavbarProfileInfoStyles.info}>

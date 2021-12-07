@@ -16,7 +16,7 @@ const Profile = ({photoUrl, firstName, lastName, patronymic, gender, phoneNumber
     <div>
       <div className={ProfileStyles.profileContainer}>
         <div className={ProfileStyles.left}>
-          <Avatar shape="square" size={210} icon={photoUrl === null ? <UserOutlined/> : null} src={photoUrl}/>
+          <Avatar shape="square" size={210} icon={photoUrl.length === 0 ? <UserOutlined/> : null} src={photoUrl}/>
           <Button type="dashed" className={ProfileStyles.settings}>
             <Link to="/edit-profile">Редактировать</Link>
           </Button>
