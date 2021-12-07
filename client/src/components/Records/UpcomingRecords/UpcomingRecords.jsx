@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const {Column} = Table;
 
-const UpcomingRecords = ({upcomingRecords}) => {
+const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
   const data = upcomingRecords?.map(item => ({
       key: item._id,
       date: item.date,
@@ -23,6 +23,7 @@ const UpcomingRecords = ({upcomingRecords}) => {
           {moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}
           </>
         )}
+        sorter={(a, b) => new Date(a.date) - new Date(b.date)}
       />
       <Column
         title="Время"
@@ -45,15 +46,32 @@ const UpcomingRecords = ({upcomingRecords}) => {
             </Tag>
           </>
         )}
+        filters={[
+          {
+            text: 'Лечебные занятия',
+            value: 'Лечебные занятия',
+          },
+          {
+            text: 'Физкультурно-оздоровительные занятия',
+            value: 'Физкультурно-оздоровительные занятия',
+          }
+        ]}
+        onFilter={(value, record) => record.appType === value}
       />
       <Column
         title="Отмена записи"
         key="cancel"
-        render={(text, record) => (
-          <Space size="middle">
-            <Button type='dashed' danger style={{color: 'red'}}>Отменить</Button>
+        render={(text, record) => {
+         return <Space size="middle">
+            <Button type='primary'
+                    onClick={() => deleteRecord(record.key)}
+                    loading={recordsIds.some(id => id === record.key)}
+                    danger
+            >
+              Отменить
+            </Button>
           </Space>
-        )}
+        }}
       />
     </Table>
   );

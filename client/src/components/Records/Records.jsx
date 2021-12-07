@@ -4,7 +4,7 @@ import UpcomingRecords from "./UpcomingRecords/UpcomingRecords";
 import FinishedRecords from "./FinishedRecords/FinishedRecords";
 import {useHistory} from "react-router-dom";
 
-const Records = ({upcomingRecords, finishedRecords, getUpcomingRecords}) => {
+const Records = ({upcomingRecords, finishedRecords, getUpcomingRecords, deleteRecord, recordsIds}) => {
   const [isUpcoming, setIsUpcoming] = useState(true);
   const history = useHistory();
 
@@ -15,12 +15,12 @@ const Records = ({upcomingRecords, finishedRecords, getUpcomingRecords}) => {
   return (
     <>
       <div style={{marginBottom: '1rem'}}>
-        <Button onClick={() => setIsUpcoming(false)} type="dashed">Прошедшие записи</Button>
+        <Button onClick={() => setIsUpcoming(false)} type="dashed">Архив</Button>
         <Button onClick={() => setIsUpcoming(true)} style={{marginLeft: '0.4rem'}}>Текущие записи</Button>
         <Button onClick={() => history.push('/records-calendar')} style={{float: 'right'}}>Календарь</Button>
       </div>
       {isUpcoming ?
-        <UpcomingRecords upcomingRecords={upcomingRecords}/>
+        <UpcomingRecords recordsIds={recordsIds} deleteRecord={deleteRecord} upcomingRecords={upcomingRecords}/>
         :
         <FinishedRecords finishedRecords={finishedRecords}/>
       }

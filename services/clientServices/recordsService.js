@@ -4,6 +4,9 @@ const Appointments = require("../../models/Appointments");
 const CommonService = require("../adminServices/common/commonService");
 const Records = require('../../models/Records');
 const RecordsDto = require("../../dtos/recordsDto");
+const ApiError = require('../../exceptions/apiError');
+const {log} = require('nodemon/lib/utils');
+const AppointmentService = require('./appointmentService');
 
 class RecordsService {
   async addRecord(date, time, appointmentType, userId) {
@@ -30,6 +33,30 @@ class RecordsService {
     const recordsDto = new RecordsDto(rec);
 
     return {records: recordsDto};
+  }
+
+  async deleteRecord(userId, id) {
+    let rec = await Records.findOne({user: userId});
+
+    if (!rec.upcomingRecords.length) {
+      throw ApiError.BadRequest('Такой записи не существует');
+    }
+
+    const index = rec.upcomingRecords.findIndex(item => String(item._id) === id);
+
+    if (index === -1) {
+      throw ApiError.BadRequest('Такой записи не существует');
+    }
+
+    const {date, time, appointmentType} = rec.upcomingRecords[index]._doc;
+
+    await AppointmentService.deletePatient(date, time, appointmentType, userId);
+
+    rec.finishedRecords.push({...rec.upcomingRecords[index]._doc, status: 'Услуга отменена'});
+
+    rec.upcomingRecords.splice(index, 1);
+
+    return rec.save();
   }
 }
 

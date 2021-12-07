@@ -1,48 +1,63 @@
 import React from 'react';
-import {Space, Table, Tag} from "antd";
+import {Table, Tag} from 'antd';
+import moment from 'moment';
 
 const {Column} = Table;
 
-const data = [
-  {
-    key: '1',
-    date: '05.11.2021',
-    time: '8:00',
-    appType: 'Массаж',
-    status: 'Пройден',
-  },
-  {
-    key: '2',
-    date: '07.11.2021',
-    time: '18:30',
-    appType: 'Лечебные занятия',
-    status: 'Запись была отменена',
-  },
-  {
-    key: '3',
-    date: '09.11.2021',
-    time: '14:00',
-    appType: 'Флоатинг',
-    status: 'Пройден',
-  },
-];
+const FinishedRecords = ({finishedRecords}) => {
+  const data = finishedRecords?.map(item => ({
+    key: item._id,
+    date: item.date,
+    time: item.time,
+    appType: item.appointmentType,
+    status: item.status,
+  }));
 
-const FinishedRecords = () => {
   return (
-    <Table dataSource={data} title={() => <h2>Прошедшие записи</h2>}>
-      <Column title="Дата" dataIndex="date" key="date"/>
-      <Column title="Время" dataIndex="time" key="time"/>
+    <Table dataSource={data} title={() => <h2>Архив</h2>}>
+      <Column
+        title="Дата"
+        dataIndex="date"
+        key="date"
+        render={date => (
+          <>
+            {moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}
+          </>
+        )}
+        sorter={(a, b) => new Date(a.date) - new Date(b.date)}
+      />
+      <Column
+        title="Время"
+        dataIndex="time"
+        key="time"
+        render={time => (
+          <>
+            {moment(time).utc().utcOffset(240).format('H:mm')}
+          </>
+        )}
+      />
       <Column
         title="Тип занятия"
         dataIndex="appType"
         key="appType"
-        render={tags => (
+        render={type => (
           <>
-            <Tag color="blue" key={tags}>
-              {tags}
+            <Tag color="blue" key={type}>
+              {type}
             </Tag>
           </>
         )}
+        filters={[
+          {
+            text: 'Лечебные занятия',
+            value: 'Лечебные занятия',
+          },
+          {
+            text: 'Физкультурно-оздоровительные занятия',
+            value: 'Физкультурно-оздоровительные занятия',
+          }
+          ]}
+        onFilter={(value, record) => record.appType === value}
       />
       <Column
         title="Статус"
@@ -50,7 +65,7 @@ const FinishedRecords = () => {
         key="status"
         render={status => (
           <>
-            <Tag color="green" key={status}>
+            <Tag color="red" key={status}>
               {status}
             </Tag>
           </>

@@ -68,7 +68,10 @@ export const profileAPI = {
 }
 
 export const recordsAPI = {
-  getUpcomingRecords(id) {
-    return api.get(`/records?id=${id}`).then(response => response.data);
+  getUpcomingRecords() {
+    return api.get(`/records`).then(response => response.data);
   },
+  deleteRecord(id) {
+    return api.delete(`/records?id=${id}`).then(response => response.data);
+  }
 }

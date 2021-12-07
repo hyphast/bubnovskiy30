@@ -34,5 +34,6 @@ router.put('/profile/photo', authMiddleware, profileController.savePhoto);
 router.put('/profile', authMiddleware, profileController.editProfileInfo);
 
 router.get('/records', authMiddleware, recordsController.getUpcomingRecords);
+router.delete('/records', authMiddleware, recordsController.deleteRecord);
 
 module.exports = router;
