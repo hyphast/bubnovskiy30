@@ -24,7 +24,7 @@ class AppointmentController {
       const records = await RecordsService.addRecord(date, time, appointmentType, userId);
 
       console.log(appointments);
-      return res.status(201).json({message: 'Запись успешно выполнена', type: 'success'});
+      return res.status(201).json({message: 'Запись успешно выполнена', type: 'success', redirect: '/records'});
     } catch (e) {
       next(e);
     }

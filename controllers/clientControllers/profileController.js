@@ -17,7 +17,7 @@ class ProfileController {
       const {photoUrl} = req.body;
       const profile = await ProfileService.savePhoto(id, photoUrl);
 
-      return res.json({message: 'Фото было обновлено', type: 'info'});
+      return res.json({message: 'Фото было обновлено', type: 'info', redirect: '/profile'});
     } catch (e) {
       next(e);
     }
@@ -28,7 +28,7 @@ class ProfileController {
       const {firstName, lastName, patronymic, gender, phoneNumber} = req.body;
       const profile = await ProfileService.editProfileInfo(id, firstName, lastName, patronymic, gender, phoneNumber);
 
-      return res.json({message: 'Основная информация профиля была изменена', type: 'info'});
+      return res.json({message: 'Основная информация профиля была изменена', type: 'info', redirect: '/profile'});
     } catch (e) {
       next(e);
     }

@@ -28,7 +28,7 @@ function App() {
         cursor: 'pointer',
       },
       onClick: () => {
-        history.push('/records');
+        history.push(globalMessage.redirect);
       },
     });
   };

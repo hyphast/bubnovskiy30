@@ -5,8 +5,10 @@ import ConsultationImg from '../../../assets/images/Consultation.jpg';
 import TreatmentImg from '../../../assets/images/Treatment.jpg';
 import PhysicalTrainingImg from '../../../assets/images/PhysicalTraining.jpg';
 import FloatingImg from '../../../assets/images/floating.jpg';
+import MassageImg from '../../../assets/images/massage.jpg';
 import PriceImg from '../../../assets/images/Price.jpg';
 import TypeFooter from "./TypeFooter/TypeFooter";
+import {notification} from 'antd';
 
 const content = {
   consultant: 'Миофасциальная диагностика - то с чего начинается лечение в центрах доктора Бубновского. Это диагностика опорно двигательного аппарата пациента, состояния его мышц, суставов, позвоночника, костей. Миофасциальная диагностика определяет, насколько пациент подвижен, есть ли у него боли, скрытые проблемы и возможные риски возникновения каких-либо новых заболеваний.',
@@ -16,10 +18,17 @@ const content = {
   floating: 'Терапевтическое действие данной методики основано на улучшении кровотока и микроциркуляции в зоне воздействия, активизации ангионеогенеза — прорастании новых мелких сосудов в тканях, снятии спазма, стимуляции регенерации и обмена веществ.',
 }
 
-const AppointmentType = ({setAppointmentType}) => {
+const AppointmentType = (props) => {
+  const openNotification = () => { // refactor
+    notification['warning']({
+      message: 'Предупреждение',
+      description: 'Запись на эту услугу временно недоступна',
+    });
+  };
+
   return (
     <div className={classnames('steps-content', NewAppointmentStyles.cards)}>
-      <div className={NewAppointmentStyles.card}>
+      <div className={NewAppointmentStyles.card} onClick={() => openNotification()}> {/*TODO refactor onClick*/}
         <TypeFooter title='Консультация'
                     content={content.consultant}
                     cardImg={ConsultationImg}
@@ -27,9 +36,9 @@ const AppointmentType = ({setAppointmentType}) => {
                     cardDesc='Медицинская консультация врача'
                     link='#'
                     priceImg={PriceImg}
-                    setAppointmentType={setAppointmentType}
+                    //setAppointmentType={setAppointmentType}
                     appType='Консультация'
-        />
+       />
       </div>
       <div className={NewAppointmentStyles.card}>
         <TypeFooter title='Лечебные занятия'
@@ -39,7 +48,7 @@ const AppointmentType = ({setAppointmentType}) => {
                     cardDesc='1-й, 2-й и 3-й цикл'
                     link='/new-appointment/treatment'
                     priceImg={PriceImg}
-                    setAppointmentType={setAppointmentType}
+                    //setAppointmentType={setAppointmentType}
                     appType='Лечебные занятия'
         />
       </div>
@@ -51,23 +60,24 @@ const AppointmentType = ({setAppointmentType}) => {
                     cardDesc='4-й цикл и последующие'
                     link='/new-appointment/treatment'
                     priceImg={PriceImg}
-                    setAppointmentType={setAppointmentType}
+                    //setAppointmentType={setAppointmentType}
                     appType='Физкультурно-оздоровительные занятия'
         />
       </div>
-      <div className={NewAppointmentStyles.card}>
+      <div className={NewAppointmentStyles.card} onClick={() => openNotification()}> {/*TODO refactor onClick*/}
         <TypeFooter title='Массаж'
                     content={content.massage}
-                    cardImg={PhysicalTrainingImg}
+                    cardImg={MassageImg}
                     cardTitle='Массаж'
                     cardDesc='Запись на массаж'
                     link='#'
                     priceImg={PriceImg}
-                    setAppointmentType={setAppointmentType}
+                    //setAppointmentType={setAppointmentType}
                     appType='Массаж'
         />
       </div>
-      <div className={classnames(NewAppointmentStyles.card,NewAppointmentStyles.lastCard)}>
+      <div className={classnames(NewAppointmentStyles.card,NewAppointmentStyles.lastCard)}
+           onClick={() => openNotification()}> {/*TODO refactor onClick*/}
         <TypeFooter title='Флоатинг'
                     content={content.floating}
                     cardImg={FloatingImg}
@@ -75,7 +85,7 @@ const AppointmentType = ({setAppointmentType}) => {
                     cardDesc='Запись на флоатинг'
                     link='#'
                     priceImg={PriceImg}
-                    setAppointmentType={setAppointmentType}
+                    //setAppointmentType={setAppointmentType}
                     appType='Флоатинг'
         />
       </div>

@@ -6,6 +6,7 @@ const initialState = {
   globalMessage: {
     type: 'info' as 'success'| 'error'| 'warning' | 'info',
     message: '' as string,
+    redirect: '/profile' as string,
   },
 }
 export type initialStateType = typeof initialState;
@@ -18,6 +19,7 @@ export const appReducer = (state = initialState, action: any): initialStateType 
         globalMessage: {
           type: action.payload.message.type,
           message: action.payload.message.message,
+          redirect: action.payload.message.redirect,
         }
       }
     }
@@ -39,6 +41,7 @@ export const appReducer = (state = initialState, action: any): initialStateType 
         globalMessage: {
           type: 'info' ,
           message: '',
+          redirect: '/profile',
         }
       }
     }
