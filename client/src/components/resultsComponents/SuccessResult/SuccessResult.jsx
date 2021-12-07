@@ -3,7 +3,7 @@ import {Button, Result, Typography} from 'antd';
 import {HomeOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
 
-const {Paragraph, Text} = Typography;
+const {Paragraph} = Typography;
 
 const SuccessResult = () => {
   const history = useHistory();
@@ -22,11 +22,11 @@ const SuccessResult = () => {
       ]}
     >
       <div>
-          <Paragraph><HomeOutlined />&#160;&#160;Наш адрес: ул. Адмиралтейская, 15 ТЦ Премиум Холл 5 этаж</Paragraph>
+        <Paragraph><HomeOutlined/>&#160;&#160;Наш адрес: ул. Адмиралтейская, 15 ТЦ Премиум Холл 5 этаж</Paragraph>
       </div>
       <div>
         <Paragraph>
-          <PhoneOutlined />
+          <PhoneOutlined/>
           &#160;&#160;Телефон:&#160;
           <a href="tel:78512669777">7 (8512) 669-777</a>
           &#160;или&#160;
@@ -35,11 +35,13 @@ const SuccessResult = () => {
       </div>
       <div style={{display: 'flex'}}>
         <Paragraph>
-          <MailOutlined />&#160;&#160;Email:&#160;
+          <MailOutlined/>&#160;&#160;Email:&#160;
         </Paragraph>
-        <Paragraph copyable={{tooltips: ['Скопировать', 'Скопировано']}}>
-          <a href="mailto:bubnovsky-astrakhan@mail.ru">bubnovsky-astrakhan@mail.ru</a>
-        </Paragraph>
+        <a href="mailto:bubnovsky-astrakhan@mail.ru">
+          <Paragraph copyable={{tooltips: ['Скопировать', 'Скопировано']}}>
+            bubnovsky-astrakhan@mail.ru
+          </Paragraph>
+        </a>
       </div>
     </Result>
   );
