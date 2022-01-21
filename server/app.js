@@ -12,7 +12,7 @@ app.use(express.json({limit: '5mb'}));
 app.use(cookieParser());
 
 const whitelist = ['http://localhost:3000', 'https://bubnovskiy30admin.netlify.app',
-'http://localhost:3001', 'http://bubnovskiy30.hopto.org'];
+'http://localhost:3001', 'http://bubnovskiy30.hopto.org', 'https://e3c8-94-233-250-73.ngrok.io'];
 app.use(cors({
   credentials: true,
   origin: function (origin, callback) {
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', require('./routes/index'));
+app.use('/api', require('./routes'));
 app.use('/api/admin', require('./routes/admin'));
 
 app.use(errorMiddleware);

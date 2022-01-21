@@ -1,43 +1,18 @@
 const Appointments = require('../../../models/Appointments');
-const AppoinmentHelpers = require('./appointmentHelpers');
-const CommonService = require('../common/commonService');
+const AppointmentHandlers = require('./AppointmentHandlers');
+const commonHandlers = require('../commonHandlers');
+const appointmentHandlers = require('../../../clientPart/services/appointment/appointmentHandlers');
 
 class AppointmentService {
-  // async createAppointment(date, appointments) {
-  //   const range = DateService.dateSearchRange(date);
-  //
-  //   const isExist = await Appointments.find({date: {$gte: range.start, $lt: range.end}});
-  //
-  //   if(!!isExist.length) {
-  //     throw ApiError.BadRequest('В этот день уже есть запись');
-  //   }
-  //
-  //   const appointment = await Appointments.create({date, appointments});
-  //
-  //   return appointment;
-  // }
-
-  // async getInstructors() {
-  //   const instructors = await Instructor.find();
-  //
-  //   return instructors;
-  // }
-
-  // async getAppointmentsTime() {
-  //   const time = await TimeTemplate.find();
-  //
-  //   return time;
-  // }
-
   async getAppointments(filter, range, sort) {
     console.time('test');
-    const {start, end} = await AppoinmentHelpers.handlePagination(range);
+    const {start, end} = await AppointmentHandlers.handlePagination(range);
 
-    const sortBy = CommonService.handleSort(sort);
+    const sortBy = commonHandlers.handleSort(sort);
 
     const appointments = await Appointments.find({date: {$gte: start, $lt: end}}).sort(sortBy);
 
-    const apps = CommonService.withIdField(appointments);
+    const apps = commonHandlers.withIdField(appointments);
 
     const countDocuments = 180; // 6 month
 
@@ -51,7 +26,7 @@ class AppointmentService {
     let appointmentWithId = {id: appointment._id, ...appointment._doc}
 
     // for (let obj of appointmentWithId) {
-    //   for(let key in obj.appointments) {
+    //   for(let key in obj.appointment) {
     //     id: appointment._id,
     //   }
     // }
@@ -69,14 +44,13 @@ class AppointmentService {
   }
 
   async updateOneAppointment(id, appointments, date) {
-    // appointments = appointments.map(item => item.patients.map(i => i.numberPatients + 1))
+    // appointment = appointment.map(item => item.patients.map(i => i.numberPatients + 1))
 
-    const numberAllPatients = appointments ?
-      appointments.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
+    const numberAllPatients = appointmentHandlers.calcNumberAllPatients(appointments); //TODO есть функция такая переписать
     console.log('numberAllPatients', numberAllPatients);
     const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
 
-    //console.log('appointment', appointment)
+    console.log('appointment', appointment)
 
     appointment['date'] = date; //todo refactor
     appointment['id'] = id; //todo refactor

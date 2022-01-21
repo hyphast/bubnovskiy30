@@ -1,6 +1,6 @@
-const RecordsService = require('../../services/clientServices/recordsService');
+const RecordsService = require('../services/recordService');
 
-class RecordsController {
+class RecordController {
   async getUpcomingRecords(req, res, next) {
     try {
       const userId = req.user.id;
@@ -24,4 +24,4 @@ class RecordsController {
   }
 }
 
-module.exports = new RecordsController();
+module.exports = new RecordController();

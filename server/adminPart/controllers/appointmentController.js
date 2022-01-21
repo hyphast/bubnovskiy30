@@ -1,40 +1,6 @@
-const AppointmentService = require('../../services/adminServices/appointments/appointmentService');
+const AppointmentService = require('../services/appointment/appointmentService');
 
 class AppointmentController {
-  // async createAppointment(req, res, next) {
-  //   try {
-  //     const {date, appointments} = req.body;
-  //     // const {user} = req.user; //todo user or admin?
-  //     console.log('new: ', new Date(date), new Date(appointments[0].time))
-  //
-  //     const data = await AppointmentService.createAppointment(date, appointments);
-  //
-  //     return res.status(201).json({message: 'Запись была добавлена'});
-  //   } catch (e) {
-  //     next(e);
-  //   }
-  // }
-  //
-  // async getInstructors(req, res, next) {
-  //   try {
-  //     const instructors = await AppointmentService.getInstructors();
-  //
-  //     return res.json(instructors);
-  //   } catch (e) {
-  //     next(e);
-  //   }
-  // }
-  //
-  // async getAppointmentsTime(req, res, next) {
-  //   try {
-  //     const time = await AppointmentService.getAppointmentsTime();
-  //
-  //     return res.json(time);
-  //   } catch (e) {
-  //     next(e);
-  //   }
-  // }
-
   async getAppointments(req, res, next) {
     try {
       const filter = req.query.filter ? JSON.parse(req.query.filter) : null;
@@ -69,6 +35,7 @@ class AppointmentController {
 
 
       const appointment = await AppointmentService.updateOneAppointment(id, appointments, date);
+      //await RecordsService.addRecord(date, time, appointmentType, userId);
 
       res.json(appointment);
     } catch (e) {

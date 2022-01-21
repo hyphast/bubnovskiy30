@@ -1,6 +1,6 @@
-const usersService = require('../../services/adminServices/users/usersService');
+const usersService = require('../services/user/userService');
 
-class UsersController {
+class UserController {
   async getUsers(req, res, next) {
     try {
       const filter = req.query.filter ? JSON.parse(req.query.filter) : null;
@@ -28,4 +28,4 @@ class UsersController {
   }
 }
 
-module.exports = new UsersController();
+module.exports = new UserController();

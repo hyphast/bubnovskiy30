@@ -1,8 +1,5 @@
-const TimeTemplate = require('../../../models/TimeTemplate');
-const Appointments = require('../../../models/Appointments');
-
-class CommonService {
-   withIdField(items) {
+class CommonHandlers {
+  withIdField(items) {
      console.log('items', typeof items);
     if (Array.isArray(items)) {
       const itemsList = items.map(i => ({
@@ -77,28 +74,6 @@ class CommonService {
 
     return {skip, lim}
   }
-
-  async initAppointments() {
-    const time = await TimeTemplate.find().sort({time: 1});
-
-    console.log('time', time);
-
-    const appointments = time.map(i => ({
-        time: i.time,
-        patients: [],
-        maxNumberPatients: 12,
-      }
-    ))
-    return appointments;
-  }
-
-  async createAppointment(date) {
-    const appointments = await this.initAppointments();
-
-    const appointment = await Appointments.create({date, appointments, numberAllPatients: 0});
-
-    return appointment;
-  }
 }
 
-module.exports = new CommonService();
+module.exports = new CommonHandlers();

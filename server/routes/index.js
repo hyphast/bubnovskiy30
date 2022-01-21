@@ -1,9 +1,9 @@
 const {Router} = require('express');
 const {check} = require('express-validator');
-const userController = require('../controllers/userController');
-const profileController = require('../controllers/clientControllers/profileController');
-const appointmentController = require('../controllers/clientControllers/appointmentController');
-const recordsController = require('../controllers/clientControllers/recordsController');
+const userController = require('../clientPart/controllers/userController');
+const profileController = require('../clientPart/controllers/profileController');
+const appointmentController = require('../clientPart/controllers/appointmentController');
+const recordsController = require('../clientPart/controllers/recordController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();

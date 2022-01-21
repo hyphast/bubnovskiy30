@@ -1,8 +1,7 @@
-const Appointments = require('../../models/Appointments');
-const TimeTemplate = require('../../models/TimeTemplate');
-const DateService = require('../dateService');
-const CommonService = require('../adminServices/common/commonService');
-const ApiError = require('../../exceptions/apiError');
+const Appointments = require('../../../models/Appointments');
+const DateService = require('../../../commonPart/services/dateService');
+const appointmentHandlers = require('./appointmentHandlers');
+const ApiError = require('../../../exceptions/apiError');
 
 class AppointmentService {
   async getAppointments(date) {
@@ -11,7 +10,7 @@ class AppointmentService {
     const appointments = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
 
     if (!appointments) {
-      const app = await CommonService.initAppointments();
+      const app = await appointmentHandlers.initAppointments();
       console.log('app', app);
       const sortedApp = app.sort((a, b) => a.time - b.time);
 
@@ -28,14 +27,18 @@ class AppointmentService {
 
     console.log('app', app)
     if (!app) {
-      app = await CommonService.createAppointment(date);
+      const appointments = await appointmentHandlers.initAppointments();
+      app = await Appointments.create({date, appointments, numberAllPatients: 0});
     }
 
     const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
 
     appointment.patients = [...appointment.patients, {id: userId, appointmentType: appointmentType}];
 
-    app.numberAllPatients = app.numberAllPatients + 1;
+    // app.numberAllPatients = app.appointment ?
+    //   app.appointment.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
+
+    app.numberAllPatients = appointmentHandlers.calcNumberAllPatients(app.appointments);
 
     return app.save();
   }
@@ -49,7 +52,7 @@ class AppointmentService {
       throw ApiError.BadRequest('Ошибка сервера');
     }
 
-    //const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
+    //const appointment = app.appointment.find(item => new Date(item.time).getTime() === new Date(time).getTime());
     const appointmentIndex = app.appointments.findIndex(item => new Date(item.time).getTime() === new Date(time).getTime());
 
     //console.log('id',appointment.patients[0].id)
@@ -57,13 +60,18 @@ class AppointmentService {
 
     console.log('index', index);
     //console.log('appointmentIndex', appointmentIndex);
-    //console.log('app.appointments[appointmentIndex].patients[index]', app.appointments[appointmentIndex].patients[index]);
+    //console.log('app.appointment[appointmentIndex].patients[index]', app.appointment[appointmentIndex].patients[index]);
 
     app.appointments[appointmentIndex].patients.splice(index, 1);
 
     //appointment.patients.slice(index, 1);
 
-    app.numberAllPatients = app.numberAllPatients - 1;
+    //app.numberAllPatients = app.numberAllPatients - 1;
+
+    // app.numberAllPatients = app.appointment ?
+    //   app.appointment.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
+
+    app.numberAllPatients = appointmentHandlers.calcNumberAllPatients(app.appointments);
 
     return app.save();
   }

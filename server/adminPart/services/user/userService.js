@@ -1,19 +1,19 @@
 const User = require('../../../models/User');
-const CommonService = require('../common/commonService');
+const commonHandlers = require('../commonHandlers');
 
-class UsersService {
+class UserService {
   async getOneUser(id) {
     const user = await User.findOne({_id: id});
 
-    const userList = CommonService.withIdField(user)
+    const userList = commonHandlers.withIdField(user)
 
     return userList;
   }
 
   async getUsers(filter, range, sort) {
-    const match = CommonService.handleFilter(filter);
-    const sortBy = CommonService.handleSort(sort);
-    const {skip, lim} = CommonService.handlePagination(range);
+    const match = commonHandlers.handleFilter(filter);
+    const sortBy = commonHandlers.handleSort(sort);
+    const {skip, lim} = commonHandlers.handlePagination(range);
     console.log('filter', filter)
     console.log('match', match);
 
@@ -21,10 +21,10 @@ class UsersService {
 
     const countDocuments = await User.countDocuments({});
 
-    const usersList = CommonService.withIdField(users)
+    const usersList = commonHandlers.withIdField(users)
 
     return {usersList, countDocuments};
   }
 }
 
-module.exports = new UsersService();
+module.exports = new UserService();

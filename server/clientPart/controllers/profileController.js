@@ -1,4 +1,4 @@
-const ProfileService = require('../../services/clientServices/profileService');
+const ProfileService = require('../services/profileService');
 
 class ProfileController {
   async getUserProfile(req, res, next) {
@@ -15,7 +15,7 @@ class ProfileController {
     try {
       const {id} = req.user;
       const {photoUrl} = req.body;
-      const profile = await ProfileService.savePhoto(id, photoUrl);
+      await ProfileService.savePhoto(id, photoUrl);
 
       return res.json({message: 'Фото было обновлено', type: 'info', redirect: '/profile'});
     } catch (e) {
@@ -26,7 +26,7 @@ class ProfileController {
     try {
       const {id} = req.user;
       const {firstName, lastName, patronymic, gender, phoneNumber} = req.body;
-      const profile = await ProfileService.editProfileInfo(id, firstName, lastName, patronymic, gender, phoneNumber);
+      await ProfileService.editProfileInfo(id, firstName, lastName, patronymic, gender, phoneNumber);
 
       return res.json({message: 'Основная информация профиля была изменена', type: 'info', redirect: '/profile'});
     } catch (e) {

@@ -1,14 +1,9 @@
-const ProfileDto = require('../../dtos/profileDto');
-const DateService = require("../dateService");
-const Appointments = require("../../models/Appointments");
-const CommonService = require("../adminServices/common/commonService");
 const Records = require('../../models/Records');
 const RecordsDto = require("../../dtos/recordsDto");
 const ApiError = require('../../exceptions/apiError');
-const {log} = require('nodemon/lib/utils');
-const AppointmentService = require('./appointmentService');
+const AppointmentService = require('./appointment/appointmentService');
 
-class RecordsService {
+class RecordService {
   async addRecord(date, time, appointmentType, userId) {
     let rec = await Records.findOne({user: userId});
 
@@ -60,4 +55,4 @@ class RecordsService {
   }
 }
 
-module.exports = new RecordsService();
+module.exports = new RecordService();

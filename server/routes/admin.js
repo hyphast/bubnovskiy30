@@ -1,6 +1,6 @@
 const {Router} = require('express');
-const userController = require('../controllers/adminControllers/usersController');
-const appointmentController = require('../controllers/adminControllers/appointmentController');
+const userController = require('../adminPart/controllers/userController');
+const appointmentController = require('../adminPart/controllers/appointmentController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
@@ -12,9 +12,9 @@ router.get('/appointments/:id', appointmentController.getOneAppointment);
 router.put('/appointments/:id', appointmentController.updateOneAppointment);
 
 
-//router.post('/appointments', appointmentController.createAppointment); //todo AuthMiddleware
-//router.get('/appointments/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
-// router.get('/created-appointments', appointmentController.getCreatedAppointments); //todo AuthMiddleware
+//router.post('/appointment', appointmentController.createAppointment); //todo AuthMiddleware
+//router.get('/appointment/time', appointmentController.getAppointmentsTime); //todo AuthMiddleware
+// router.get('/created-appointment', appointmentController.getCreatedAppointments); //todo AuthMiddleware
 
 //router.get('/instructors', appointmentController.getInstructors); //todo AuthMiddleware
 
