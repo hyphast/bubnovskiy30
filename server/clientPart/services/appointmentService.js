@@ -1,16 +1,16 @@
-const Appointments = require('../../../models/Appointments');
-const DateService = require('../../../commonPart/services/dateService');
-const appointmentHandlers = require('./appointmentHandlers');
-const ApiError = require('../../../exceptions/apiError');
+const Appointment = require('../../models/Appointment');
+const dateService = require('../../commonPart/services/dateService');
+const commonAppointmentHandlers = require('../../commonPart/handlers/commonAppointmentHandlers');
+const ApiError = require('../../exceptions/apiError');
 
 class AppointmentService {
   async getAppointments(date) {
-    const range = DateService.dateSearchRange(date);
+    const range = dateService.dateSearchRange(date);
 
-    const appointments = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    const appointments = await Appointment.findOne({date: {$gte: range.start, $lt: range.end}});
 
     if (!appointments) {
-      const app = await appointmentHandlers.initAppointments();
+      const app = await commonAppointmentHandlers.initAppointments();
       console.log('app', app);
       const sortedApp = app.sort((a, b) => a.time - b.time);
 
@@ -21,14 +21,14 @@ class AppointmentService {
   }
 
   async addPatient(date, time, appointmentType, userId) {
-    const range = DateService.dateSearchRange(date);
+    const range = dateService.dateSearchRange(date);
 
-    let app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    let app = await Appointment.findOne({date: {$gte: range.start, $lt: range.end}});
 
     console.log('app', app)
     if (!app) {
-      const appointments = await appointmentHandlers.initAppointments();
-      app = await Appointments.create({date, appointments, numberAllPatients: 0});
+      const appointments = await commonAppointmentHandlers.initAppointments();
+      app = await Appointment.create({date, appointments, numberAllPatients: 0});
     }
 
     const appointment = app.appointments.find(item => new Date(item.time).getTime() === new Date(time).getTime());
@@ -38,15 +38,15 @@ class AppointmentService {
     // app.numberAllPatients = app.appointment ?
     //   app.appointment.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
 
-    app.numberAllPatients = appointmentHandlers.calcNumberAllPatients(app.appointments);
+    app.numberAllPatients = commonAppointmentHandlers.calcNumberAllPatients(app.appointments);
 
     return app.save();
   }
 
   async deletePatient(date, time, appointmentType, userId) {
-    const range = DateService.dateSearchRange(date);
+    const range = dateService.dateSearchRange(date);
 
-    let app = await Appointments.findOne({date: {$gte: range.start, $lt: range.end}});
+    let app = await Appointment.findOne({date: {$gte: range.start, $lt: range.end}});
 
     if (!app) {
       throw ApiError.BadRequest('Ошибка сервера');
@@ -71,7 +71,7 @@ class AppointmentService {
     // app.numberAllPatients = app.appointment ?
     //   app.appointment.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
 
-    app.numberAllPatients = appointmentHandlers.calcNumberAllPatients(app.appointments);
+    app.numberAllPatients = commonAppointmentHandlers.calcNumberAllPatients(app.appointments);
 
     return app.save();
   }

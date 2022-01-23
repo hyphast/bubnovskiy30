@@ -1,16 +1,16 @@
-const Appointments = require('../../../models/Appointments');
-const AppointmentHandlers = require('./AppointmentHandlers');
+const Appointment = require('../../../models/Appointment');
+const appointmentHandlers = require('./AppointmentHandlers');
 const commonHandlers = require('../commonHandlers');
-const appointmentHandlers = require('../../../clientPart/services/appointment/appointmentHandlers');
+const commonAppointmentHandlers = require('../../../commonPart/handlers/commonAppointmentHandlers');
 
 class AppointmentService {
   async getAppointments(filter, range, sort) {
     console.time('test');
-    const {start, end} = await AppointmentHandlers.handlePagination(range);
+    const {start, end} = await appointmentHandlers.handlePagination(range);
 
     const sortBy = commonHandlers.handleSort(sort);
 
-    const appointments = await Appointments.find({date: {$gte: start, $lt: end}}).sort(sortBy);
+    const appointments = await Appointment.find({date: {$gte: start, $lt: end}}).sort(sortBy);
 
     const apps = commonHandlers.withIdField(appointments);
 
@@ -21,7 +21,7 @@ class AppointmentService {
   }
 
   async getOneAppointment(id) {
-    const appointment = await Appointments.findOne({_id: id});
+    const appointment = await Appointment.findOne({_id: id});
 
     let appointmentWithId = {id: appointment._id, ...appointment._doc}
 
@@ -46,9 +46,9 @@ class AppointmentService {
   async updateOneAppointment(id, appointments, date) {
     // appointment = appointment.map(item => item.patients.map(i => i.numberPatients + 1))
 
-    const numberAllPatients = appointmentHandlers.calcNumberAllPatients(appointments); //TODO есть функция такая переписать
+    const numberAllPatients = commonAppointmentHandlers.calcNumberAllPatients(appointments); //TODO переделать!
     console.log('numberAllPatients', numberAllPatients);
-    const appointment = await Appointments.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
+    const appointment = await Appointment.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
 
     console.log('appointment', appointment)
 

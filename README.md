@@ -7,6 +7,6 @@
 *Личный кабинет пациента и система администратора для взаимодействия с пациентами*
 
 ## API:
-*https://bubnovskiy30.stoplight.io*
+[API stoplight](https://bubnovskiy30.stoplight.io)
 
 

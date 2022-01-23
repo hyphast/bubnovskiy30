@@ -1,6 +1,6 @@
-const TimeTemplate = require('../../../models/TimeTemplate');
+const TimeTemplate = require('../../models/TimeTemplate');
 
-class AppointmentHandlers {
+class CommonAppointmentHandlers {
   calcNumberAllPatients(appointments) {
     return appointments ?
       appointments.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
@@ -22,4 +22,4 @@ class AppointmentHandlers {
   }
 }
 
-module.exports = new AppointmentHandlers();
+module.exports = new CommonAppointmentHandlers();

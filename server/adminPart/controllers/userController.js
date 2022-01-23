@@ -1,4 +1,4 @@
-const usersService = require('../services/user/userService');
+const userService = require('../services/user/userService');
 
 class UserController {
   async getUsers(req, res, next) {
@@ -7,7 +7,7 @@ class UserController {
       const range = req.query.range ? JSON.parse(req.query.range) : null;
       const sort = req.query.sort ? JSON.parse(req.query.sort) : null;
 
-      const users = await usersService.getUsers(filter, range, sort);
+      const users = await userService.getUsers(filter, range, sort);
 
       return res.set('Content-Range', users.countDocuments.toString()).json(users.usersList);
     } catch (e) {
@@ -19,7 +19,7 @@ class UserController {
     try {
       const id = req.params.id;
 
-      const user = await usersService.getOneUser(id);
+      const user = await userService.getOneUser(id);
 
       return res.json(user);
     } catch (e) {

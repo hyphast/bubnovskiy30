@@ -1,5 +1,5 @@
-const AppointmentService = require('../services/appointment/appointmentService');
-const RecordsService = require('../services/recordService');
+const appointmentService = require('../services/appointmentService');
+const recordsService = require('../services/recordService');
 
 class AppointmentController {
   async getAppointments(req, res, next) {
@@ -7,7 +7,7 @@ class AppointmentController {
       const {date} = req.query;
       const parseDate = parseInt(date, 10);
 
-      const appointments = await AppointmentService.getAppointments(parseDate);
+      const appointments = await appointmentService.getAppointments(parseDate);
 
       return res.json(appointments);
     } catch (e) {
@@ -19,9 +19,9 @@ class AppointmentController {
     try {
       const {date, time, appointmentType, userId} = req.body;
 
-      const appointments = await AppointmentService.addPatient(date, time, appointmentType, userId);
+      const appointments = await appointmentService.addPatient(date, time, appointmentType, userId);
 
-      await RecordsService.addRecord(date, time, appointmentType, userId);
+      await recordsService.addRecord(date, time, appointmentType, userId);
 
       console.log(appointments);
       return res.status(201).json({message: 'Запись успешно выполнена', type: 'success', redirect: '/records'});

@@ -3,7 +3,7 @@ const {check} = require('express-validator');
 const userController = require('../clientPart/controllers/userController');
 const profileController = require('../clientPart/controllers/profileController');
 const appointmentController = require('../clientPart/controllers/appointmentController');
-const recordsController = require('../clientPart/controllers/recordController');
+const recordController = require('../clientPart/controllers/recordController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = Router();
@@ -33,7 +33,7 @@ router.get('/profile', authMiddleware, profileController.getUserProfile);
 router.put('/profile/photo', authMiddleware, profileController.savePhoto);
 router.put('/profile', authMiddleware, profileController.editProfileInfo);
 
-router.get('/records', authMiddleware, recordsController.getUpcomingRecords);
-router.delete('/records', authMiddleware, recordsController.deleteRecord);
+router.get('/records', authMiddleware, recordController.getUpcomingRecords);
+router.delete('/records', authMiddleware, recordController.deleteRecord);
 
 module.exports = router;

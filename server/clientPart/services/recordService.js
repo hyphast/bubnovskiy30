@@ -1,14 +1,14 @@
-const Records = require('../../models/Records');
+const Record = require('../../models/Record');
 const RecordsDto = require("../../dtos/recordsDto");
 const ApiError = require('../../exceptions/apiError');
-const AppointmentService = require('./appointment/appointmentService');
+const appointmentService = require('./appointmentService');
 
 class RecordService {
   async addRecord(date, time, appointmentType, userId) {
-    let rec = await Records.findOne({user: userId});
+    let rec = await Record.findOne({user: userId});
 
     if (!rec) {
-      rec = await Records.create({user: userId, upcomingRecords: [], finishedRecords: []});
+      rec = await Record.create({user: userId, upcomingRecords: [], finishedRecords: []});
     }
 
     rec.upcomingRecords = rec.upcomingRecords.concat({date, time, appointmentType});
@@ -19,7 +19,7 @@ class RecordService {
   }
 
   async getUpcomingRecords(id) {
-    const rec = await Records.findOne({user: id});
+    const rec = await Record.findOne({user: id});
 
     if (!rec) {
      return {records: {upcomingRecords: [], finishedRecords: []}};
@@ -31,7 +31,7 @@ class RecordService {
   }
 
   async deleteRecord(userId, id) {
-    let rec = await Records.findOne({user: userId});
+    let rec = await Record.findOne({user: userId});
 
     if (!rec.upcomingRecords.length) {
       throw ApiError.BadRequest('Такой записи не существует');
@@ -45,7 +45,7 @@ class RecordService {
 
     const {date, time, appointmentType} = rec.upcomingRecords[index]._doc;
 
-    await AppointmentService.deletePatient(date, time, appointmentType, userId);
+    await appointmentService.deletePatient(date, time, appointmentType, userId);
 
     rec.finishedRecords.push({...rec.upcomingRecords[index]._doc, status: 'Услуга отменена'});
 
