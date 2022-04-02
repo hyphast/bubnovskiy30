@@ -43,6 +43,7 @@ class UserController {
     }
   }
 
+  //TODO Does he need a useGuard decorator here?
   async logout(req, res, next) {
     try {
       const {refreshToken} = req.cookies;

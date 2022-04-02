@@ -1,7 +1,7 @@
 const TimeTemplate = require('../../models/TimeTemplate');
 
 class CommonAppointmentHandlers {
-  calcNumberAllPatients(appointments) {
+calcNumberAllPatients(appointments) {
     return appointments ?
       appointments.reduce((acc, cur) => cur?.patients?.length ? acc + cur.patients.length : acc + 0, 0) : null;
   }

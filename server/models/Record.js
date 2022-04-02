@@ -1,12 +1,14 @@
 const {Schema, model, Types} = require('mongoose');
 
 const upcomingSchema = new Schema({
+  appointmentId: {type: String},
   date: { type : Date},
   time: { type : Date},
   appointmentType: {type: String},
 });
 
 const finishedSchema = new Schema({
+  appointmentId: {type: String},
   date: { type : Date},
   time: { type : Date},
   appointmentType: {type: String},

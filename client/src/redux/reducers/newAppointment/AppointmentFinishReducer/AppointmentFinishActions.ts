@@ -14,7 +14,6 @@ type setAppointmentFinishDataType = {
 }
 export const setAppointmentFinishData = (date: Date, time: Date, isSelected: boolean): setAppointmentFinishDataType => {
   const appointmentType = localStorage.getItem('appointmentType');
-  console.log('appointmentType', appointmentType);
   return {type: SET_APPOINTMENT_FINISH_DATA, payload: {appointmentType, date, time, isSelected}}
 }
 

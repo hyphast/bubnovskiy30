@@ -2,6 +2,7 @@ const Record = require('../../models/Record');
 const RecordsDto = require("../../dtos/recordsDto");
 const ApiError = require('../../exceptions/apiError');
 const appointmentService = require('./appointmentService');
+const { v4: uuidv4 } = require('uuid');
 
 class RecordService {
   async addRecord(date, time, appointmentType, userId) {
@@ -11,9 +12,9 @@ class RecordService {
       rec = await Record.create({user: userId, upcomingRecords: [], finishedRecords: []});
     }
 
-    rec.upcomingRecords = rec.upcomingRecords.concat({date, time, appointmentType});
+    rec.upcomingRecords = rec.upcomingRecords.concat({appointmentId: uuidv4(), date, time, appointmentType});
 
-    console.log(rec.upcomingRecords);
+    //console.log(rec.upcomingRecords);
 
     return rec.save();
   }
@@ -40,7 +41,7 @@ class RecordService {
     const index = rec.upcomingRecords.findIndex(item => String(item._id) === id);
 
     if (index === -1) {
-      throw ApiError.BadRequest('Такой записи не существует');
+      throw BadRequest('Такой записи не существует');
     }
 
     const {date, time, appointmentType} = rec.upcomingRecords[index]._doc;

@@ -1,4 +1,5 @@
-const AppointmentService = require('../services/appointment/appointmentService');
+const appointmentService = require('../services/appointment/appointmentService');
+const recordService = require('../services/recordService');
 
 class AppointmentController {
   async getAppointments(req, res, next) {
@@ -7,7 +8,7 @@ class AppointmentController {
       const range = req.query.range ? JSON.parse(req.query.range) : null;
       const sort = req.query.sort ? JSON.parse(req.query.sort) : null;
 
-      const appointments = await AppointmentService.getAppointments(filter, range, sort);
+      const appointments = await appointmentService.getAppointments(filter, range, sort);
 
       return res.set('Content-Range', appointments.countDocuments.toString()).json(appointments.appointments);
     } catch (e) {
@@ -19,7 +20,7 @@ class AppointmentController {
     try {
       const id = req.params.id;
 
-      const appointment = await AppointmentService.getOneAppointment(id);
+      const appointment = await appointmentService.getOneAppointment(id);
 
       return res.json(appointment);
     } catch (e) {
@@ -31,11 +32,9 @@ class AppointmentController {
     try {
       const id = req.params.id;
       const {appointments, date} = req.body;
-      console.log('appointments', appointments)
 
-
-      const appointment = await AppointmentService.updateOneAppointment(id, appointments, date);
-      //await RecordsService.addRecord(date, time, appointmentType, userId);
+      await recordService.addRecord(id, appointments, date);
+      const appointment = await appointmentService.updateOneAppointment(id, appointments, date);
 
       res.json(appointment);
     } catch (e) {

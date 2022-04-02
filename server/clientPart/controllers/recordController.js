@@ -15,6 +15,7 @@ class RecordController {
     try {
       const {id} = req.query;
       const userId = req.user.id;
+
       await recordsService.deleteRecord(userId, id);
 
       return res.json({message: 'Запись была удалена и перемещена в архив', type: 'warning', redirect: '/records'});

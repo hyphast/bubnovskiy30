@@ -79,7 +79,6 @@ class UserService {
     const tokenFromDb = tokenService.findToken((refreshToken));
 
     if (!userData || !tokenFromDb) {
-      console.log('Refresh Token DB');
       throw ApiError.UnauthorizedError();
     }
 

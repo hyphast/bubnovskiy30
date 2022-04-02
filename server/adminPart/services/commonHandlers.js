@@ -1,6 +1,5 @@
 class CommonHandlers {
   withIdField(items) {
-     console.log('items', typeof items);
     if (Array.isArray(items)) {
       const itemsList = items.map(i => ({
         id: i._id,
@@ -61,7 +60,6 @@ class CommonHandlers {
     if(sort){
       sortBy[sort[0]] = sort[1] === 'DESC' ? -1 : 1;
     }
-    console.log('sortBy', sortBy)
     return sortBy;
   }
 

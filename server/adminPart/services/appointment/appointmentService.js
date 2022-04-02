@@ -2,6 +2,8 @@ const Appointment = require('../../../models/Appointment');
 const appointmentHandlers = require('./AppointmentHandlers');
 const commonHandlers = require('../commonHandlers');
 const commonAppointmentHandlers = require('../../../commonPart/handlers/commonAppointmentHandlers');
+const dateService = require('../../../commonPart/services/dateService');
+const { v4: uuidv4 } = require('uuid');
 
 class AppointmentService {
   async getAppointments(filter, range, sort) {
@@ -23,13 +25,7 @@ class AppointmentService {
   async getOneAppointment(id) {
     const appointment = await Appointment.findOne({_id: id});
 
-    let appointmentWithId = {id: appointment._id, ...appointment._doc}
-
-    // for (let obj of appointmentWithId) {
-    //   for(let key in obj.appointment) {
-    //     id: appointment._id,
-    //   }
-    // }
+    let appointmentWithId = {id: appointment._id, ...appointment._doc} //todo дублирование?
 
     appointmentWithId.appointments = appointmentWithId.appointments.map(app => ({id: app._id, ...app._doc})); //todo refactor
 
@@ -38,7 +34,7 @@ class AppointmentService {
       app.physicalTraining = app.patients.filter( item => item.appointmentType === 'Физкультурно-оздоровительные занятия');
     });
 
-    //console.log('appointmentWithId', appointmentWithId.treatment);
+    //console.log('appointmentWithId:', appointmentWithId.appointments[0].treatment);
 
     return appointmentWithId;
   }
@@ -46,11 +42,13 @@ class AppointmentService {
   async updateOneAppointment(id, appointments, date) {
     // appointment = appointment.map(item => item.patients.map(i => i.numberPatients + 1))
 
-    const numberAllPatients = commonAppointmentHandlers.calcNumberAllPatients(appointments); //TODO переделать!
-    console.log('numberAllPatients', numberAllPatients);
-    const appointment = await Appointment.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
+    const numberAllPatients = commonAppointmentHandlers.calcNumberAllPatients(appointments);
 
-    console.log('appointment', appointment)
+    appointments
+      .forEach((_, i) => appointments[i].patients
+      .forEach((patient, j) => appointments[i].patients[j] = {...patient, appointmentId: uuidv4()})); //todo дублирование?
+
+    const appointment = await Appointment.updateOne({_id: id}, {appointments: appointments, numberAllPatients});
 
     appointment['date'] = date; //todo refactor
     appointment['id'] = id; //todo refactor

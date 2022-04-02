@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const TreatmentDatePicker = ({getAppointments}) => {
   const onChange = (date) => {
-    date?._d && getAppointments(+new Date(date._d));
+    date?._d && getAppointments(+new Date(date._d)); //TODO Use Date.UTC() there and specify year, month and day!!!
   };
 
   const disabledDate = current => {

@@ -1,7 +1,8 @@
 const {Schema, model, Types} = require('mongoose');
 
 const patientsSchema = new Schema({
-  id: {type: Types.ObjectId, ref: 'User'},
+  appointmentId: {type: String},
+  userId: {type: Types.ObjectId, ref: 'User'},
   appointmentType: {type: String},
 });
 

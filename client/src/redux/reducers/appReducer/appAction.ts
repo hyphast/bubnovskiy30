@@ -18,9 +18,9 @@ export const setIsReady = (isReady: boolean): setIsReadyType => {
 }
 
 type messageType = {
-  type: 'success'| 'error'| 'warning' | 'info',
+  type?: 'success'| 'error'| 'warning' | 'info',
   message: string,
-  redirect: string,
+  redirect?: string,
 }
 type setMessageType = {
   type: typeof SET_MESSAGE,

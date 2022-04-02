@@ -1,5 +1,6 @@
 type patientsType = {
-    id: any,
+    userId: any,
+    appointmentId: string,
     appointmentType: string,
 }
 type appType = {
@@ -25,11 +26,13 @@ export type profileType = {
 }
 
 export type upcomingRecType = {
+    appointmentId: string,
     date: Date,
     time: Date,
     appointmentType: string,
 }
 export type finishedRecType = {
+    appointmentId: string,
     date: Date,
     time: Date,
     appointmentType: string,

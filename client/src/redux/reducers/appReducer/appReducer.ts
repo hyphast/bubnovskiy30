@@ -16,11 +16,7 @@ export const appReducer = (state = initialState, action: any): initialStateType 
     case SET_MESSAGE: {
       return {
         ...state,
-        globalMessage: {
-          type: action.payload.message.type,
-          message: action.payload.message.message,
-          redirect: action.payload.message.redirect,
-        }
+        globalMessage: {...state.globalMessage, ...action.payload.message}
       }
     }
     case APP_SET_INITIALIZED: {

@@ -23,7 +23,7 @@ class AppointmentController {
 
       await recordsService.addRecord(date, time, appointmentType, userId);
 
-      console.log(appointments);
+      //console.log(appointments);
       return res.status(201).json({message: 'Запись успешно выполнена', type: 'success', redirect: '/records'});
     } catch (e) {
       next(e);
