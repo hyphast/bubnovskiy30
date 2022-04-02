@@ -2,12 +2,12 @@ FROM node:14-slim
 
 WORKDIR usr/src/app
 
-COPY ../package.json ./
+COPY ./package.json ./
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 3000
 
-CMD ["node", "app.js"]
+CMD ["npm", "start"]

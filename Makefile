@@ -1,2 +1,2 @@
-run-dev:
-	docker-compose up
+build:
+	docker build -t react-app .
