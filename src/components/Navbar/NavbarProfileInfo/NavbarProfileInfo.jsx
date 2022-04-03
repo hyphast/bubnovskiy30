@@ -17,8 +17,10 @@ const NavbarProfileInfo = ({photoUrl, firstName, lastName, patronymic, gender, p
         />
       </div>
       <div className={NavbarProfileInfoStyles.info}>
-        <span className={NavbarProfileInfoStyles.name}>{`${lastName} ${firstName.slice(0, 1)}.`}</span>
-        <span>{patronymic && `${patronymic.slice(0, 1)}.`}</span>
+        <div className={NavbarProfileInfoStyles.name}>
+          <span>{`${lastName} ${firstName.slice(0, 1)}.`}</span>
+          <span>{patronymic && `${patronymic.slice(0, 1)}.`}</span>
+        </div>
         <span className={NavbarProfileInfoStyles.gender}>Пол: {gender === 'male' ? 'Мужской' : 'Женский'}</span>
         <span className={NavbarProfileInfoStyles.phone}>Телефон: {formatPhoneNumber}</span>
         <div className={NavbarProfileInfoStyles.settings}>

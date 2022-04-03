@@ -9,7 +9,7 @@ const Settings = () => {
   return (
     <div>
       <h2>Настройки</h2>
-      <Checkbox onChange={onChange}>Уведомлять об предстоящих занятиях</Checkbox>
+      <Checkbox onChange={onChange}>Уведомлять о предстоящих занятиях</Checkbox>
     </div>
   );
 };

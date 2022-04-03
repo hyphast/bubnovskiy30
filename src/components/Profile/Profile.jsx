@@ -1,10 +1,9 @@
 import React from 'react';
 import {Avatar, Button, Row, Statistic} from 'antd';
-import {EditOutlined, UserOutlined} from '@ant-design/icons';
-import ProfileStyles from "./Profile.module.scss";
-import {Link} from "react-router-dom";
-import {CheckCircleTwoTone, CloseCircleTwoTone} from '@ant-design/icons';
-import Text from "antd/es/typography/Text";
+import {CheckCircleTwoTone, CloseCircleTwoTone, UserOutlined} from '@ant-design/icons';
+import ProfileStyles from './Profile.module.scss';
+import {Link} from 'react-router-dom';
+import Text from 'antd/es/typography/Text';
 
 const Profile = ({photoUrl, firstName, lastName, patronymic, gender, phoneNumber, email, isActivated}) => {
   const formatPhoneNumber =
@@ -29,7 +28,7 @@ const Profile = ({photoUrl, firstName, lastName, patronymic, gender, phoneNumber
           <Statistic className={ProfileStyles.field} title="Телефон" value={formatPhoneNumber}/>
           <div className={ProfileStyles.email}>
             <Statistic className={ProfileStyles.field} title="Почта" value={email}/>
-            {isActivated === 'true' ?
+            {isActivated ?
             <div className={ProfileStyles.isActivated}>
               <CheckCircleTwoTone twoToneColor="#52c41a" className={ProfileStyles.isActivatedIcon} style={{fontSize: '24px'}}/>
               <Text type="success"> Email подтвержден</Text>

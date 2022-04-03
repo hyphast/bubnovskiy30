@@ -31,7 +31,10 @@ const HeaderInfo = ({photoUrl, firstName, lastName, patronymic, phoneNumber, log
     <Dropdown overlay={menu}>
       <div className={HeaderComponentStyles.headerRight}>
         <Avatar className={HeaderComponentStyles.ava} size={40} icon={photoUrl.length === 0 ? <UserOutlined/> : null} src={photoUrl}/>
-        <span className={HeaderComponentStyles.name}>{`${lastName} ${firstName.slice(0, 1)}.${patronymic.slice(0, 1)}.`}</span>
+        <div className={HeaderComponentStyles.name}>
+          <span>{`${lastName} ${firstName.slice(0, 1)}.`}</span>
+          <span>{patronymic && `${patronymic.slice(0, 1)}.`}</span>
+        </div>
         <span className={HeaderComponentStyles.phone}>{formatPhoneNumber}</span>
       </div>
     </Dropdown>

@@ -1,42 +1,45 @@
 import React, {useState} from 'react';
-import {Upload, message} from 'antd';
+import {message, Upload} from 'antd';
 import {LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
-import AvatarUploadStyles from './AvatarUpload.scss';
-import {savePhoto} from "../../../redux/reducers/profileReducer/profileActions";
-
-function beforeUpload(file) {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    message.error('Вы можете загружать только файлы в форматах JPG/PNG!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Изображение должно быть меньше 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
-}
 
 const AvatarUpload = ({photoUrl, savePhoto}) => {
   const [loading, setLoading] = useState(false);
+  const [isImgValid, setIsImgValid] = useState(true)
 
-  const getBase64 = (img, callback) => {
-    if (img) {
-      const reader = new FileReader();
-      reader.addEventListener('load', () => callback(reader.result, savePhoto));
-      reader.readAsDataURL(img);
+  function beforeUpload(file) {
+    setIsImgValid(true)
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('Вы можете загружать только файлы в форматах JPG/PNG!');
+      setIsImgValid(false)
     }
+    const isLt2M = file.size / 1024 / 1024 < 10;
+    if (!isLt2M) {
+      message.error('Изображение должно быть меньше 10MB!')
+      setIsImgValid(false)
+    }
+    return isJpgOrPng && isLt2M;
   }
 
+  // const getBase64 = (img, callback) => {
+  //   if (img) {
+  //     const reader = new FileReader();
+  //     reader.addEventListener('load', () => callback(reader.result, savePhoto));
+  //     reader.readAsDataURL(img);
+  //   }
+  // }
+
   const handleChange = ({fileList, ...info}) => {
-    if (info.file.status === 'uploading') {
+    if (info.file.status === 'uploading' || !isImgValid) {
       setLoading(true);
       return;
     }
-    getBase64(info.file.originFileObj, (imageUrl, savePhoto) => {
-      savePhoto(imageUrl);
-      setLoading(false);
-    })
+    savePhoto(fileList[fileList.length - 1].originFileObj);
+    // getBase64(info.file.originFileObj, (imageUrl, savePhoto) => {
+    //   savePhoto(imageUrl);
+    //   setLoading(false);
+    // })
   };
 
   const uploadButton = (

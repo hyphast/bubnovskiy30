@@ -1,4 +1,4 @@
-import {SET_PROFILE, SET_USER_INFO, SET_USER_PHOTO} from '../../types';
+import {SET_PROFILE, SET_USER_INFO} from '../../types';
 import {profileAPI} from '../../../API/api';
 import {profileType} from '../commonTypes';
 import {setMessage} from "../appReducer/appAction";
@@ -8,16 +8,17 @@ type setUserProfileType = {
   payload: profileType,
 }
 export const setUserProfile = (profile: profileType): setUserProfileType => {
-  return {type: SET_PROFILE, payload: {...profile}}
+  const photoUrl = profile.photoUrl.length ? process.env.REACT_APP_API_URL + '/' +  profile.photoUrl : ''
+  return {type: SET_PROFILE, payload: {...profile, photoUrl}}
 }
 
-type setUserPhotoType = {
-  type: typeof SET_USER_PHOTO,
-  payload: {photoUrl: string},
-}
-export const setUserPhoto = (photoUrl: string): setUserPhotoType => {
-  return {type: SET_USER_PHOTO, payload: {photoUrl}}
-}
+// type setUserPhotoType = {
+//   type: typeof SET_USER_PHOTO,
+//   payload: {photoUrl: string},
+// }
+// export const setUserPhoto = (photoUrl: string): setUserPhotoType => {
+//   return {type: SET_USER_PHOTO, payload: {photoUrl}}
+// }
 
 type setUserInfoPayloadType = {
   firstName: string,
@@ -35,11 +36,11 @@ export const setUserInfo =
   return {type: SET_USER_INFO, payload: {firstName, lastName, patronymic, gender, phoneNumber}}
 }
 
-export const savePhoto = (photoUrl: string) => {
+export const savePhoto = (photo: any) => {
   return async (dispatch: any) => {
     try {
-      const data = await profileAPI.savePhoto(photoUrl);
-      dispatch(setUserPhoto(photoUrl));
+      const data = await profileAPI.savePhoto(photo);
+      // dispatch(setUserPhoto(photo));
 
       dispatch(getUserProfile());
 

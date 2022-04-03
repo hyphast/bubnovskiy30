@@ -8,8 +8,8 @@ const TreatmentDatePicker = ({getAppointments}) => {
   const onChange = (date) => {
     if (date) {
       const d = date?._d
-      const res = new Date(Date.UTC(d?.getUTCFullYear(), d?.getUTCMonth(), d?.getUTCDate()))
-      date?._d && getAppointments(res?.toISOString()); //TODO Use Date.UTC() there and specify year, month and day!!!
+      const res = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
+      getAppointments(res?.toISOString())
     }
   };
 

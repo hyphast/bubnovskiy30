@@ -25,6 +25,7 @@ const FinishedRecords = ({finishedRecords}) => {
           </>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
+        defaultSortOrder='ascend'
       />
       <Column
         title="Время"

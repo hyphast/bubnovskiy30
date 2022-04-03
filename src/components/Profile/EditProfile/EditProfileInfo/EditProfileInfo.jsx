@@ -70,7 +70,7 @@ const EditProfileInfo = ({firstName, lastName, patronymic, gender, phoneNumber, 
                         htmlType='submit'
                         type='primary'
       >
-        Изменить
+        Сохранить
       </ButtonController>
     </form>
   );

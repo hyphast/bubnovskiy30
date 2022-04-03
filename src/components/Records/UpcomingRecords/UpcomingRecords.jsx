@@ -7,6 +7,7 @@ const {Column} = Table;
 const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
   const data = upcomingRecords?.map(item => ({
       key: item._id,
+      appointmentId: item.appointmentId,
       date: item.date,
       time: item.time,
       appType: item.appointmentType,
@@ -24,6 +25,7 @@ const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
           </>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
+        defaultSortOrder='ascend'
       />
       <Column
         title="Время"
@@ -64,7 +66,7 @@ const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
         render={(text, record) => {
          return <Space size="middle">
             <Button type='primary'
-                    onClick={() => deleteRecord(record.key)}
+                    onClick={() => deleteRecord(record.appointmentId)}
                     loading={recordsIds.some(id => id === record.key)}
                     danger
             >

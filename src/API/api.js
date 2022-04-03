@@ -58,7 +58,12 @@ export const profileAPI = {
     return api.get('/profile').then(response => response.data);
   },
   savePhoto(photoUrl) {
-    return api.put('/profile/photo', {photoUrl}).then(response => response.data);
+    const formData = new FormData();
+    formData.append('image', photoUrl);
+    return api.put('/profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }}).then(response => response.data);
   },
   editProfileInfo(firstName, lastName, patronymic, gender, phoneNumber) {
     return api.put('/profile', {firstName, lastName, patronymic, gender, phoneNumber}).then(response => response.data);
