@@ -1,23 +1,26 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {editProfileInfo, savePhoto} from "../../../redux/reducers/profileReducer/profileActions";
-import EditProfile from "./EditProfile";
+import React from 'react'
+import { connect } from 'react-redux'
+import {
+  editProfileInfo,
+  savePhoto,
+} from '../../../redux/reducers/profileReducer/profileActions'
+import EditProfile from './EditProfile'
 
 const EditProfileContainer = (props) => {
-  return (
-    <EditProfile {...props}/>
-  );
-};
+  return <EditProfile {...props} />
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     photoUrl: state.profile.photoUrl,
-    firstName: state.profile.firstName,
-    lastName: state.profile.lastName,
-    patronymic: state.profile.patronymic,
-    gender: state.profile.gender,
-    phoneNumber: state.profile.phoneNumber,
+    curFirstName: state.profile.firstName,
+    curLastName: state.profile.lastName,
+    curPatronymic: state.profile.patronymic,
+    curGender: state.profile.gender,
+    curPhoneNumber: state.profile.phoneNumber,
   }
 }
 
-export default connect(mapStateToProps, {savePhoto, editProfileInfo})(EditProfileContainer);
+export default connect(mapStateToProps, { savePhoto, editProfileInfo })(
+  EditProfileContainer,
+)

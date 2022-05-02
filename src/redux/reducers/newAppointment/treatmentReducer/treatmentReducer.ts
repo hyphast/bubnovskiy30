@@ -1,14 +1,21 @@
-import {CLEAR_APPOINTMENTS, NEW_APPOINTMENT_LOADING, SET_TREATMENT_APPOINTMENTS_DATA} from '../../../types';
-import {appointmentsType} from "../../commonTypes";
+import {
+  CLEAR_APPOINTMENTS,
+  NEW_APPOINTMENT_LOADING,
+  SET_TREATMENT_APPOINTMENTS_DATA,
+} from '../../../types'
+import { AppointmentsType } from '../../commonTypes'
 
 const initialState = {
-  appointments: null as Array<appointmentsType> | null,
+  appointments: null as Array<AppointmentsType> | null,
   isLoading: false,
 }
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState
 
-export const treatmentReducer = (state = initialState, action: any): initialStateType => {
-  switch(action.type) {
+export const treatmentReducer = (
+  state = initialState,
+  action: any,
+): InitialStateType => {
+  switch (action.type) {
     case SET_TREATMENT_APPOINTMENTS_DATA:
     case NEW_APPOINTMENT_LOADING: {
       return {
@@ -22,6 +29,7 @@ export const treatmentReducer = (state = initialState, action: any): initialStat
         appointments: null,
       }
     }
-    default: return state;
+    default:
+      return state
   }
 }

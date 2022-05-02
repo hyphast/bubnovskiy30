@@ -1,17 +1,17 @@
-import React from 'react';
-import {Table, Tag} from 'antd';
-import moment from 'moment';
+import React from 'react'
+import { Table, Tag } from 'antd'
+import moment from 'moment'
 
-const {Column} = Table;
+const { Column } = Table
 
-const FinishedRecords = ({finishedRecords}) => {
-  const data = finishedRecords?.map(item => ({
-    key: item._id,
-    date: item.date,
-    time: item.time,
-    appType: item.appointmentType,
-    status: item.status,
-  }));
+const FinishedRecords = ({ finishedRecords }) => {
+  const data = finishedRecords?.map((item) => ({
+    key: item.record._id,
+    date: item.record.date,
+    time: item.record.time,
+    appType: item.record.appointmentType,
+    status: item.record.status,
+  }))
 
   return (
     <Table dataSource={data} title={() => <h2>Архив</h2>}>
@@ -19,29 +19,25 @@ const FinishedRecords = ({finishedRecords}) => {
         title="Дата"
         dataIndex="date"
         key="date"
-        render={date => (
-          <>
-            {moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}
-          </>
+        render={(date) => (
+          <>{moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}</>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
-        defaultSortOrder='ascend'
+        defaultSortOrder="ascend"
       />
       <Column
         title="Время"
         dataIndex="time"
         key="time"
-        render={time => (
-          <>
-            {moment(time).utc().utcOffset(240).format('H:mm')}
-          </>
+        render={(time) => (
+          <>{moment(time).utc().utcOffset(240).format('H:mm')}</>
         )}
       />
       <Column
         title="Тип занятия"
         dataIndex="appType"
         key="appType"
-        render={type => (
+        render={(type) => (
           <>
             <Tag color="blue" key={type}>
               {type}
@@ -56,15 +52,15 @@ const FinishedRecords = ({finishedRecords}) => {
           {
             text: 'Физкультурно-оздоровительные занятия',
             value: 'Физкультурно-оздоровительные занятия',
-          }
-          ]}
+          },
+        ]}
         onFilter={(value, record) => record.appType === value}
       />
       <Column
         title="Статус"
         dataIndex="status"
         key="status"
-        render={status => (
+        render={(status) => (
           <>
             <Tag color="red" key={status}>
               {status}
@@ -73,7 +69,7 @@ const FinishedRecords = ({finishedRecords}) => {
         )}
       />
     </Table>
-  );
-};
+  )
+}
 
-export default FinishedRecords;
+export default FinishedRecords

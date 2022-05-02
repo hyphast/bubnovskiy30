@@ -1,13 +1,13 @@
-import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
-import App from './App';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import App from './App'
 
 const AppContainer = () => {
   return (
     <Router>
-      <App/>
+      <App />
     </Router>
-  );
-};
+  )
+}
 
-export default AppContainer;
+export default AppContainer

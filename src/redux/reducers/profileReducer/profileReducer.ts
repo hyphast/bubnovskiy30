@@ -1,4 +1,4 @@
-import {SET_PROFILE, SET_USER_INFO, SET_USER_PHOTO} from '../../types';
+import { SET_PROFILE, SET_USER_INFO, SET_USER_PHOTO } from '../../types'
 
 const initialState = {
   id: null as any,
@@ -10,18 +10,22 @@ const initialState = {
   phoneNumber: '',
   isActivated: false,
 }
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState
 
-export const profileReducer = (state = initialState, action: any): initialStateType => {
-  switch(action.type) {
+export const profileReducer = (
+  state = initialState,
+  action: any,
+): InitialStateType => {
+  switch (action.type) {
     case SET_PROFILE:
     case SET_USER_PHOTO:
-    case SET_USER_INFO : {
+    case SET_USER_INFO: {
       return {
         ...state,
         ...action.payload,
       }
     }
-    default: return state;
+    default:
+      return state
   }
 }

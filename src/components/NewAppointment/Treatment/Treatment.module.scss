@@ -1,9 +1,9 @@
 .container {
   display: grid;
   grid-template-areas:
-    "header header"
-    "subtitle subtitle"
-    "calendar content";
+    'header header'
+    'subtitle subtitle'
+    'calendar content';
   grid-gap: 5px;
   grid-template-columns: 230px 1fr;
   grid-template-rows: 30px 50px 1fr;
@@ -54,27 +54,27 @@
 }
 
 .green {
-  background-color: #96E561;
+  background-color: #96e561;
 }
 
 .green:hover {
-  background-color: #B7EE95;
+  background-color: #b7ee95;
 }
 
 .yellow {
-  background-color: #FFB85C;
+  background-color: #ffb85c;
 }
 
 .yellow:hover {
-  background-color: #FFD399;
+  background-color: #ffd399;
 }
 
 .orange {
-  background-color: #F8A38B;
+  background-color: #f8a38b;
 }
 
 .orange:hover {
-  background-color: #FBC1B1;
+  background-color: #fbc1b1;
 }
 
 .badges {

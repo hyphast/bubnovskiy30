@@ -10,6 +10,7 @@
   .profileInfo {
     margin-left: 4rem;
     margin-bottom: 1rem;
+    width: 100%;
 
     .fullName {
       font-weight: 700;
@@ -30,7 +31,7 @@
       margin-left: 2rem;
 
       .isActivatedIcon {
-        fontSize: 24px;
+        fontsize: 24px;
         margin-right: 0.3rem;
       }
     }

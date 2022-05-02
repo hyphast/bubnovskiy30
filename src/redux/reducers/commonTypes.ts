@@ -1,44 +1,43 @@
-type patientsType = {
-    userId: any,
-    appointmentId: string,
-    appointmentType: string,
+type PatientsType = {
+  record: string
 }
-type appType = {
-    time: Date,
-    patients: Array<patientsType>,
-    maxNumberPatients: number,
+type AppType = {
+  time: Date
+  patients: Array<PatientsType>
+  maxNumberPatients: number
 }
-export type appointmentsType = {
-    date: Date,
-    appointments: Array<appType>,
-    numberAllPatients: number,
+export type AppointmentsType = {
+  date: Date
+  appointments: Array<AppType>
+  numberAllPatients: number
 }
 
-export type profileType = {
-    id: any,
-    photoUrl: string,
-    firstName: string,
-    lastName: string,
-    patronymic: string,
-    gender: string,
-    phoneNumber: string,
-    isActivated: boolean,
+export type ProfileType = {
+  id: any
+  photoUrl: string
+  firstName: string
+  lastName: string
+  patronymic: string
+  gender: string
+  phoneNumber: string
+  isActivated: boolean
 }
 
-export type upcomingRecType = {
-    appointmentId: string,
-    date: Date,
-    time: Date,
-    appointmentType: string,
+export type RecType = {
+  userId: string
+  date: Date
+  time: Date
+  appointmentType: string
+  status?: string
 }
-export type finishedRecType = {
-    appointmentId: string,
-    date: Date,
-    time: Date,
-    appointmentType: string,
-    status: string,
-}
-export type recordsType = {
-    upcomingRecords: [upcomingRecType],
-    finishedRecords: [finishedRecType],
+// export type finishedRecType = {
+//     userId: string,
+//     date: Date,
+//     time: Date,
+//     appointmentType: string,
+//     status?: string,
+// }
+export type RecordsType = {
+  upcomingRecords: [RecType]
+  finishedRecords: [RecType]
 }

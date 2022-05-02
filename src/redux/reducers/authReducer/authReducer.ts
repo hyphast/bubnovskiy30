@@ -1,16 +1,24 @@
-import {AUTH_ERROR, AUTH_LOADING, CLEAR_AUTH_ERROR, SET_AUTH_USER_DATA} from '../../types';
+import {
+  AUTH_ERROR,
+  AUTH_LOADING,
+  CLEAR_AUTH_ERROR,
+  SET_AUTH_USER_DATA,
+} from '../../types'
 
 const initialState = {
   userId: null as string | null,
   email: null as string | null,
   isAuth: false,
-  errors: [] as Array<object>,
+  errors: [] as Array<any>,
   isLoading: false,
 }
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState
 
-export const authReducer = (state = initialState, action: any): initialStateType => {
-  switch(action.type) {
+export const authReducer = (
+  state = initialState,
+  action: any,
+): InitialStateType => {
+  switch (action.type) {
     case SET_AUTH_USER_DATA:
     case AUTH_LOADING: {
       return {
@@ -30,6 +38,7 @@ export const authReducer = (state = initialState, action: any): initialStateType
         errors: [],
       }
     }
-    default: return state;
+    default:
+      return state
   }
 }

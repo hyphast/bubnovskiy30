@@ -1,15 +1,13 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {logout} from '../../redux/reducers/authReducer/authActions';
-import HeaderComponent from './HeaderComponent';
+import React from 'react'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/reducers/authReducer/authActions'
+import HeaderComponent from './HeaderComponent'
 
 const HeaderContainer = (props) => {
-  return (
-   <HeaderComponent {...props}/>
-  );
-};
+  return <HeaderComponent {...props} />
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     photoUrl: state.profile.photoUrl,
     firstName: state.profile.firstName,
@@ -20,4 +18,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {logout})(HeaderContainer);
+export default connect(mapStateToProps, { logout })(HeaderContainer)

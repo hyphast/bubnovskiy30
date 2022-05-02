@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import {Alert, Calendar} from 'antd';
-
+import React, { useState } from 'react'
+import { Alert, Calendar } from 'antd'
 
 const AppointmentDate = () => {
   // const [value, setValue] = useState('2017-01-25');
@@ -20,9 +19,9 @@ const AppointmentDate = () => {
       {/*  message={`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`}*/}
       {/*/>*/}
       {/*<RecordsCalendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} />*/}
-      <Calendar  />
+      <Calendar />
     </>
-  );
+  )
 }
 
-export default AppointmentDate;
+export default AppointmentDate

@@ -1,25 +1,29 @@
 .ant-menu {
-    /*margin-top: 8rem;*/
+  /*margin-top: 8rem;*/
 }
 
 .ant-layout-sider-children {
-    background-color: white;
+  background-color: white;
 }
 
 .ant-layout-header {
-    background-color: white;
+  background-color: white;
 }
 
 .ant-layout-sider-trigger {
-    //background-color: white;
+  //background-color: white;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .contentContainer {
-    margin: 24px 16px;
-    padding: 20px;
-    min-height: 280px;
+  margin: 24px 16px;
+  padding: 20px;
+  min-height: 280px;
+}
+
+.ant-alert-banner {
+  text-align: center;
 }

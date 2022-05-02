@@ -1,28 +1,29 @@
-import React, {FC} from 'react';
-import {connect} from 'react-redux';
-import Records from "./Records";
-import {getUpcomingRecords, deleteRecord} from "../../redux/reducers/recordsReducer/recordsActions";
-import {finishedRecType, upcomingRecType} from "../../redux/reducers/commonTypes";
-import {stateType} from "../../redux/reducers/rootReducer";
+import React, { FC } from 'react'
+import { connect } from 'react-redux'
+import Records from './Records'
+import {
+  getUpcomingRecords,
+  deleteRecord,
+} from '../../redux/reducers/recordsReducer/recordsActions'
+import { RecType } from '../../redux/reducers/commonTypes'
+import { StateType } from '../../redux/reducers/rootReducer'
 
-type mapStateToPropsType = {
-  upcomingRecords: Array<upcomingRecType>,
-  finishedRecords: Array<finishedRecType>,
-  recordsIds: Array<string>,
+type MapStateToPropsType = {
+  upcomingRecords: Array<RecType>
+  finishedRecords: Array<RecType>
+  recordsIds: Array<string>
 }
-type mapDispatchToPropsType = {
-  getUpcomingRecords: () => void,
-  deleteRecord: (id: string) => void,
+type MapDispatchToPropsType = {
+  getUpcomingRecords: () => void
+  deleteRecord: (id: string) => void
 }
-type propsType = mapStateToPropsType & mapDispatchToPropsType;
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const RecordsContainer: FC<propsType> = (props) => {
-  return (
-    <Records {...props}/>
-  );
-};
+const RecordsContainer: FC<PropsType> = (props) => {
+  return <Records {...props} />
+}
 
-const mapStateToProps = (state: stateType): mapStateToPropsType => {
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
   return {
     upcomingRecords: state.records.upcomingRecords,
     finishedRecords: state.records.finishedRecords,
@@ -30,5 +31,9 @@ const mapStateToProps = (state: stateType): mapStateToPropsType => {
   }
 }
 
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, stateType>
-(mapStateToProps, {getUpcomingRecords, deleteRecord})(RecordsContainer);
+export default connect<
+  MapStateToPropsType,
+  MapDispatchToPropsType,
+  any, //TODO was {}
+  StateType
+>(mapStateToProps, { getUpcomingRecords, deleteRecord })(RecordsContainer)

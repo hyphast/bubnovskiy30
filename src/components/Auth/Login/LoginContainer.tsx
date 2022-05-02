@@ -1,32 +1,36 @@
-import React, {FC} from 'react';
-import {connect} from "react-redux";
-import {clearAuthError, login} from '../../../redux/reducers/authReducer/authActions';
-import Login from "./Login";
-import {stateType} from '../../../redux/reducers/rootReducer';
+import React, { FC } from 'react'
+import { connect } from 'react-redux'
+import {
+  clearAuthError,
+  login,
+} from '../../../redux/reducers/authReducer/authActions'
+import Login from './Login'
+import { StateType } from '../../../redux/reducers/rootReducer'
 
-type mapStateToPropsType = {
-  _error: Array<object>,
-  isLoading: boolean,
+type MapStateToPropsType = {
+  _error: Array<any>
+  isLoading: boolean
 }
-type mapDispatchToPropsType = {
-  login: (email: string, password: string) => void,
-  _clearError: () => void,
+type MapDispatchToPropsType = {
+  login: (email: string, password: string) => void
+  _clearError: () => void
 }
-type propsType = mapStateToPropsType & mapDispatchToPropsType;
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const LoginContainer: FC<propsType> = (props) => {
-  return (
-   <Login {...props}/>
-  );
-};
+const LoginContainer: FC<PropsType> = (props) => {
+  return <Login {...props} />
+}
 
-const mapStateToProps = (state: stateType): mapStateToPropsType => {
+const mapStateToProps = (state: StateType): MapStateToPropsType => {
   return {
     _error: state.auth.errors,
     isLoading: state.auth.isLoading,
   }
 }
 
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, stateType>
-(mapStateToProps, {login, _clearError: clearAuthError})(LoginContainer);
-
+export default connect<
+  MapStateToPropsType,
+  MapDispatchToPropsType,
+  any, //TODO was {}
+  StateType
+>(mapStateToProps, { login, _clearError: clearAuthError })(LoginContainer)

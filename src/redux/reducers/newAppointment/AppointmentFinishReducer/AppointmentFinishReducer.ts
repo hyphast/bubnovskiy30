@@ -1,4 +1,7 @@
-import {SET_APPOINTMENT_FINISH_DATA, SET_APPOINTMENT_TYPE} from '../../../types';
+import {
+  SET_APPOINTMENT_FINISH_DATA,
+  SET_APPOINTMENT_TYPE,
+} from '../../../types'
 
 const initialState = {
   appointmentType: '',
@@ -6,17 +9,21 @@ const initialState = {
   time: null as Date | null,
   isSelected: false,
 }
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState
 
-export const AppointmentFinishReducer = (state = initialState, action: any): initialStateType => {
-  switch(action.type) {
+export const AppointmentFinishReducer = (
+  state = initialState,
+  action: any,
+): InitialStateType => {
+  switch (action.type) {
     case SET_APPOINTMENT_FINISH_DATA:
     case SET_APPOINTMENT_TYPE: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
     }
-    default: return state;
+    default:
+      return state
   }
 }

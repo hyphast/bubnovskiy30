@@ -1,14 +1,12 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import Profile from './Profile';
+import React from 'react'
+import { connect } from 'react-redux'
+import Profile from './Profile'
 
 const ProfileContainer = (props) => {
-  return (
-    <Profile {...props}/>
-  );
-};
+  return <Profile {...props} />
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     photoUrl: state.profile.photoUrl,
     firstName: state.profile.firstName,
@@ -17,8 +15,8 @@ const mapStateToProps = state => {
     gender: state.profile.gender,
     phoneNumber: state.profile.phoneNumber,
     email: state.auth.email,
-    isActivated:  state.profile.isActivated,
+    isActivated: state.profile.isActivated,
   }
 }
 
-export default connect(mapStateToProps, {})(ProfileContainer);
+export default connect(mapStateToProps, {})(ProfileContainer)

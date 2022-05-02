@@ -1,17 +1,16 @@
-import React from 'react';
-import {Button, Space, Table, Tag} from "antd";
-import moment from 'moment';
+import React from 'react'
+import { Button, Space, Table, Tag } from 'antd'
+import moment from 'moment'
 
-const {Column} = Table;
+const { Column } = Table
 
-const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
-  const data = upcomingRecords?.map(item => ({
-      key: item._id,
-      appointmentId: item.appointmentId,
-      date: item.date,
-      time: item.time,
-      appType: item.appointmentType,
-  }));
+const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
+  const data = upcomingRecords?.map((item) => ({
+    key: item.record._id,
+    date: item.record.date,
+    time: item.record.time,
+    appType: item.record.appointmentType,
+  }))
 
   return (
     <Table dataSource={data} title={() => <h2>Текущие записи</h2>}>
@@ -19,29 +18,25 @@ const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
         title="Дата"
         dataIndex="date"
         key="date"
-        render={date => (
-          <>
-          {moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}
-          </>
+        render={(date) => (
+          <>{moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}</>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
-        defaultSortOrder='ascend'
+        defaultSortOrder="ascend"
       />
       <Column
         title="Время"
         dataIndex="time"
         key="time"
-        render={time => (
-          <>
-            {moment(time).utc().utcOffset(240).format('H:mm')}
-          </>
+        render={(time) => (
+          <>{moment(time).utc().utcOffset(240).format('H:mm')}</>
         )}
       />
       <Column
         title="Тип занятия"
         dataIndex="appType"
         key="appType"
-        render={type => (
+        render={(type) => (
           <>
             <Tag color="blue" key={type}>
               {type}
@@ -56,7 +51,7 @@ const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
           {
             text: 'Физкультурно-оздоровительные занятия',
             value: 'Физкультурно-оздоровительные занятия',
-          }
+          },
         ]}
         onFilter={(value, record) => record.appType === value}
       />
@@ -64,19 +59,22 @@ const UpcomingRecords = ({upcomingRecords, deleteRecord, recordsIds}) => {
         title="Отмена записи"
         key="cancel"
         render={(text, record) => {
-         return <Space size="middle">
-            <Button type='primary'
-                    onClick={() => deleteRecord(record.appointmentId)}
-                    loading={recordsIds.some(id => id === record.key)}
-                    danger
-            >
-              Отменить
-            </Button>
-          </Space>
+          return (
+            <Space size="middle">
+              <Button
+                type="primary"
+                onClick={() => deleteRecord(record.key)}
+                loading={recordsIds.some((id) => id === record.key)}
+                danger
+              >
+                Отменить
+              </Button>
+            </Space>
+          )
         }}
       />
     </Table>
-  );
-};
+  )
+}
 
-export default UpcomingRecords;
+export default UpcomingRecords

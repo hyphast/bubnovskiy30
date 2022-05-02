@@ -1,14 +1,12 @@
-import React from 'react';
-import Navbar from './Navbar';
-import {connect} from 'react-redux';
+import React from 'react'
+import Navbar from './Navbar'
+import { connect } from 'react-redux'
 
 const NavbarContainer = (props) => {
-  return (
-   <Navbar {...props}/>
-  );
-};
+  return <Navbar {...props} />
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     photoUrl: state.profile.photoUrl,
     firstName: state.profile.firstName,
@@ -16,7 +14,8 @@ const mapStateToProps = state => {
     patronymic: state.profile.patronymic,
     gender: state.profile.gender,
     phoneNumber: state.profile.phoneNumber,
+    isActivated: state.profile.isActivated,
   }
 }
 
-export default connect(mapStateToProps, {})(NavbarContainer);
+export default connect(mapStateToProps, {})(NavbarContainer)

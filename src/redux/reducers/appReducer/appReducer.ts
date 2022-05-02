@@ -1,22 +1,30 @@
-import {APP_IS_READY, APP_SET_INITIALIZED, CLEAR_MESSAGE, SET_MESSAGE} from '../../types';
+import {
+  APP_IS_READY,
+  APP_SET_INITIALIZED,
+  CLEAR_MESSAGE,
+  SET_MESSAGE,
+} from '../../types'
 
 const initialState = {
   initialized: false,
   isReady: false,
   globalMessage: {
-    type: 'info' as 'success'| 'error'| 'warning' | 'info',
+    type: 'info' as 'success' | 'error' | 'warning' | 'info',
     message: '' as string,
     redirect: '/profile' as string,
   },
 }
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState
 
-export const appReducer = (state = initialState, action: any): initialStateType => {
-  switch(action.type) {
+export const appReducer = (
+  state = initialState,
+  action: any,
+): InitialStateType => {
+  switch (action.type) {
     case SET_MESSAGE: {
       return {
         ...state,
-        globalMessage: {...state.globalMessage, ...action.payload.message}
+        globalMessage: { ...state.globalMessage, ...action.payload.message },
       }
     }
     case APP_SET_INITIALIZED: {
@@ -35,12 +43,13 @@ export const appReducer = (state = initialState, action: any): initialStateType 
       return {
         ...state,
         globalMessage: {
-          type: 'info' ,
+          type: 'info',
           message: '',
           redirect: '/profile',
-        }
+        },
       }
     }
-    default: return state;
+    default:
+      return state
   }
 }

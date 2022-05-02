@@ -5,12 +5,27 @@
   height: 72px;
   background-color: #f2ecfd;
 
+  .rightGrid {
+    display: flex;
+    .code {
+      font-size: 30px;
+      position: relative;
+      top: 1.1rem;
+      left: -1rem;
+      transition: 1s;
+    }
+    .code:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+  }
+
   .headerRight {
     margin: 0.9rem 1.1rem 0 0;
     display: grid;
     grid-template-areas:
-    "avatar name"
-    "avatar phone";
+      'avatar name'
+      'avatar phone';
     grid-template-columns: 45px 1fr;
     grid-template-rows: 17px 17px;
     grid-gap: 3px;
@@ -19,6 +34,11 @@
     cursor: pointer;
     color: gray;
   }
+  //.code {
+  //  grid-area: code;
+  //  align-self: center;
+  //  font-size: 27px;
+  //}
   .ava {
     grid-area: avatar;
     align-self: center;
