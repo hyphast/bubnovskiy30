@@ -49,7 +49,8 @@ export const useRoutes = (isAuth) => {
           <Route path="/about-us" exact>
             <AboutUs />
           </Route>
-          <Route render={() => <PageNotExist redirect="/profile" />} />
+          {/*<Route render={() => <PageNotExist redirect="/profile" />} />*/}
+          <Redirect to="/profile" />
         </Switch>
       </>
     )
@@ -63,7 +64,7 @@ export const useRoutes = (isAuth) => {
       <Route path="/registration" exact>
         <RegistrationContainer />
       </Route>
-      <Route render={() => <PageNotExist redirect="/login" />} />
+      <Redirect to="/login" />
     </Switch>
   )
 }

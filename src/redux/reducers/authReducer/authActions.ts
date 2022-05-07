@@ -60,11 +60,15 @@ export const isAuth = () => {
   }
 }
 
-export const login = (email: string, password: string) => {
+export const login = (
+  email: string,
+  password: string,
+  captchaToken: string,
+) => {
   return async (dispatch: any) => {
     try {
       dispatch(setIsLoading(true))
-      const data = await authAPI.login(email, password)
+      const data = await authAPI.login(email, password, captchaToken)
       localStorage.setItem('token', data.accessToken)
 
       dispatch(setAuthUserData(data.user.id, data.user.email, true))
@@ -86,6 +90,7 @@ export const registration = (
   password: string,
   gender: string,
   phoneNumber: string,
+  captchaToken: string,
 ) => {
   return async (dispatch: any) => {
     try {
@@ -98,6 +103,7 @@ export const registration = (
         password,
         gender,
         phoneNumber,
+        captchaToken,
       )
       localStorage.setItem('token', data.accessToken)
 

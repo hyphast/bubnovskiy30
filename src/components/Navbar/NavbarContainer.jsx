@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
     gender: state.profile.gender,
     phoneNumber: state.profile.phoneNumber,
     isActivated: state.profile.isActivated,
+    modifiedNumber: state.records.modifiedNumber,
   }
 }
 

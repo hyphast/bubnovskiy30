@@ -28,7 +28,8 @@ export type RecType = {
   date: Date
   time: Date
   appointmentType: string
-  status?: string
+  status: string
+  modifiedDate: Date
 }
 // export type finishedRecType = {
 //     userId: string,
@@ -40,4 +41,5 @@ export type RecType = {
 export type RecordsType = {
   upcomingRecords: [RecType]
   finishedRecords: [RecType]
+  modifiedNumber: number
 }

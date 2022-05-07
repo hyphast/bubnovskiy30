@@ -53,6 +53,7 @@ const TreatmentList = ({ appointments, isLoading }) => {
               xl: 6,
               xxl: 3,
             }}
+            locale={{ emptyText: 'Пусто' }}
             dataSource={data}
             renderItem={(item) => (
               <List.Item className={TreatmentStyles.timesContainer}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Tag } from 'antd'
 import moment from 'moment'
+import { localeTable } from '../localeTable'
 
 const { Column } = Table
 
@@ -11,10 +12,11 @@ const FinishedRecords = ({ finishedRecords }) => {
     time: item.record.time,
     appType: item.record.appointmentType,
     status: item.record.status,
+    modifiedDate: item.record.modifiedDate,
   }))
 
   return (
-    <Table dataSource={data} title={() => <h2>Архив</h2>}>
+    <Table dataSource={data} locale={localeTable} title={() => <h2>Архив</h2>}>
       <Column
         title="Дата"
         dataIndex="date"
@@ -23,7 +25,7 @@ const FinishedRecords = ({ finishedRecords }) => {
           <>{moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}</>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
-        defaultSortOrder="ascend"
+        // defaultSortOrder="ascend"
       />
       <Column
         title="Время"
@@ -32,6 +34,7 @@ const FinishedRecords = ({ finishedRecords }) => {
         render={(time) => (
           <>{moment(time).utc().utcOffset(240).format('H:mm')}</>
         )}
+        sorter={(a, b) => new Date(a.time) - new Date(b.time)}
       />
       <Column
         title="Тип занятия"
@@ -67,6 +70,15 @@ const FinishedRecords = ({ finishedRecords }) => {
             </Tag>
           </>
         )}
+      />
+      <Column
+        title="Дата операции"
+        key="Date of operation"
+        render={(text, record) => {
+          return moment(record.modifiedDate).fromNow()
+        }}
+        sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
+        defaultSortOrder="descend"
       />
     </Table>
   )

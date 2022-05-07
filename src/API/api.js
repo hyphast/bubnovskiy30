@@ -46,9 +46,9 @@ export const authAPI = {
       })
       .then((response) => response.data)
   },
-  login(email, password) {
+  login(email, password, captchaToken) {
     return api
-      .post('/auth/login', { email, password })
+      .post('/auth/login', { email, password, captchaToken })
       .then((response) => response.data)
   },
   registration(
@@ -59,6 +59,7 @@ export const authAPI = {
     password,
     gender,
     phoneNumber,
+    captchaToken,
   ) {
     return api
       .post('/auth/registration', {
@@ -69,6 +70,7 @@ export const authAPI = {
         password,
         gender,
         phoneNumber,
+        captchaToken,
       })
       .then((response) => response.data)
   },

@@ -31,6 +31,7 @@ const Records = ({
           Текущие записи
         </Button>
         <Button
+          disabled
           onClick={() => history.push('/records-calendar')}
           style={{ float: 'right' }}
         >

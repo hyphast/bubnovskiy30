@@ -13,7 +13,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { Link } from 'react-router-dom'
 
 const Registration = ({ registration, _error, _clearError, isLoading }) => {
-  const [isVerified, setIsVerified] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState('')
 
   const schema = useMemo(
     () =>
@@ -73,6 +73,7 @@ const Registration = ({ registration, _error, _clearError, isLoading }) => {
       password,
       gender,
       phoneNumber,
+      captchaToken,
     )
   }
 
@@ -93,8 +94,8 @@ const Registration = ({ registration, _error, _clearError, isLoading }) => {
   }, [_clearError, clearErrors])
 
   const onRecaptchaChange = (value) => {
-    console.log('Captcha value:', value)
-    setIsVerified(true)
+    console.log('Captcha value:', typeof value)
+    setCaptchaToken(value)
   }
 
   return (
@@ -179,7 +180,7 @@ const Registration = ({ registration, _error, _clearError, isLoading }) => {
             >
               <div className={RegistrationStyles.recaptcha}>
                 <ReCAPTCHA //TODO сделать отдельный компонент
-                  sitekey={process.env.REACT_APP_RECAPTCHA_KEY} //TODO test key here
+                  sitekey={String(process.env.REACT_APP_RECAPTCHA_KEY)} //TODO test key here
                   onChange={onRecaptchaChange}
                   hl="ru"
                 />
@@ -198,7 +199,7 @@ const Registration = ({ registration, _error, _clearError, isLoading }) => {
                 <ButtonController
                   field="submitBtn"
                   control={control}
-                  disabled={isLoading || !isVerified}
+                  disabled={isLoading || !captchaToken}
                   className={RegistrationStyles.btn}
                   htmlType="submit"
                   type="primary"

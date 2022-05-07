@@ -15,7 +15,7 @@ import NavbarCss from './Navbar.scss'
 
 const { Sider } = Layout
 
-const Navbar = ({ isActivated, ...props }) => {
+const Navbar = ({ isActivated, modifiedNumber, ...props }) => {
   const location = useLocation()
   return (
     <Sider trigger={null}>
@@ -45,7 +45,7 @@ const Navbar = ({ isActivated, ...props }) => {
             icon={<InboxOutlined />}
             className="navbar-item"
           >
-            <Badge count={3} color="purple" offset={[-10, 20]}>
+            <Badge count={modifiedNumber} color="purple" offset={[-10, 20]}>
               <Link to="/records">Мои записи</Link>
             </Badge>
           </Menu.Item>

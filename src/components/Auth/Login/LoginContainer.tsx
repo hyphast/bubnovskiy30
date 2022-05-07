@@ -12,7 +12,7 @@ type MapStateToPropsType = {
   isLoading: boolean
 }
 type MapDispatchToPropsType = {
-  login: (email: string, password: string) => void
+  login: (email: string, password: string, captchaToken: string) => void
   _clearError: () => void
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType

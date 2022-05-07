@@ -6,6 +6,7 @@ import {
   CLEAR_MESSAGE,
   SET_MESSAGE,
 } from '../../types'
+import { getUpcomingRecords } from '../recordsReducer/recordsActions'
 
 type SetInitializedType = {
   type: typeof APP_SET_INITIALIZED
@@ -46,8 +47,13 @@ export const initializeApp = () => {
   return async (dispatch: any) => {
     const isAuthPromise = dispatch(isAuth())
     const getUserProfilePromise = dispatch(getUserProfile())
+    const getUpcomingRecordsPromise = dispatch(getUpcomingRecords())
 
-    Promise.all([isAuthPromise, getUserProfilePromise])
+    Promise.all([
+      isAuthPromise,
+      getUserProfilePromise,
+      getUpcomingRecordsPromise,
+    ])
       .then(() => {
         dispatch(setInitialized())
         dispatch(setIsReady(true))

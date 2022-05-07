@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Space, Table, Tag } from 'antd'
 import moment from 'moment'
+import { localeTable } from '../localeTable'
 
 const { Column } = Table
 
@@ -10,10 +11,16 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
     date: item.record.date,
     time: item.record.time,
     appType: item.record.appointmentType,
+    status: item.record.status,
+    modifiedDate: item.record.modifiedDate,
   }))
 
   return (
-    <Table dataSource={data} title={() => <h2>Текущие записи</h2>}>
+    <Table
+      dataSource={data}
+      locale={localeTable}
+      title={() => <h2>Текущие записи</h2>}
+    >
       <Column
         title="Дата"
         dataIndex="date"
@@ -22,7 +29,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
           <>{moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}</>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
-        defaultSortOrder="ascend"
+        // defaultSortOrder="ascend"
       />
       <Column
         title="Время"
@@ -31,6 +38,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
         render={(time) => (
           <>{moment(time).utc().utcOffset(240).format('H:mm')}</>
         )}
+        sorter={(a, b) => new Date(a.time) - new Date(b.time)}
       />
       <Column
         title="Тип занятия"
@@ -54,6 +62,27 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
           },
         ]}
         onFilter={(value, record) => record.appType === value}
+      />
+      <Column
+        title="Статус"
+        dataIndex="status"
+        key="status"
+        render={(status) => (
+          <>
+            <Tag color="yellow" key={status}>
+              {status}
+            </Tag>
+          </>
+        )}
+      />
+      <Column
+        title="Дата операции"
+        key="Date of operation"
+        render={(text, record) => {
+          return moment(record.modifiedDate).fromNow()
+        }}
+        sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
+        defaultSortOrder="descend"
       />
       <Column
         title="Отмена записи"

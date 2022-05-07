@@ -1,6 +1,7 @@
 import { SET_APPOINTMENT_FINISH_DATA } from '../../../types'
 import { newAppointmentAPI } from '../../../../API/api'
 import { setMessage } from '../../appReducer/appAction'
+import { getUpcomingRecords } from '../../recordsReducer/recordsActions'
 
 type SetAppointmentFinishDataPayloadType = {
   appointmentType: string | null
@@ -43,6 +44,8 @@ export const addPatient = (date: Date, time: Date, appointmentType: string) => {
         appointmentType,
         userId,
       )
+
+      dispatch(getUpcomingRecords())
 
       dispatch(setMessage(data))
     } catch (e: any) {

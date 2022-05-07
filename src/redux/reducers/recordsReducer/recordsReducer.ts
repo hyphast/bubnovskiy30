@@ -5,6 +5,7 @@ const initialState = {
   upcomingRecords: [] as Array<RecType>,
   finishedRecords: [] as Array<RecType>,
   recordsIds: [] as Array<string>,
+  modifiedNumber: 0,
 }
 export type InitialStateType = typeof initialState
 

@@ -13,6 +13,7 @@ import NavbarContainer from './components/Navbar/NavbarContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import './App.css'
 import Preloader from './components/common/Preloader/Preloader'
+import { selectGlobalMessage } from './redux/reducers/appReducer/appSelectors'
 
 const { Content } = Layout
 
@@ -20,7 +21,8 @@ function App() {
   const dispatch = useDispatch()
   let history = useHistory()
   const isAuthorized = useSelector((state) => state.auth.isAuth)
-  const globalMessage = useSelector((state) => state.app.globalMessage)
+  const getGlobalMessage = useMemo(() => selectGlobalMessage, []) //TODO переделать!
+  const globalMessage = useSelector((state) => getGlobalMessage(state))
   const ready = useSelector((state) => state.app.isReady)
   const isActivated = useSelector((state) => state.profile.isActivated)
   const routes = useRoutes(isAuthorized) //TODO Захардкодил isAuthorized в true
@@ -36,7 +38,12 @@ function App() {
         history.push(globalMessage.redirect)
       },
     })
-  }, [globalMessage, history])
+  }, [
+    globalMessage.message,
+    globalMessage.type,
+    globalMessage.redirect,
+    history,
+  ])
 
   useEffect(() => {
     globalMessage.message && openNotification() //TODO was: globalMessage.message && openNotification()

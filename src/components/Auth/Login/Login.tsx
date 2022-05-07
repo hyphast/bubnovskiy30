@@ -14,12 +14,14 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import LogoImg from '../../../assets/images/logo.jpg'
 import RegistrationStyles from '../Registration/Registration.module.scss'
 
+//TODO ?? дублирование
 type MapStateToPropsType = {
   _error: Array<any>
   isLoading: boolean
 }
+//TODO ??
 type MapDispatchToPropsType = {
-  login: (email: string, password: string) => void
+  login: (email: string, password: string, captchaToken: string) => void
   _clearError: () => void
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -31,7 +33,7 @@ type FormValues = {
 }
 
 const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
-  const [isVerified, setIsVerified] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState('')
 
   const schema = useMemo(
     () =>
@@ -40,7 +42,11 @@ const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
           .string()
           .required('Введите ваш Email')
           .email('Некорректный Email'),
-        password: yup.string().required('Введите пароль'),
+        password: yup
+          .string()
+          .required('Введите пароль')
+          .min(6, 'Пароль должен быть больше 6 символов')
+          .max(32, 'Максимальная длина пароля 32 символа'),
       }),
     [],
   )
@@ -60,7 +66,7 @@ const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
   }) => {
     // console.log('form: ',email, password, rememberMe);
     //login(email, password).catch((response: any) => console.log(response));
-    login(email, password)
+    login(email, password, captchaToken)
   }
 
   useEffect(() => {
@@ -78,8 +84,8 @@ const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
   }, [_clearError, clearErrors])
 
   const onRecaptchaChange = (value: any) => {
-    console.log('Captcha value:', value)
-    setIsVerified(true)
+    console.log('Captcha value:', typeof value)
+    setCaptchaToken(value)
   }
 
   return (
@@ -116,7 +122,7 @@ const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
             {_error[0] && (
               <Alert
                 className={authStyles.alertError}
-                message={<>Object.values(_error[0])[0]</>} //TODO было без фрагмента
+                message={<>{Object.values(_error[0])[0]}</>} //TODO было без фрагмента
                 type="error"
                 showIcon
               />
@@ -143,7 +149,7 @@ const Login: FC<PropsType> = ({ login, _error, _clearError, isLoading }) => {
             <ButtonController
               field="submitBtn"
               control={control}
-              disabled={isLoading || !isVerified}
+              disabled={isLoading || !captchaToken} //TODO was: isLoading || !isVerified
               htmlType="submit"
               type="primary"
               className={classnames('login-form-button', authStyles.btn)}
