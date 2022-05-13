@@ -36,7 +36,8 @@ const Profile = ({
         <div className={ProfileStyles.left}>
           <Avatar
             shape="square"
-            size={210}
+            size={{ xs: 100, sm: 130, md: 150, lg: 180, xl: 210, xxl: 250 }}
+            // size={210}
             icon={photoUrl.length === 0 ? <UserOutlined /> : null}
             src={photoUrl}
           />
@@ -107,7 +108,7 @@ const Profile = ({
           {/*/>*/}
           <Row gutter={16}>
             <Col span={12}>
-              <Statistic title="Цикл" value={10} prefix={<TrophyOutlined />} />
+              <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />
             </Col>
             <Col span={12}>
               <Statistic

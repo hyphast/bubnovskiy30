@@ -11,7 +11,7 @@ const SuccessResult = () => {
     <Result
       status="success"
       title="Вы успешно записались на услугу"
-      subTitle="Осталось занятий: 11"
+      subTitle="Вы можете отменить запись во вкладке Мои записи"
       extra={[
         <Button
           key="profile"

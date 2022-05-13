@@ -1,4 +1,8 @@
-import { SET_DELETE_RECORD_LOADING, SET_UPCOMING_RECORDS } from '../../types'
+import {
+  RESET_MODIFIED_NUMBER,
+  SET_DELETE_RECORD_LOADING,
+  SET_UPCOMING_RECORDS,
+} from '../../types'
 import { RecType } from '../commonTypes'
 
 const initialState = {
@@ -26,6 +30,12 @@ export const recordsReducer = (
         recordsIds: action.payload.isFetch
           ? [...state.recordsIds, action.payload.recordId]
           : state.recordsIds.filter((id) => id !== action.payload.recordId),
+      }
+    }
+    case RESET_MODIFIED_NUMBER: {
+      return {
+        ...state,
+        modifiedNumber: 0,
       }
     }
     default:

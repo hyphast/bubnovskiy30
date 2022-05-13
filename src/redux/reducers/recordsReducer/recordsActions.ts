@@ -1,4 +1,8 @@
-import { SET_DELETE_RECORD_LOADING, SET_UPCOMING_RECORDS } from '../../types'
+import {
+  SET_DELETE_RECORD_LOADING,
+  SET_UPCOMING_RECORDS,
+  RESET_MODIFIED_NUMBER,
+} from '../../types'
 import { recordsAPI } from '../../../API/api'
 import { RecordsType } from '../commonTypes'
 import { setMessage } from '../appReducer/appAction'
@@ -23,6 +27,14 @@ export const deleteInProgress = (
   recordId: string,
 ): DeleteRecordLoadingType => {
   return { type: SET_DELETE_RECORD_LOADING, payload: { isFetch, recordId } }
+}
+
+type ResetModifiedNumberType = {
+  type: typeof RESET_MODIFIED_NUMBER
+}
+
+export const resetModifiedNumber = (): ResetModifiedNumberType => {
+  return { type: RESET_MODIFIED_NUMBER }
 }
 
 export const getUpcomingRecords = () => {
@@ -55,6 +67,18 @@ export const deleteRecord = (id: string) => {
       console.log(e.response?.data?.message)
       dispatch(setMessage(e.response?.data))
       dispatch(deleteInProgress(false, id))
+    }
+  }
+}
+
+export const resetModified = () => {
+  return async (dispatch: any) => {
+    try {
+      const data = await recordsAPI.resetModifiedNumber()
+
+      dispatch(resetModifiedNumber())
+    } catch (e: any) {
+      console.log(e.response?.data?.message)
     }
   }
 }

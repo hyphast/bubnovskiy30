@@ -1,6 +1,6 @@
 .profileContainer {
   display: flex;
-  position: absolute;
+  //position: absolute;
 
   .left {
     display: flex;
@@ -22,13 +22,14 @@
 
     .email {
       display: flex;
+      flex-wrap: wrap;
     }
 
     .isActivated {
       display: flex;
-      position: relative;
-      top: 2.2rem;
-      margin-left: 2rem;
+      //position: relative;
+      //top: 2.2rem;
+      padding: 2rem;
 
       .isActivatedIcon {
         fontsize: 24px;
@@ -42,8 +43,8 @@
   }
 
   .SettingsIcon {
-    position: relative;
-    top: -1.1rem;
-    left: 10rem;
+    //position: relative;
+    //top: -1.1rem;
+    //left: 10rem;
   }
 }

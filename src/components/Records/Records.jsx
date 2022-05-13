@@ -10,13 +10,17 @@ const Records = ({
   getUpcomingRecords,
   deleteRecord,
   recordsIds,
+  resetModified,
 }) => {
   const [isUpcoming, setIsUpcoming] = useState(true)
   const history = useHistory()
 
   useEffect(() => {
-    getUpcomingRecords()
-  }, [getUpcomingRecords]) //TODO was: []
+    const resetModifiedPromise = resetModified()
+    Promise.all([resetModifiedPromise]).then(() => {
+      getUpcomingRecords()
+    })
+  }, [getUpcomingRecords, resetModified]) //TODO was: []
 
   return (
     <>
@@ -30,13 +34,12 @@ const Records = ({
         >
           Текущие записи
         </Button>
-        <Button
-          disabled
-          onClick={() => history.push('/records-calendar')}
-          style={{ float: 'right' }}
-        >
-          Календарь
-        </Button>
+        {/*<Button*/}
+        {/*  onClick={() => history.push('/records-calendar')}*/}
+        {/*  style={{ float: 'right' }}*/}
+        {/*>*/}
+        {/*  Календарь*/}
+        {/*</Button>*/}
       </div>
       {isUpcoming ? (
         <UpcomingRecords

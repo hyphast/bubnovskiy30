@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Badge, Layout, Menu } from 'antd'
 import classnames from 'classnames'
 import {
@@ -17,11 +17,17 @@ const { Sider } = Layout
 
 const Navbar = ({ isActivated, modifiedNumber, ...props }) => {
   const location = useLocation()
+
   return (
     <Sider trigger={null}>
       <div className={classnames('logo', NavbarStyles.navbar)}>
         <NavbarProfileInfo {...props} />
-        <Menu theme="light" selectedKeys={[location.pathname]} mode="inline">
+        <Menu
+          theme="light"
+          selectedKeys={[location.pathname]}
+          mode="inline"
+          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+        >
           <Menu.Item
             key="/profile"
             icon={<UserOutlined />}

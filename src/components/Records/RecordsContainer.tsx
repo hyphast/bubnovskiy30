@@ -4,6 +4,7 @@ import Records from './Records'
 import {
   getUpcomingRecords,
   deleteRecord,
+  resetModified,
 } from '../../redux/reducers/recordsReducer/recordsActions'
 import { RecType } from '../../redux/reducers/commonTypes'
 import { StateType } from '../../redux/reducers/rootReducer'
@@ -16,6 +17,7 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
   getUpcomingRecords: () => void
   deleteRecord: (id: string) => void
+  resetModified: () => void
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -36,4 +38,6 @@ export default connect<
   MapDispatchToPropsType,
   any, //TODO was {}
   StateType
->(mapStateToProps, { getUpcomingRecords, deleteRecord })(RecordsContainer)
+>(mapStateToProps, { getUpcomingRecords, deleteRecord, resetModified })(
+  RecordsContainer,
+)

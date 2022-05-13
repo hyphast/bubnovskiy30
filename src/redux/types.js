@@ -23,3 +23,4 @@ export const CLEAR_MESSAGE = 'appointmentFinish/CLEAR_MESSAGE'
 
 export const SET_UPCOMING_RECORDS = 'records/SET_UPCOMING_RECORDS'
 export const SET_DELETE_RECORD_LOADING = 'records/SET_DELETE_RECORD_LOADING'
+export const RESET_MODIFIED_NUMBER = 'records/RESET_MODIFIED_NUMBER'

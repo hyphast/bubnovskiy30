@@ -49,8 +49,16 @@ export const useRoutes = (isAuth) => {
           <Route path="/about-us" exact>
             <AboutUs />
           </Route>
-          {/*<Route render={() => <PageNotExist redirect="/profile" />} />*/}
-          <Redirect to="/profile" />
+          <Redirect from="/login" to="/profile" />
+          <Redirect from="/registration" to="/profile" />
+          <Route
+            render={() => (
+              <PageNotExist
+                status={404}
+                message="Извините, страница не существует 😔"
+              />
+            )}
+          />
         </Switch>
       </>
     )

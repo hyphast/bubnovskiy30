@@ -121,4 +121,7 @@ export const recordsAPI = {
   deleteRecord(id) {
     return api.delete(`/records?id=${id}`).then((response) => response.data)
   },
+  resetModifiedNumber() {
+    return api.put(`/records/modified-number`).then((response) => response.data)
+  },
 }

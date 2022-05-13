@@ -2,10 +2,15 @@ import React from 'react'
 import { Button, Space, Table, Tag } from 'antd'
 import moment from 'moment'
 import { localeTable } from '../localeTable'
+import PageNotExist from '../../resultsComponents/PageNotExist/PageNotExist'
 
 const { Column } = Table
 
 const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
+  // console.log(upcomingRecords[upcomingRecords.length - 1]?.record)
+  // if (upcomingRecords[upcomingRecords.length - 1]?.record === null)
+  //   return <PageNotExist status={500} message="Что-то пошло не так 😔" />
+
   const data = upcomingRecords?.map((item) => ({
     key: item.record._id,
     date: item.record.date,
