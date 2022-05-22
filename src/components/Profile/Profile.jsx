@@ -106,33 +106,34 @@ const Profile = ({
           {/*  className={ProfileStyles.field}*/}
           {/*  title="Осталось занятий"*/}
           {/*/>*/}
-          <Row gutter={16}>
-            <Col span={12}>
-              <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />
-            </Col>
-            <Col span={12}>
-              <Statistic
-                title="Осталось занятий"
-                value={12}
-                suffix="/ 12"
-                prefix={<SendOutlined />}
-              />
-              <Progress
-                percent={100}
-                format={() => 12}
-                strokeColor={{
-                  '0%': '#ffd43b',
-                  '100%': '#644394',
-                }}
-                strokeWidth={20}
-                trailColor="#bfbfbf"
-                status="active"
-              />
-            </Col>
-            <Col span={12}>
-              <Statistic title="Тип занятий" value="Лечебные занятия" />
-            </Col>
-          </Row>
+
+          {/*<Row gutter={16}>*/}
+          {/*  <Col span={12}>*/}
+          {/*    <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />*/}
+          {/*  </Col>*/}
+          {/*  <Col span={12}>*/}
+          {/*    <Statistic*/}
+          {/*      title="Осталось занятий"*/}
+          {/*      value={12}*/}
+          {/*      suffix="/ 12"*/}
+          {/*      prefix={<SendOutlined />}*/}
+          {/*    />*/}
+          {/*    <Progress*/}
+          {/*      percent={100}*/}
+          {/*      format={() => 12}*/}
+          {/*      strokeColor={{*/}
+          {/*        '0%': '#ffd43b',*/}
+          {/*        '100%': '#644394',*/}
+          {/*      }}*/}
+          {/*      strokeWidth={20}*/}
+          {/*      trailColor="#bfbfbf"*/}
+          {/*      status="active"*/}
+          {/*    />*/}
+          {/*  </Col>*/}
+          {/*  <Col span={12}>*/}
+          {/*    <Statistic title="Тип занятий" value="Лечебные занятия" />*/}
+          {/*  </Col>*/}
+          {/*</Row>*/}
           {/*</div>*/}
         </div>
       </div>
