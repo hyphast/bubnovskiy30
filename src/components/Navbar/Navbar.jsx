@@ -55,7 +55,7 @@ const Navbar = ({ isActivated, modifiedNumber, ...props }) => {
               <Link to="/records">Мои записи</Link>
             </Badge>
           </Menu.Item>
-          <Menu.Item key="/settings" icon={<SettingFilled />}>
+          <Menu.Item key="/settings" icon={<SettingFilled />} disabled>
             <Link to="/settings">Настройки</Link>
           </Menu.Item>
           <Menu.Item key="/about-us" icon={<AimOutlined />}>

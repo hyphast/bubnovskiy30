@@ -24,7 +24,7 @@ const EditPassword = (props) => {
     clearErrors,
   } = useForm({ resolver: yupResolver(schema) })
 
-  const onSubmit = ({ password }) => {
+  const onSubmit = ({ password, confirmPassword }) => {
     console.log(password)
   }
 
@@ -42,8 +42,8 @@ const EditPassword = (props) => {
 
       <InputController
         errors={errors}
-        type="password"
-        field="password"
+        type="confirmPassword"
+        field="confirmPassword"
         control={control}
         placeholder="Новый пароль"
         className="site-form-item-icon"
@@ -51,6 +51,7 @@ const EditPassword = (props) => {
       />
 
       <ButtonController
+        disabled={true}
         field="submitBtn"
         control={control}
         //disabled={isLoading} TODO refactor

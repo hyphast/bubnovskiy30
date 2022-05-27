@@ -79,6 +79,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
             </Tag>
           </>
         )}
+        responsive={['sm']}
       />
       <Column
         title="Дата операции"
@@ -88,6 +89,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
         }}
         sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
         defaultSortOrder="descend"
+        responsive={['md']}
       />
       <Column
         title="Отмена записи"
@@ -106,6 +108,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
             </Space>
           )
         }}
+        responsive={['lg']}
       />
     </Table>
   )

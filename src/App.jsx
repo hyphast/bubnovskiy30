@@ -14,6 +14,7 @@ import HeaderContainer from './components/Header/HeaderContainer'
 import './App.css'
 import Preloader from './components/common/Preloader/Preloader'
 import { selectGlobalMessage } from './redux/reducers/appReducer/appSelectors'
+// import LogRocket from 'logrocket'
 
 const { Content } = Layout
 
@@ -44,6 +45,10 @@ function App() {
     globalMessage.redirect,
     history,
   ])
+
+  // useEffect(() => { //TODO ?
+  //   LogRocket.init('gpt861/bubnovskiy')
+  // }, [])
 
   useEffect(() => {
     globalMessage.message && openNotification() //TODO was: globalMessage.message && openNotification()

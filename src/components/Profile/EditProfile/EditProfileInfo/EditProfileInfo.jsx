@@ -58,16 +58,16 @@ const EditProfileInfo = ({
     <form onSubmit={handleSubmit(onSubmit)} className="edit-profile-form">
       <InputController
         errors={errors}
-        field="firstName"
+        field="lastName"
         control={control}
-        placeholder="Имя"
+        placeholder="Фамилия"
       />
 
       <InputController
         errors={errors}
-        field="lastName"
+        field="firstName"
         control={control}
-        placeholder="Фамилия"
+        placeholder="Имя"
       />
 
       <InputController

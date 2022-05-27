@@ -58,6 +58,7 @@ const FinishedRecords = ({ finishedRecords }) => {
           },
         ]}
         onFilter={(value, record) => record.appType === value}
+        responsive={['sm']}
       />
       <Column
         title="Статус"
@@ -70,6 +71,7 @@ const FinishedRecords = ({ finishedRecords }) => {
             </Tag>
           </>
         )}
+        responsive={['md']}
       />
       <Column
         title="Дата операции"
@@ -79,6 +81,7 @@ const FinishedRecords = ({ finishedRecords }) => {
         }}
         sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
         defaultSortOrder="descend"
+        responsive={['lg']}
       />
     </Table>
   )
