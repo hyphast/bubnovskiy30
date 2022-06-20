@@ -1,35 +1,32 @@
-.avatar {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.8rem;
+.ava {
+  margin-top: 13px;
+  :global {
+    .ant-avatar {
+      display: block;
+      margin: 0 auto;
+    }
+  }
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
-  //padding: 0.5rem 0 1rem 1rem;
+  text-align: center;
   .name {
-    display: flex;
-    justify-content: center;
     font-weight: 700;
     font-size: 1.4rem;
   }
   .gender {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
   }
   .phone {
-    padding-left: 0.8rem;
   }
   .settings {
-    display: flex;
-    justify-content: center;
-    margin: 0.7rem 0 1rem 0;
+    position: relative;
+    padding-top: 0.7rem;
+    margin-bottom: 1rem;
   }
   .SettingsIcon {
-    position: relative;
-    top: 0.18rem;
-    left: 0.25rem;
+    position: absolute;
+    top: 0.9rem;
+    left: 10rem;
   }
 }

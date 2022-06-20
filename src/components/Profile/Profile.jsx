@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, Button, Col, Progress, Row, Statistic } from 'antd'
+import { Avatar, Button, Progress, Statistic, Typography } from 'antd'
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -7,9 +7,11 @@ import {
   TrophyOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import ProfileStyles from './Profile.module.scss'
 import { Link } from 'react-router-dom'
 import Text from 'antd/es/typography/Text'
+import styles from './Profile.module.scss'
+
+const { Title } = Typography
 
 const Profile = ({
   photoUrl,
@@ -31,111 +33,101 @@ const Profile = ({
   const fullName = `${lastName} ${firstName} ${patronymic}`
 
   return (
-    <div>
-      <div className={ProfileStyles.profileContainer}>
-        <div className={ProfileStyles.left}>
-          <Avatar
-            shape="square"
-            size={{ xs: 100, sm: 130, md: 150, lg: 180, xl: 210, xxl: 250 }}
-            // size={210}
-            icon={photoUrl.length === 0 ? <UserOutlined /> : null}
-            src={photoUrl}
-          />
-          <Button type="dashed" className={ProfileStyles.settings}>
-            <Link to="/edit-profile">Редактировать</Link>
-          </Button>
+    <div className={styles.root}>
+      <div className={styles.ava}>
+        <Avatar
+          shape="square"
+          size={{ xs: 100, sm: 130, md: 150, lg: 180, xl: 210, xxl: 250 }}
+          icon={photoUrl.length === 0 ? <UserOutlined /> : null}
+          src={photoUrl}
+        />
+      </div>
+      <div className={styles.settings}>
+        <Button type="dashed">
+          <Link to="/edit-profile">Редактировать</Link>
+        </Button>
+      </div>
+      <div className={styles.profileInfo}>
+        <Title level={3}>{fullName}</Title>
+        <Statistic
+          title="Пол"
+          value={gender === 'male' ? 'Мужской' : 'Женский'}
+        />
+        <Statistic
+          // className={styles.field}
+          title="Телефон"
+          value={formatPhoneNumber}
+        />
+        <div className={styles.email}>
+          <Statistic title="Email" value={email} />
+          {isActivated ? (
+            <div className={styles.isActivatedWrapper}>
+              <CheckCircleTwoTone
+                twoToneColor="#52c41a"
+                className={styles.isActivatedIcon}
+              />
+              <Text className={styles.isActivated} type="success">
+                Email подтвержден
+              </Text>
+            </div>
+          ) : (
+            <div className={styles.isActivatedWrapper}>
+              <CloseCircleTwoTone
+                twoToneColor="#fe5961"
+                className={styles.isActivatedIcon}
+              />
+              <Text className={styles.isActivated} type="danger">
+                Email не подтвержден
+              </Text>
+            </div>
+          )}
         </div>
-        <div className={ProfileStyles.profileInfo}>
-          <Row className={ProfileStyles.fullName}>
-            <Statistic
-              className={ProfileStyles.field}
-              title=""
-              value={fullName}
-            />
-          </Row>
-          <Statistic
-            className={ProfileStyles.field}
-            title="Пол"
-            value={gender === 'male' ? 'Мужской' : 'Женский'}
-          />
-          <Statistic
-            className={ProfileStyles.field}
-            title="Телефон"
-            value={formatPhoneNumber}
-          />
-          <div className={ProfileStyles.email}>
-            <Statistic
-              className={ProfileStyles.field}
-              title="Email"
-              value={email}
-            />
-            {isActivated ? (
-              <div className={ProfileStyles.isActivated}>
-                <CheckCircleTwoTone
-                  twoToneColor="#52c41a"
-                  className={ProfileStyles.isActivatedIcon}
-                  style={{ fontSize: '24px' }}
-                />
-                <Text type="success"> Email подтвержден</Text>
-              </div>
-            ) : (
-              <div className={ProfileStyles.isActivated}>
-                <CloseCircleTwoTone
-                  twoToneColor="#fe5961"
-                  className={ProfileStyles.isActivatedIcon}
-                  style={{ fontSize: '24px' }}
-                />
-                <Text type="danger"> Email не подтвержден</Text>
-              </div>
-            )}
-          </div>
-          {/*<div style={{ display: 'flex' }}>*/}
-          {/*<Statistic*/}
-          {/*  className={ProfileStyles.field}*/}
-          {/*  title="Цикл"*/}
-          {/*  value="10-й цикл"*/}
-          {/*/>*/}
-          {/*<Progress*/}
-          {/*  type="circle"*/}
-          {/*  percent={75}*/}
-          {/*  format={() => 9}*/}
-          {/*  width={70}*/}
-          {/*  style={{ margin: '0rem 0 0 3rem' }}*/}
-          {/*/>*/}
-          {/*<Statistic*/}
-          {/*  className={ProfileStyles.field}*/}
-          {/*  title="Осталось занятий"*/}
-          {/*/>*/}
+        {/*<div style={{ display: 'flex' }}>*/}
+        {/*<Statistic*/}
+        {/*  className={styles.field}*/}
+        {/*  title="Цикл"*/}
+        {/*  value="10-й цикл"*/}
+        {/*/>*/}
+        {/*<Progress*/}
+        {/*  type="circle"*/}
+        {/*  percent={75}*/}
+        {/*  format={() => 9}*/}
+        {/*  width={70}*/}
+        {/*  style={{ margin: '0rem 0 0 3rem' }}*/}
+        {/*/>*/}
+        {/*<Statistic*/}
+        {/*  className={styles.field}*/}
+        {/*  title="Осталось занятий"*/}
+        {/*/>*/}
 
-          {/*<Row gutter={16}>*/}
-          {/*  <Col span={12}>*/}
-          {/*    <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />*/}
-          {/*  </Col>*/}
-          {/*  <Col span={12}>*/}
-          {/*    <Statistic*/}
-          {/*      title="Осталось занятий"*/}
-          {/*      value={12}*/}
-          {/*      suffix="/ 12"*/}
-          {/*      prefix={<SendOutlined />}*/}
-          {/*    />*/}
-          {/*    <Progress*/}
-          {/*      percent={100}*/}
-          {/*      format={() => 12}*/}
-          {/*      strokeColor={{*/}
-          {/*        '0%': '#ffd43b',*/}
-          {/*        '100%': '#644394',*/}
-          {/*      }}*/}
-          {/*      strokeWidth={20}*/}
-          {/*      trailColor="#bfbfbf"*/}
-          {/*      status="active"*/}
-          {/*    />*/}
-          {/*  </Col>*/}
-          {/*  <Col span={12}>*/}
-          {/*    <Statistic title="Тип занятий" value="Лечебные занятия" />*/}
-          {/*  </Col>*/}
-          {/*</Row>*/}
-          {/*</div>*/}
-        </div>
+        {/*<Row gutter={16}>*/}
+        {/*  <Col span={12}>*/}
+        {/*    <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />*/}
+        {/*  </Col>*/}
+        {/*  <Col span={12}>*/}
+        {/*    <Statistic*/}
+        {/*      title="Осталось занятий"*/}
+        {/*      value={12}*/}
+        {/*      suffix="/ 12"*/}
+        {/*      prefix={<SendOutlined />}*/}
+        {/*    />*/}
+        {/*    <Progress*/}
+        {/*      percent={100}*/}
+        {/*      format={() => 12}*/}
+        {/*      strokeColor={{*/}
+        {/*        '0%': '#ffd43b',*/}
+        {/*        '100%': '#644394',*/}
+        {/*      }}*/}
+        {/*      strokeWidth={20}*/}
+        {/*      trailColor="#bfbfbf"*/}
+        {/*      status="active"*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*  <Col span={12}>*/}
+        {/*    <Statistic title="Тип занятий" value="Лечебные занятия" />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
+        {/*</div>*/}
       </div>
     </div>
   )

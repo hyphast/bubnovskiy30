@@ -1,16 +1,13 @@
-.appFinish {
-  margin: 0 1rem 0 0;
+.root {
+  margin-left: 32px;
+  div {
+    margin: 15px 0;
+  }
 }
 
 .submit {
   color: green;
   width: 160px;
   height: 40px;
-  margin: 0 32px;
-}
-
-.type,
-.time,
-.date {
-  margin: 20px 32px;
+  margin-left: 32px;
 }

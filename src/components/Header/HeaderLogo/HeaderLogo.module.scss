@@ -1,28 +1,31 @@
-.logoContainer {
+.root {
   display: flex;
-  justify-content: start;
-  margin: 0.4rem 0 0 1.5rem;
+  align-items: center;
+  margin-left: 1.5rem;
 }
 
 .logo {
   fill: #563199;
 }
 
-.headerLogoTitle {
-  margin: 0.3rem 0 0 1rem;
-  font-family: Rubik, sans-serif;
-  color: #644394;
-  font-weight: 800;
-  font-size: 1.35rem;
+.titleContainer {
+  .logoTitle {
+    padding-left: 1rem;
+    font-family: Rubik, sans-serif;
+    color: #644394;
+    font-weight: 800;
+    font-size: 1.35rem;
+  }
 
+  .logoSubtitle {
+    padding-left: 1rem;
+    display: block;
+    font-family: Rubik, sans-serif;
+    color: #644394;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
 }
 
-.headerLogoSubtitle {
-  margin-left: 1rem;
-  display: block;
-  font-family: Rubik, sans-serif;
-  color: #644394;
-  font-weight: 500;
-  font-style: italic;
-  font-size: 1.2rem;
-}
+

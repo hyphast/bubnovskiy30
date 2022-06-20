@@ -1,11 +1,11 @@
 import React from 'react'
 import AppointmentType from './AppointmentType/AppointmentType'
-import NewAppointmentStyles from './NewAppointment.module.scss'
 import { connect } from 'react-redux'
+import styles from './NewAppointment.module.scss'
 
 const NewAppointment = (props) => {
   return (
-    <div className={NewAppointmentStyles.type}>
+    <div className={styles.root}>
       <h2>Выберите услугу</h2>
       <AppointmentType {...props} />
     </div>

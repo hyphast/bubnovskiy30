@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { message, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import ImgCrop from 'antd-img-crop'
+import styles from './AvatarUpload.module.scss'
 
 const AvatarUpload = ({ photoUrl, savePhoto }) => {
   const [loading, setLoading] = useState(false)
@@ -50,30 +51,32 @@ const AvatarUpload = ({ photoUrl, savePhoto }) => {
     </div>
   )
   return (
-    <ImgCrop
-      rotate
-      shape="round"
-      modalTitle="Редактировать изображение"
-      modalCancel="Отмена"
-    >
-      <Upload
-        name="avatar"
-        visible={true}
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        action={photoUrl}
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-        accept="image/x-png,image/jpeg"
+    <div className={styles.root}>
+      <ImgCrop
+        rotate
+        shape="round"
+        modalTitle="Редактировать изображение"
+        modalCancel="Отмена"
       >
-        {photoUrl ? (
-          <img src={photoUrl} alt="avatar" style={{ width: '100%' }} />
-        ) : (
-          uploadButton
-        )}
-      </Upload>
-    </ImgCrop>
+        <Upload
+          name="avatar"
+          visible={true}
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action={photoUrl}
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+          accept="image/x-png,image/jpeg"
+        >
+          {photoUrl ? (
+            <img src={photoUrl} alt="avatar" style={{ width: '100%' }} />
+          ) : (
+            uploadButton
+          )}
+        </Upload>
+      </ImgCrop>
+    </div>
   )
 }
 

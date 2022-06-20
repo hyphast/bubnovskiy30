@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Avatar, Dropdown, Menu, Modal, Typography } from 'antd'
-import { AndroidFilled, QrcodeOutlined, UserOutlined } from '@ant-design/icons'
-import HeaderComponentStyles from '../HeaderComponent.module.scss'
+import {
+  QrcodeOutlined,
+  UserOutlined,
+  QuestionCircleOutlined,
+} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import QrCodeImg from '../../../assets/images/qrcode.png'
 import DownloadApp from '../../../assets/images/downloadApp.jpg'
+import styles from '../HeaderComponent.module.scss'
 
 const { Title } = Typography
 
@@ -67,23 +71,28 @@ const HeaderInfo = ({
   }
 
   return (
-    <div className={HeaderComponentStyles.rightGrid}>
-      <QrcodeOutlined onClick={info} className={HeaderComponentStyles.code} />
+    <div className={styles.rightLayout}>
+      <a
+        className={styles.docs}
+        href="https://pomo1.notion.site/0e97c619c0164ebc9d71ec3a8119dd62"
+        target="_blank"
+      >
+        <QuestionCircleOutlined />
+      </a>
+      <QrcodeOutlined onClick={info} className={styles.code} />
       <Dropdown overlay={menu}>
-        <div className={HeaderComponentStyles.headerRight}>
+        <div className={styles.userInfo}>
           <Avatar
-            className={HeaderComponentStyles.ava}
+            className={styles.ava}
             size={40}
             icon={photoUrl.length === 0 ? <UserOutlined /> : null}
             src={photoUrl}
           />
-          <div className={HeaderComponentStyles.name}>
+          <div className={styles.name}>
             <span>{`${lastName} ${firstName.slice(0, 1)}.`}</span>
             <span>{patronymic && `${patronymic.slice(0, 1)}.`}</span>
           </div>
-          <span className={HeaderComponentStyles.phone}>
-            {formatPhoneNumber}
-          </span>
+          <span className={styles.phone}>{formatPhoneNumber}</span>
         </div>
       </Dropdown>
     </div>

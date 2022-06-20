@@ -9,8 +9,8 @@ import {
   Col,
 } from 'antd'
 import moment from 'moment'
-import AppointmentStyles from './AppointmentFinish.module.scss'
 import { useHistory } from 'react-router-dom'
+import styles from './AppointmentFinish.module.scss'
 
 const AppointmentFinish = ({
   appointmentType,
@@ -45,39 +45,34 @@ const AppointmentFinish = ({
           <Button
             disabled={!isSelected}
             onClick={onSubmit}
-            className={AppointmentStyles.submit}
+            className={styles.submit}
           >
             Записаться
           </Button>
         }
       >
-        <Col className={AppointmentStyles.appFinish}>
-          <div>
-            <Statistic
-              title="Тип занятия"
-              className={AppointmentStyles.type}
-              value={appointmentType === '' ? 'Не выбрано' : appointmentType}
-            />
-            <Statistic
-              title="Дата записи"
-              className={AppointmentStyles.date}
-              value={
-                !date
-                  ? 'Не выбрано'
-                  : moment(date).utc().utcOffset(240).format('DD.MM.YYYY dddd')
-              }
-            />
-            <Statistic
-              title="Время"
-              value={
-                !time
-                  ? 'Не выбрано'
-                  : moment(time).utc().utcOffset(240).format('H:mm')
-              }
-              className={AppointmentStyles.time}
-            />
-          </div>
-        </Col>
+        <div className={styles.root}>
+          <Statistic
+            title="Тип занятия"
+            value={appointmentType === '' ? 'Не выбрано' : appointmentType}
+          />
+          <Statistic
+            title="Дата записи"
+            value={
+              !date
+                ? 'Не выбрано'
+                : moment(date).utc().utcOffset(240).format('DD.MM.YYYY dddd')
+            }
+          />
+          <Statistic
+            title="Время"
+            value={
+              !time
+                ? 'Не выбрано'
+                : moment(time).utc().utcOffset(240).format('H:mm')
+            }
+          />
+        </div>
       </PageHeader>
     </>
   )

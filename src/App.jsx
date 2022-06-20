@@ -11,10 +11,10 @@ import {
 } from './redux/reducers/appReducer/appAction'
 import NavbarContainer from './components/Navbar/NavbarContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import './App.css'
 import Preloader from './components/common/Preloader/Preloader'
 import { selectGlobalMessage } from './redux/reducers/appReducer/appSelectors'
-// import LogRocket from 'logrocket'
+import '@csstools/normalize.css'
+import './App.css'
 
 const { Content } = Layout
 
@@ -46,10 +46,6 @@ function App() {
     history,
   ])
 
-  // useEffect(() => { //TODO ?
-  //   LogRocket.init('gpt861/bubnovskiy')
-  // }, [])
-
   useEffect(() => {
     globalMessage.message && openNotification() //TODO was: globalMessage.message && openNotification()
     return () => {
@@ -73,26 +69,29 @@ function App() {
       <>
         {!isActivated ? (
           <Alert
+            style={{ textAlign: 'center' }}
             message="Вы не подтвердили Email"
             banner
             // showIcon={false}
           />
         ) : null}
-        <HeaderContainer />
-        <Layout>
-          <NavbarContainer />
-          <Layout className="site-layout">
-            <Content
-              className={classnames(
-                'site-layout-background',
-                'contentContainer',
-                'AppContainer',
-              )}
-            >
-              {routes}
-            </Content>
+        <div>
+          <HeaderContainer />
+          <Layout>
+            <NavbarContainer />
+            <Layout className="site-layout">
+              <Content
+                className={classnames(
+                  'site-layout-background',
+                  'contentContainer',
+                  'AppContainer',
+                )}
+              >
+                {routes}
+              </Content>
+            </Layout>
           </Layout>
-        </Layout>
+        </div>
       </>
     )
 }

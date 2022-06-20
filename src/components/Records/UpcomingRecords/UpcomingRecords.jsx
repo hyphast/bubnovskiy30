@@ -88,7 +88,7 @@ const UpcomingRecords = ({ upcomingRecords, deleteRecord, recordsIds }) => {
           return moment(record.modifiedDate).fromNow()
         }}
         sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
-        defaultSortOrder="descend"
+        sortOrder="descend"
         responsive={['md']}
       />
       <Column

@@ -1,50 +1,85 @@
-.profileContainer {
-  display: flex;
-  //position: absolute;
+.root {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  grid-template-rows: 1fr 70px;
 
-  .left {
-    display: flex;
-    flex-direction: column;
+  @media(max-width: 1200px) {
+    :global {
+      .ant-btn {
+        padding: 4px 40px;
+      }
+    }
+    .settings {
+      align-self: flex-start;
+    }
   }
-
-  .profileInfo {
-    margin-left: 4rem;
-    margin-bottom: 1rem;
-    width: 100%;
-
-    .fullName {
-      font-weight: 700;
-    }
-
-    .field {
-      margin-bottom: 1.2rem;
-    }
-
-    .email {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .isActivated {
-      display: flex;
-      //position: relative;
-      //top: 2.2rem;
-      padding: 2rem;
-
-      .isActivatedIcon {
-        fontsize: 24px;
-        margin-right: 0.3rem;
+  @media(max-width: 992px) {
+    :global {
+      .ant-btn {
+        padding: 4px 25px;
       }
     }
   }
 
-  .settings {
-    margin: 2rem 0 1rem 0;
+  .ava {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
   }
 
-  .SettingsIcon {
-    //position: relative;
-    //top: -1.1rem;
-    //left: 10rem;
+  .settings {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+
+    :global {
+      .ant-btn {
+        padding: 4px 55px;
+      }
+    }
+  }
+
+  .profileInfo {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    //margin-left: 4rem;
+    //margin-bottom: 1rem;
+    //width: 100%;
+
+    > div {
+      margin-bottom: 1.2rem;
+    }
+
+    //.fullName {
+    //  font-weight: 700;
+    //}
+
+    .email {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      //@media(max-width: 992px) {
+      //  flex-direction: column;
+      //}
+
+      .isActivatedWrapper {
+        position: relative;
+        margin-left: 4rem;
+
+        .isActivated {
+          padding-left: 0.4rem;
+        }
+
+        .isActivatedIcon {
+          font-size: 26px;
+          position: absolute;
+          left: -1.5rem;
+          top: -0.1rem;
+        }
+      }
+    }
   }
 }

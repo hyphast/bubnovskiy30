@@ -1,8 +1,12 @@
-.editInfo {
-  display: flex;
-  justify-content: start;
-}
+.root {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 100px;
 
-.editMainInfo {
-  margin-left: 10rem;
+  .editPhoto {
+    h3 {
+      margin-bottom: 1rem;
+    }
+  }
 }

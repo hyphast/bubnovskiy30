@@ -1,23 +1,19 @@
-.cards {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 3rem;
-  &:after {
-    content: '';
-    flex: auto;
-  }
-}
-
-.card {
-  width: 330px;
-  margin: 0 0 1rem 4rem;
-}
-
-.type {
+.root {
   h2 {
     font-size: 1.875rem;
     font-weight: 700;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 50px;
+    margin-top: 3rem;
+
+    .card {
+      //width: 330px;
+    }
   }
 }

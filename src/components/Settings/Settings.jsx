@@ -16,6 +16,9 @@ const Settings = () => {
         </Checkbox>
       </Row>
       <Row gutter={16} style={{ marginTop: '1rem' }}>
+        <Checkbox onChange={onChange}>Двухэтапная аутентификация</Checkbox>
+      </Row>
+      <Row gutter={16} style={{ marginTop: '1rem' }}>
         <Popconfirm
           title="Вы действительно хотите выйти со всех устройств？"
           icon={<QuestionCircleOutlined style={{ color: 'red' }} />}

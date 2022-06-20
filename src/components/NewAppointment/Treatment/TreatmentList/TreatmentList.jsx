@@ -5,7 +5,7 @@ import { Button, List, Popover, Skeleton, Space, Tooltip } from 'antd'
 import moment from 'moment'
 import { setAppointmentFinishData } from '../../../../redux/reducers/newAppointment/AppointmentFinishReducer/AppointmentFinishActions'
 import classnames from 'classnames'
-import TreatmentStyles from '../Treatment.module.scss'
+import styles from '../Treatment.module.scss'
 
 const TreatmentList = ({ appointments, isLoading }) => {
   const dispatch = useDispatch()
@@ -32,7 +32,7 @@ const TreatmentList = ({ appointments, isLoading }) => {
   }, [appointments])
 
   return (
-    <div className={TreatmentStyles.list}>
+    <div className={styles.list}>
       <h2>Выберите время для записи</h2>
       {isLoading ? (
         <>
@@ -45,18 +45,18 @@ const TreatmentList = ({ appointments, isLoading }) => {
         <>
           <List
             grid={{
-              gutter: 16,
+              gutter: 1,
               xs: 1,
               sm: 2,
               md: 4,
               lg: 4,
               xl: 6,
-              xxl: 3,
+              xxl: 8,
             }}
             locale={{ emptyText: 'Пусто' }}
             dataSource={data}
             renderItem={(item) => (
-              <List.Item className={TreatmentStyles.timesContainer}>
+              <List.Item className={styles.timesContainer}>
                 <Popover content={`Свободных мест: ${item.numberPatients}`}>
                   <Button
                     disabled={
@@ -65,11 +65,11 @@ const TreatmentList = ({ appointments, isLoading }) => {
                         minutesOfDay(new Date()) >
                           minutesOfDay(new Date(item.time)))
                     }
-                    className={classnames(TreatmentStyles.times, {
-                      [TreatmentStyles.green]: item.numberPatients >= 8,
-                      [TreatmentStyles.yellow]:
+                    className={classnames(styles.times, {
+                      [styles.green]: item.numberPatients >= 8,
+                      [styles.yellow]:
                         item.numberPatients >= 4 && item.numberPatients < 8,
-                      [TreatmentStyles.orange]: item.numberPatients < 4,
+                      [styles.orange]: item.numberPatients < 4,
                     })}
                     onClick={() => onSubmit(item.time)}
                     type="primary"

@@ -25,7 +25,6 @@ const FinishedRecords = ({ finishedRecords }) => {
           <>{moment(date).utc().utcOffset(240).format('DD.MM.YYYY')}</>
         )}
         sorter={(a, b) => new Date(a.date) - new Date(b.date)}
-        // defaultSortOrder="ascend"
       />
       <Column
         title="Время"
@@ -80,8 +79,8 @@ const FinishedRecords = ({ finishedRecords }) => {
           return moment(record.modifiedDate).fromNow()
         }}
         sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
-        defaultSortOrder="descend"
         responsive={['lg']}
+        sortOrder="descend"
       />
     </Table>
   )

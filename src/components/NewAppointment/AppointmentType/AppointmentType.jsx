@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import NewAppointmentStyles from '../NewAppointment.module.scss'
+import { notification } from 'antd'
 import ConsultationImg from '../../../assets/images/Consultation.jpg'
 import TreatmentImg from '../../../assets/images/Treatment.jpg'
 import PhysicalTrainingImg from '../../../assets/images/PhysicalTraining.jpg'
@@ -8,7 +8,7 @@ import FloatingImg from '../../../assets/images/floating.jpg'
 import MassageImg from '../../../assets/images/massage.jpg'
 import PriceImg from '../../../assets/images/Price.jpg'
 import TypeFooter from './TypeFooter/TypeFooter'
-import { notification } from 'antd'
+import styles from '../NewAppointment.module.scss'
 
 const content = {
   consultant:
@@ -33,12 +33,8 @@ const AppointmentType = (props) => {
   }
 
   return (
-    <div className={classnames('steps-content', NewAppointmentStyles.cards)}>
-      <div
-        className={NewAppointmentStyles.card}
-        onClick={() => openNotification()}
-      >
-        {' '}
+    <div className={classnames('steps-content', styles.cards)}>
+      <div onClick={() => openNotification()}>
         {/*TODO refactor onClick*/}
         <TypeFooter
           title="Консультация"
@@ -52,7 +48,7 @@ const AppointmentType = (props) => {
           appType="Консультация"
         />
       </div>
-      <div className={NewAppointmentStyles.card}>
+      <div>
         <TypeFooter
           title="Лечебные занятия"
           content={content.treatment}
@@ -65,7 +61,7 @@ const AppointmentType = (props) => {
           appType="Лечебные занятия"
         />
       </div>
-      <div className={NewAppointmentStyles.card}>
+      <div>
         <TypeFooter
           title="Физкультурно-оздоровительные занятия"
           content={content.physicalTraining}
@@ -78,11 +74,7 @@ const AppointmentType = (props) => {
           appType="Физкультурно-оздоровительные занятия"
         />
       </div>
-      <div
-        className={NewAppointmentStyles.card}
-        onClick={() => openNotification()}
-      >
-        {' '}
+      <div onClick={() => openNotification()}>
         {/*TODO refactor onClick*/}
         <TypeFooter
           title="Массаж"
@@ -96,7 +88,7 @@ const AppointmentType = (props) => {
           appType="Массаж"
         />
       </div>
-      {/*<div className={classnames(NewAppointmentStyles.card,NewAppointmentStyles.lastCard)}*/}
+      {/*<div className={classnames(styles.card,styles.lastCard)}*/}
       {/*     onClick={() => openNotification()}> /!*TODO refactor onClick*!/*/}
       {/*  <TypeFooter title='Флоатинг'*/}
       {/*              content={content.floating}*/}

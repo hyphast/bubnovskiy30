@@ -18,7 +18,7 @@ const TreatmentDatePicker = ({ getAppointments }) => {
   }
 
   return (
-    <>
+    <div>
       <ConfigProvider locale={ruRU}>
         <DatePicker
           disabledDate={disabledDate}
@@ -26,7 +26,7 @@ const TreatmentDatePicker = ({ getAppointments }) => {
           size="large"
         />
       </ConfigProvider>
-    </>
+    </div>
   )
 }
 

@@ -1,17 +1,33 @@
+:global {
+  .ant-layout-header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d6d6;
+    line-height: 1;
+  }
+}
+
 .header {
   padding: 0;
   display: flex;
   justify-content: space-between;
   height: 72px;
-  background-color: #f2ecfd;
 
-  .rightGrid {
+  .rightLayout {
     display: flex;
-    .code {
+    align-items: center;
+
+    .docs {
+      margin-right: 0.5rem;
       font-size: 30px;
-      position: relative;
-      top: 1.1rem;
-      left: -1rem;
+      transition: 1s;
+    }
+    .docs:hover {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+    .code {
+      margin-right: 0.5rem;
+      font-size: 30px;
       transition: 1s;
     }
     .code:hover {
@@ -20,39 +36,46 @@
     }
   }
 
-  .headerRight {
-    margin: 0.9rem 1.1rem 0 0;
+  .userInfo {
+    margin: 0 1rem 0 0;
     display: grid;
-    grid-template-areas:
-      'avatar name'
-      'avatar phone';
+    //grid-template-areas:
+    //  'code avatar name'
+    //  'code avatar phone';
     grid-template-columns: 45px 1fr;
-    grid-template-rows: 17px 17px;
+    grid-template-rows: 1fr 1fr;
     grid-gap: 3px;
+
+    .ava {
+      //grid-area: avatar;
+      grid-column: 1;
+      grid-row: 1 / 3;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .name {
+      //grid-area: name;
+      grid-column: 2;
+      grid-row: 1;
+      align-self: flex-end;
+      justify-self: flex-start;
+      font-weight: 800;
+      font-size: 0.97rem;
+    }
+
+    .phone {
+      //grid-area: phone;
+      line-height: 20px;
+      grid-column: 2;
+      grid-row: 2;
+      align-self: flex-start;
+      justify-self: center;
+      font-size: 0.9rem;
+    }
   }
-  .headerRight:hover {
+  .userInfo:hover {
     cursor: pointer;
     color: gray;
-  }
-  //.code {
-  //  grid-area: code;
-  //  align-self: center;
-  //  font-size: 27px;
-  //}
-  .ava {
-    grid-area: avatar;
-    align-self: center;
-  }
-
-  .name {
-    grid-area: name;
-    font-weight: 800;
-    font-size: 0.97rem;
-  }
-
-  .phone {
-    grid-area: phone;
-    font-size: 0.9rem;
-    z-index: 999;
   }
 }
