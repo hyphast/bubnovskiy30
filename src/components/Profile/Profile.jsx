@@ -1,9 +1,8 @@
 import React from 'react'
-import { Avatar, Button, Progress, Statistic, Typography } from 'antd'
+import { Avatar, Button, Statistic, Typography } from 'antd'
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
-  SendOutlined,
   TrophyOutlined,
   UserOutlined,
 } from '@ant-design/icons'
@@ -82,12 +81,9 @@ const Profile = ({
             </div>
           )}
         </div>
+        <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />
         {/*<div style={{ display: 'flex' }}>*/}
-        {/*<Statistic*/}
-        {/*  className={styles.field}*/}
-        {/*  title="Цикл"*/}
-        {/*  value="10-й цикл"*/}
-        {/*/>*/}
+        {/*<Statistic className={styles.field} title="Цикл" value="10-й цикл" />*/}
         {/*<Progress*/}
         {/*  type="circle"*/}
         {/*  percent={75}*/}
@@ -95,37 +91,34 @@ const Profile = ({
         {/*  width={70}*/}
         {/*  style={{ margin: '0rem 0 0 3rem' }}*/}
         {/*/>*/}
-        {/*<Statistic*/}
-        {/*  className={styles.field}*/}
-        {/*  title="Осталось занятий"*/}
-        {/*/>*/}
+        {/*<Statistic className={styles.field} title="Осталось занятий" />*/}
 
         {/*<Row gutter={16}>*/}
-        {/*  <Col span={12}>*/}
-        {/*    <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />*/}
-        {/*  </Col>*/}
-        {/*  <Col span={12}>*/}
-        {/*    <Statistic*/}
-        {/*      title="Осталось занятий"*/}
-        {/*      value={12}*/}
-        {/*      suffix="/ 12"*/}
-        {/*      prefix={<SendOutlined />}*/}
-        {/*    />*/}
-        {/*    <Progress*/}
-        {/*      percent={100}*/}
-        {/*      format={() => 12}*/}
-        {/*      strokeColor={{*/}
-        {/*        '0%': '#ffd43b',*/}
-        {/*        '100%': '#644394',*/}
-        {/*      }}*/}
-        {/*      strokeWidth={20}*/}
-        {/*      trailColor="#bfbfbf"*/}
-        {/*      status="active"*/}
-        {/*    />*/}
-        {/*  </Col>*/}
-        {/*  <Col span={12}>*/}
-        {/*    <Statistic title="Тип занятий" value="Лечебные занятия" />*/}
-        {/*  </Col>*/}
+        {/*<Col span={12}>*/}
+        {/*  <Statistic title="Цикл" value={1} prefix={<TrophyOutlined />} />*/}
+        {/*</Col>*/}
+        {/*<Col span={12}>*/}
+        {/*  <Statistic*/}
+        {/*    title="Осталось занятий"*/}
+        {/*    value={12}*/}
+        {/*    suffix="/ 12"*/}
+        {/*    prefix={<SendOutlined />}*/}
+        {/*  />*/}
+        {/*  <Progress*/}
+        {/*    percent={100}*/}
+        {/*    format={() => 12}*/}
+        {/*    strokeColor={{*/}
+        {/*      '0%': '#ffd43b',*/}
+        {/*      '100%': '#644394',*/}
+        {/*    }}*/}
+        {/*    strokeWidth={20}*/}
+        {/*    trailColor="#bfbfbf"*/}
+        {/*    status="active"*/}
+        {/*  />*/}
+        {/*</Col>*/}
+        {/*<Col span={12}>*/}
+        {/*  <Statistic title="Тип занятий" value="Лечебные занятия" />*/}
+        {/*</Col>*/}
         {/*</Row>*/}
         {/*</div>*/}
       </div>

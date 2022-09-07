@@ -80,7 +80,7 @@ const FinishedRecords = ({ finishedRecords }) => {
         }}
         sorter={(a, b) => new Date(a.modifiedDate) - new Date(b.modifiedDate)}
         responsive={['lg']}
-        sortOrder="descend"
+        // sortOrder="descend"
       />
     </Table>
   )
